@@ -14,7 +14,7 @@ burger.addEventListener("click", () => {
 nav.querySelectorAll(".menu a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
 
 // появление при скролле: проверяем позицию, без зависимости от IntersectionObserver
-const pending = new Set(document.querySelectorAll(".label, .h, .lead, .verdict, .sins-head, .deck, .person, .fmt, .faq details, .quiz, .video, .foot-print, .calm"));
+const pending = new Set(document.querySelectorAll(".label, .h, .lead, .verdict, .y-head, .glass-row, .discs, .person, .fmt, .faq details, .quiz, .video, .foot-print, .calm"));
 pending.forEach(el => el.classList.add("rv"));
 function sweep() {
   for (const el of pending) {
@@ -222,23 +222,40 @@ function onScrollFx() {
 }
 addEventListener("scroll", onScrollFx, { passive: true });
 
-// карты-симптомы переворачиваются по нажатию
-document.querySelectorAll(".tcard").forEach(c => c.addEventListener("click", () => c.classList.toggle("flip")));
-
-// путь к свету: линия заполняется, шаги зажигаются
-const path = document.querySelector(".path");
-const steps = [...path.querySelectorAll(".st")];
-function pathFx() {
-  const r = path.getBoundingClientRect(), mark = innerHeight * .62;
-  path.style.setProperty("--p", calm ? 1 : clamp((mark - r.top) / r.height));
-  steps.forEach(st => {
-    const d = st.querySelector(".st-dot").getBoundingClientRect();
-    st.classList.toggle("lit", calm || d.top + d.height / 2 < mark);
+// стеклянные карточки наклоняются за курсором
+document.querySelectorAll(".glass").forEach(g => {
+  g.addEventListener("pointermove", e => {
+    if (calm || e.pointerType !== "mouse") return;
+    const r = g.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    g.style.setProperty("--ty", `${x * 14}deg`);
+    g.style.setProperty("--tx", `${-y * 14}deg`);
+    g.style.setProperty("--sx", `${(1 - (x + .5)) * 100}%`);
   });
-}
-addEventListener("scroll", pathFx, { passive: true });
-addEventListener("resize", pathFx);
-pathFx();
+  g.addEventListener("pointerleave", () => { g.style.setProperty("--tx", "0deg"); g.style.setProperty("--ty", "0deg"); });
+});
+
+// окна кейсов можно перетаскивать (на широких экранах)
+let zTop = 5;
+document.querySelectorAll(".win").forEach(win => {
+  const bar = win.querySelector(".win-bar");
+  win.addEventListener("pointerdown", () => { win.style.zIndex = ++zTop; });
+  bar.addEventListener("pointerdown", e => {
+    if (innerWidth <= 900) return;
+    e.preventDefault();
+    bar.setPointerCapture(e.pointerId);
+    const sx = e.clientX, sy = e.clientY, ox = win.offsetLeft, oy = win.offsetTop;
+    const desk = win.parentElement;
+    win.classList.add("drag");
+    const move = ev => {
+      const x = clamp(ox + ev.clientX - sx, -40, desk.clientWidth - win.offsetWidth + 40);
+      const y = clamp(oy + ev.clientY - sy, -40, desk.clientHeight - 60);
+      win.style.left = `${x}px`; win.style.top = `${y}px`;
+    };
+    const up = () => { win.classList.remove("drag"); bar.removeEventListener("pointermove", move); bar.removeEventListener("pointerup", up); };
+    bar.addEventListener("pointermove", move);
+    bar.addEventListener("pointerup", up);
+  });
+});
 onScrollFx();
 
 // счётчики

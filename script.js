@@ -14,7 +14,7 @@ burger.addEventListener("click", () => {
 nav.querySelectorAll(".menu a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
 
 // появление при скролле: проверяем позицию, без зависимости от IntersectionObserver
-const pending = new Set(document.querySelectorAll(".label, .h, .lead, .row, .verdict, .case, .steps li, .person, .fmt, .faq details, .quiz, .video, .foot-print, .calm"));
+const pending = new Set(document.querySelectorAll(".label, .h, .lead, .verdict, .sins-head, .deck, .person, .fmt, .faq details, .quiz, .video, .foot-print, .calm"));
 pending.forEach(el => el.classList.add("rv"));
 function sweep() {
   for (const el of pending) {
@@ -181,7 +181,7 @@ function feathers(canvas) {
 document.querySelectorAll("canvas.feathers").forEach(feathers);
 
 // свет под курсором
-document.querySelectorAll(".hero, .orb, .fmt").forEach(el => el.addEventListener("pointermove", e => {
+document.querySelectorAll(".hero, .fmt").forEach(el => el.addEventListener("pointermove", e => {
   const r = el.getBoundingClientRect();
   el.style.setProperty("--mx", `${e.clientX - r.left}px`);
   el.style.setProperty("--my", `${e.clientY - r.top}px`);
@@ -221,6 +221,24 @@ function onScrollFx() {
   }
 }
 addEventListener("scroll", onScrollFx, { passive: true });
+
+// карты-симптомы переворачиваются по нажатию
+document.querySelectorAll(".tcard").forEach(c => c.addEventListener("click", () => c.classList.toggle("flip")));
+
+// путь к свету: линия заполняется, шаги зажигаются
+const path = document.querySelector(".path");
+const steps = [...path.querySelectorAll(".st")];
+function pathFx() {
+  const r = path.getBoundingClientRect(), mark = innerHeight * .62;
+  path.style.setProperty("--p", calm ? 1 : clamp((mark - r.top) / r.height));
+  steps.forEach(st => {
+    const d = st.querySelector(".st-dot").getBoundingClientRect();
+    st.classList.toggle("lit", calm || d.top + d.height / 2 < mark);
+  });
+}
+addEventListener("scroll", pathFx, { passive: true });
+addEventListener("resize", pathFx);
+pathFx();
 onScrollFx();
 
 // счётчики

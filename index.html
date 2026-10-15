@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1792107059">
+<link rel="stylesheet" href="style.css?v=1792107423">
 </head>
 <body>
 
@@ -128,13 +128,70 @@
     </div>
   </section>
 
-  <section class="block symptoms">
-    <p class="lead wide">Стоит выключиться на один день — контент, команда и&nbsp;продажи останавливаются. Три симптома. Если совпало два — канал уже зависит от вас.</p>
-    <div class="rows">
-      <div class="row"><span class="n">01</span><span class="t"><svg class="ico row-ico"><use href="#i-feather"/></svg>Контент</span><h3>Посты выходят, только когда вы находите силы</h3><p>Канал держится не на системе, а на вашем свободном вечере.</p></div>
-      <div class="row"><span class="n">02</span><span class="t"><svg class="ico row-ico"><use href="#i-halo"/></svg>Команда</span><h3>Без вашего ответа никто не двигается</h3><p>Темы, тексты и публикации каждый раз ждут личного согласования.</p></div>
-      <div class="row"><span class="n">03</span><span class="t"><svg class="ico row-ico"><use href="#i-wing"/></svg>Запуск</span><h3>К продажам готовитесь в последний момент</h3><p>Прогрев сжимается до недели, и запуск не успевает набрать силу.</p></div>
+  <!-- 01: карты-симптомы -->
+  <section class="sins">
+    <div class="decor" aria-hidden="true">
+      <svg class="ico fl tw" style="--x:8%;--y:16%;--s:26px"><use href="#i-star"/></svg>
+      <svg class="ico fl tw" style="--x:90%;--y:12%;--s:38px;--d:-2s"><use href="#i-star"/></svg>
+      <svg class="ico fl tw" style="--x:72%;--y:88%;--s:22px;--d:-4s"><use href="#i-star"/></svg>
+      <svg class="ico fl tw" style="--x:20%;--y:80%;--s:16px;--d:-6s"><use href="#i-star"/></svg>
+      <svg class="ico fl tw" style="--x:50%;--y:6%;--s:14px;--d:-1s"><use href="#i-star"/></svg>
     </div>
+    <div class="sins-head">
+      <span class="small">Три симптома</span>
+      <h2>Если совпало два — канал уже зависит от&nbsp;вас.</h2>
+      <p>Стоит выключиться на один день — контент, команда и&nbsp;продажи останавливаются вместе с&nbsp;вами. Переверните карты.</p>
+    </div>
+    <div class="deck">
+        <button class="tcard" style="--r:-8deg" aria-label="Контент: Посты выходят, только когда вы находите силы">
+          <span class="tcard-in">
+            <span class="face front">
+              <span class="roman">I</span>
+              <span class="sigil"><svg class="ico "><use href="#i-feather"/></svg></span>
+              <span class="tname">Контент</span>
+              <span class="hint">перевернуть</span>
+            </span>
+            <span class="face back">
+              <span class="roman">I</span>
+              <span class="ttitle">Посты выходят, только когда вы находите силы</span>
+              <span class="ttext">Канал держится не на системе, а на вашем свободном вечере.</span>
+            </span>
+          </span>
+        </button>
+        <button class="tcard" style="--r:0deg" aria-label="Команда: Без вашего ответа никто не двигается">
+          <span class="tcard-in">
+            <span class="face front">
+              <span class="roman">II</span>
+              <span class="sigil"><svg class="ico "><use href="#i-halo"/></svg></span>
+              <span class="tname">Команда</span>
+              <span class="hint">перевернуть</span>
+            </span>
+            <span class="face back">
+              <span class="roman">II</span>
+              <span class="ttitle">Без вашего ответа никто не двигается</span>
+              <span class="ttext">Темы, тексты и публикации каждый раз ждут личного согласования.</span>
+            </span>
+          </span>
+        </button>
+        <button class="tcard" style="--r:8deg" aria-label="Запуск: К продажам готовитесь в последний момент">
+          <span class="tcard-in">
+            <span class="face front">
+              <span class="roman">III</span>
+              <span class="sigil"><svg class="ico "><use href="#i-wing"/></svg></span>
+              <span class="tname">Запуск</span>
+              <span class="hint">перевернуть</span>
+            </span>
+            <span class="face back">
+              <span class="roman">III</span>
+              <span class="ttitle">К продажам готовитесь в последний момент</span>
+              <span class="ttext">Прогрев сжимается до недели, и запуск не успевает набрать силу.</span>
+            </span>
+          </span>
+        </button>
+    </div>
+  </section>
+
+  <section class="block verdict-wrap">
     <div class="verdict panel studio">
       <div class="panel-bg" style="background-image:url(img/studio-cross.jpg)"></div>
       <h2 class="h">Проблема не в&nbsp;дисциплине. Каналу нужна система и&nbsp;команда.</h2>
@@ -145,42 +202,56 @@
     </div>
   </section>
 
-  <!-- кейсы -->
+  <!-- 02: кейсы стопкой -->
   <section class="block cases" id="cases">
     <div class="label"><span>02</span><span>Кейсы</span></div>
-    <div class="case-grid">
-      <article class="case">
-        <div class="orb"><div class="orb-glow"></div><svg class="ico orb-ico"><use href="#i-wings"/></svg><p class="orb-num"><span data-count="180">0</span>+</p></div>
-        <div class="case-head"><h3>Wake Up</h3><span>7 дней</span></div>
-        <p>Соединили несколько воронок и частично автоматизировали запуск.</p>
-        <dl><div><dt>Участники</dt><dd>180+</dd></div><div><dt>Средний чек</dt><dd>4 000 ₽</dd></div></dl>
+    <div class="stack">
+      <article class="cs sky">
+        <svg class="ico cs-art"><use href="#i-cloud"/></svg>
+        <div class="cs-l">
+          <span class="small">Кейс 01 · 7 дней</span>
+          <h3>Wake Up</h3>
+          <p>За неделю соединили несколько воронок и частично автоматизировали запуск.</p>
+          <dl><div><dt>Средний чек</dt><dd>4 000 ₽</dd></div><div><dt>Длительность</dt><dd>7 дней</dd></div></dl>
+        </div>
+        <div class="cs-r"><p class="mega"><span data-count="180">0</span>+</p><span class="small">человек вошли в продукт</span></div>
       </article>
-      <article class="case">
-        <div class="orb"><div class="orb-glow"></div><svg class="ico orb-ico"><use href="#i-halo"/></svg><p class="orb-num"><span data-count="80">0</span>+</p></div>
-        <div class="case-head"><h3>Wake Up Empire</h3><span>5 дней</span></div>
-        <p>Больше 80 платных подписчиков на сильном прогреве и технически продуманном сайте.</p>
-        <dl><div><dt>Участники</dt><dd>80+</dd></div><div><dt>Средний чек</dt><dd>4 990 ₽</dd></div></dl>
+      <article class="cs night">
+        <div class="cs-halo" aria-hidden="true"></div>
+        <svg class="ico cs-art"><use href="#i-halo"/></svg>
+        <div class="cs-l">
+          <span class="small">Кейс 02 · 5 дней</span>
+          <h3>Wake Up Empire</h3>
+          <p>Сильный прогрев и технически продуманный сайт — основа запуска.</p>
+          <dl><div><dt>Средний чек</dt><dd>от 4 990 ₽</dd></div><div><dt>Длительность</dt><dd>5 дней</dd></div></dl>
+        </div>
+        <div class="cs-r"><p class="mega"><span data-count="80">0</span>+</p><span class="small">платных подписчиков</span></div>
       </article>
-      <article class="case">
-        <div class="orb"><div class="orb-glow"></div><svg class="ico orb-ico"><use href="#i-star"/></svg><p class="orb-num"><span data-count="100000">0</span>&nbsp;₽</p></div>
-        <div class="case-head"><h3>100 000 ₽ с нуля</h3><span>3 дня</span></div>
-        <p>Широкий охват вместо высокого чека — и первый шаг к групповой работе за 60 000+ ₽.</p>
-        <dl><div><dt>Участники</dt><dd>150+</dd></div><div><dt>Средний чек</dt><dd>1 750 ₽</dd></div></dl>
+      <article class="cs chrome">
+        <svg class="ico cs-art"><use href="#i-wings"/></svg>
+        <div class="cs-l">
+          <span class="small">Кейс 03 · 3 дня</span>
+          <h3>С нуля</h3>
+          <p>Широкий охват вместо высокого чека — и первый шаг к групповой работе за 60&nbsp;000+&nbsp;₽.</p>
+          <dl><div><dt>Участники</dt><dd>150+</dd></div><div><dt>Средний чек</dt><dd>1 750 ₽</dd></div></dl>
+        </div>
+        <div class="cs-r"><p class="mega"><span data-count="100000">0</span>&nbsp;₽</p><span class="small">выручка за три дня</span></div>
       </article>
     </div>
   </section>
 
-  <!-- как работаем -->
+  <!-- 03: путь к свету -->
   <section class="block work" id="work">
     <div class="label"><span>03</span><span>Как мы ведём канал</span></div>
     <h2 class="h big">Берём ваш канал на&nbsp;себя.</h2>
     <p class="lead">Вы рассказываете о себе и своей цели. Дальше мы придумываем темы, пишем посты, находим читателей и помогаем продавать.</p>
-    <ol class="steps">
-      <li><svg class="ico step-ico"><use href="#i-star"/></svg><span>01</span><h3>Решаем, о чём канал</h3><p>Находим главную тему и объясняем, почему людям будет интересно читать именно вас.</p></li>
-      <li><svg class="ico step-ico"><use href="#i-feather"/></svg><span>02</span><h3>Пишем и выпускаем</h3><p>Узнаём, как вы говорите, придумываем темы, пишем тексты и публикуем вовремя.</p></li>
-      <li><svg class="ico step-ico"><use href="#i-cloud"/></svg><span>03</span><h3>Находим читателей</h3><p>Рассказываем о канале там, где уже есть нужные вам люди, и смотрим, кто приходит.</p></li>
-      <li><svg class="ico step-ico"><use href="#i-wings"/></svg><span>04</span><h3>Продаём через канал</h3><p>Рассказываем о продукте так, чтобы было понятно, зачем он нужен и как его купить.</p></li>
-    </ol>
+    <div class="path">
+      <div class="path-line" aria-hidden="true"><i></i></div>
+      <div class="st"><div class="st-dot"><svg class="ico "><use href="#i-star"/></svg></div><div class="st-body"><span class="small">Шаг 01</span><h3>Решаем, о чём канал</h3><p>Находим главную тему и объясняем, почему людям будет интересно читать именно вас.</p></div></div>
+      <div class="st"><div class="st-dot"><svg class="ico "><use href="#i-feather"/></svg></div><div class="st-body"><span class="small">Шаг 02</span><h3>Пишем и выпускаем</h3><p>Узнаём, как вы говорите, придумываем темы, пишем тексты и публикуем вовремя.</p></div></div>
+      <div class="st"><div class="st-dot"><svg class="ico "><use href="#i-cloud"/></svg></div><div class="st-body"><span class="small">Шаг 03</span><h3>Находим читателей</h3><p>Рассказываем о канале там, где уже есть нужные вам люди, и смотрим, кто приходит.</p></div></div>
+      <div class="st"><div class="st-dot"><svg class="ico "><use href="#i-wings"/></svg></div><div class="st-body"><span class="small">Шаг 04</span><h3>Продаём через канал</h3><p>Рассказываем о продукте так, чтобы было понятно, зачем он нужен и как его купить.</p></div></div>
+    </div>
   </section>
 
   <section class="interlude">
@@ -286,6 +357,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=1792107059"></script>
+<script src="script.js?v=1792107423"></script>
 </body>
 </html>

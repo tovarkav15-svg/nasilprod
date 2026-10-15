@@ -145,15 +145,15 @@ function feathers(canvas) {
       ctx.rotate(rot);
       ctx.scale(f.size * flip, f.size);
       ctx.globalAlpha = .45 + f.z * .5;
-      ctx.shadowColor = "rgba(60,58,50,.12)";
+      ctx.shadowColor = "rgba(58,58,58,.12)";
       ctx.shadowBlur = 10 * f.z;
       ctx.fillStyle = "#fff";
       ctx.fill(FEATHER);
       ctx.shadowBlur = 0;
       ctx.lineWidth = 1.2 / f.size;
-      ctx.strokeStyle = "rgba(140,138,128,.35)";
+      ctx.strokeStyle = "rgba(138,138,138,.35)";
       ctx.beginPath(); ctx.moveTo(0, -.48); ctx.quadraticCurveTo(.02, 0, 0, .5); ctx.stroke();
-      ctx.strokeStyle = "rgba(140,138,128,.12)";
+      ctx.strokeStyle = "rgba(138,138,138,.12)";
       for (let i = -.36; i < .34; i += .07) {
         ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(-.24, i - .09); ctx.moveTo(0, i); ctx.lineTo(.2, i - .09); ctx.stroke();
       }

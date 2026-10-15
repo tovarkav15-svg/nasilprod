@@ -91,7 +91,7 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 
 /* team */
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,28px)}
-.person img{width:100%;aspect-ratio:4/5;object-fit:cover;margin-bottom:18px;filter:grayscale(1) brightness(1.12) contrast(1.02)}
+.person img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(1) brightness(1.12) contrast(1.02)}
 .person h3{font-size:clamp(28px,3.4vw,52px);font-weight:700;letter-spacing:-.05em;line-height:1}
 .person .role{display:block;margin:8px 0 14px;font-size:13px;font-weight:600;text-transform:uppercase;color:var(--ink-3)}
 .person p{max-width:480px;color:var(--ink-2);margin-bottom:14px}
@@ -212,6 +212,83 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 .foot-rays{top:auto;bottom:-110vmax;opacity:.8}
 .footer>*:not(.foot-rays){position:relative}
 
+/* ---------- тематические объекты ---------- */
+.ico{fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.decor{position:absolute;inset:0;pointer-events:none;z-index:1}
+.decor .ico{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);translate:-50% -50%;color:rgba(38,38,36,.34)}
+.fl{animation:float 10s ease-in-out var(--d,0s) infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(3deg)}}
+.decor .tw{color:var(--ink);animation:float 10s ease-in-out var(--d,0s) infinite,twinkle 4s ease-in-out var(--d,0s) infinite}
+@keyframes twinkle{0%,100%{opacity:.25;scale:.8}50%{opacity:1;scale:1.1}}
+.draw{stroke-dasharray:100;animation:draw 9s ease-in-out var(--d,0s) infinite}
+@keyframes draw{0%{stroke-dashoffset:100}40%,70%{stroke-dashoffset:0}100%{stroke-dashoffset:-100}}
+
+/* стикер-печать */
+.sticker{position:absolute;z-index:3;right:var(--pad);bottom:150px;width:150px;height:150px;animation:fadeup 1.6s 1.9s both}
+.sticker-ring{width:100%;height:100%;animation:spin 30s linear infinite;overflow:visible}
+.sticker-ring text{font:600 13px var(--f);letter-spacing:.06em;fill:var(--ink)}
+.sticker-cross{position:absolute;left:50%;top:50%;width:46px;height:46px;translate:-50% -50%;stroke-width:1.6}
+
+/* бегущая строка */
+.ticker{background:var(--ink);color:var(--cream);overflow:hidden;padding:20px 0}
+.tk{display:flex;align-items:center;gap:32px;width:max-content;animation:marq 46s linear infinite}
+@keyframes marq{to{transform:translateX(-50%)}}
+.tk span{font-size:clamp(20px,2.2vw,30px);font-weight:700;letter-spacing:-.03em;text-transform:uppercase}
+.tk .ico{width:30px;height:30px;stroke-width:1.6}
+.tk svg:has(use[href="#i-wings"]),.tk svg:has(use[href="#i-halo"]){width:64px}
+
+/* строки симптомов */
+.row-ico{width:20px;height:20px;vertical-align:-5px;margin-right:8px;color:var(--ink)}
+
+/* плашки с фото */
+.panel{position:relative;overflow:hidden;isolation:isolate}
+.panel-bg{position:absolute;inset:0;z-index:-1;background-size:cover;background-position:center}
+.verdict.studio{min-height:min(84vh,760px);padding:clamp(28px,5vw,72px);color:#fff;margin-top:clamp(48px,7vw,96px)}
+.studio .panel-bg{filter:saturate(.3) contrast(1.05)}
+.studio .panel-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,18,16,0) 35%,rgba(18,18,16,.72))}
+.studio p{color:rgba(255,255,255,.82)}
+.studio .btn{background:var(--cream);color:var(--ink)}
+
+/* интерлюдия с ангелом */
+.interlude{align-items:flex-end;justify-content:flex-start;padding:var(--pad);background:#c9d3dc;height:clamp(520px,92vh,900px);isolation:isolate}
+.interlude .panel-bg{filter:saturate(.45) brightness(1.04)}
+.interlude .panel-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.15),rgba(18,18,16,.05) 50%,rgba(18,18,16,.55))}
+.kb{animation:kb 30s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.12) translate(-1%,-1%)}}
+.interlude .feathers{z-index:1}
+.interlude .calm{text-align:left;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.25)}
+
+/* кейсы */
+.orb-ico{position:absolute;width:62%;height:62%;color:rgba(38,38,36,.18);stroke-width:1.2;animation:float 12s ease-in-out infinite}
+.case:nth-child(2) .orb-ico{animation-delay:-4s}.case:nth-child(3) .orb-ico{animation-delay:-8s;width:40%}
+
+/* шаги */
+.steps li{position:relative}
+.step-ico{position:absolute;right:0;top:22px;width:48px;height:48px;color:var(--ink-3);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.steps li:hover .step-ico{transform:rotate(18deg) scale(1.15);color:var(--ink)}
+.steps li:last-child .step-ico{width:90px}
+
+/* команда: нимбы */
+.portrait{position:relative;margin-bottom:18px;overflow:hidden}
+.nimb{position:absolute;left:50%;top:4%;width:40%;height:auto;aspect-ratio:100/40;translate:-50% 0;color:#fff;stroke-width:2;filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 18px rgba(255,255,255,.8));animation:nimb 6s ease-in-out infinite}
+.person:nth-child(2) .nimb{animation-delay:-3s}
+@keyframes nimb{0%,100%{transform:translateY(0);opacity:.85}50%{transform:translateY(-8px);opacity:1}}
+
+/* форматы */
+.fmt>.panel-bg{position:absolute;z-index:0}
+.fmt>.fmt-ico{position:absolute;top:28px;right:28px;width:64px;height:44px;opacity:.55;animation:float 10s ease-in-out infinite}
+.fmt.photo{color:#fff;background:#3a3a37}
+.fmt.photo>.panel-bg{filter:saturate(.25)}
+.fmt.photo>.panel-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,18,16,.72),rgba(18,18,16,.35) 55%,rgba(18,18,16,.78))}
+
+/* анкета */
+.brief{position:relative;overflow:hidden}
+.brief-in{position:relative;z-index:2}
+.big-cross{color:rgba(38,38,36,.16)!important;stroke-width:1.2}
+
+/* футер */
+.foot-wings{position:absolute;left:50%;top:44%;width:min(96vw,1300px);height:auto;aspect-ratio:200/80;translate:-50% -50%;color:rgba(38,38,36,.14);stroke-width:1.2;animation:float 14s ease-in-out infinite}
+
 /* появление */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
@@ -236,6 +313,9 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
   .team-grid,.steps{grid-template-columns:1fr}
   .steps span{margin-bottom:16px}
   .label{gap:16px}
+  .sticker{width:96px;height:96px;bottom:auto;top:76px;right:12px}
+  .sticker-cross{width:30px;height:30px}
+  .verdict.studio{min-height:620px}
   .hero .p1{font-size:9.4vw}.hero .p2{font-size:17vw}.hero .p3{font-size:14vw}
 }
 @media (prefers-reduced-motion:reduce){

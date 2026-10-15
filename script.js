@@ -11,17 +11,21 @@ burger.addEventListener("click", () => {
   const open = nav.classList.toggle("open");
   burger.setAttribute("aria-expanded", open);
 });
-nav.querySelectorAll(".nav-links a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+nav.querySelectorAll(".menu a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
 
-// появление при скролле
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll(".label, .h, .lead, .row, .verdict, .case, .steps li, .person, .fmt, .faq details, .quiz, .video, .foot-print, .calm").forEach(el => {
-  el.classList.add("rv");
-  if (el.getBoundingClientRect().top < innerHeight) requestAnimationFrame(() => el.classList.add("in"));
-  else io.observe(el);
-});
+// появление при скролле: проверяем позицию, без зависимости от IntersectionObserver
+const pending = new Set(document.querySelectorAll(".label, .h, .lead, .row, .verdict, .case, .steps li, .person, .fmt, .faq details, .quiz, .video, .foot-print, .calm"));
+pending.forEach(el => el.classList.add("rv"));
+function sweep() {
+  for (const el of pending) {
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight * .92 && r.bottom > 0) { el.classList.add("in"); pending.delete(el); }
+  }
+}
+addEventListener("scroll", sweep, { passive: true });
+addEventListener("resize", sweep);
+addEventListener("load", sweep);
+setTimeout(sweep, 60);
 
 // анкета
 const STEPS = [
@@ -216,7 +220,7 @@ function onScrollFx() {
     el.style.filter = k ? `blur(${k * 10}px)` : "";
   }
 }
-addEventListener("scroll", () => requestAnimationFrame(onScrollFx), { passive: true });
+addEventListener("scroll", onScrollFx, { passive: true });
 onScrollFx();
 
 // счётчики

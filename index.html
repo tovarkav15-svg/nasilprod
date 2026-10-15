@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1792105648">
+<link rel="stylesheet" href="style.css?v=1792107059">
 </head>
 <body>
 
@@ -25,6 +25,17 @@
     <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="1" seed="9" result="w"/>
     <feDisplacementMap in="worn" in2="w" scale="2" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
+</svg>
+
+<!-- тематические объекты -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cross" viewBox="0 0 100 100"><path vector-effect="non-scaling-stroke" pathLength="100" d="M40 2H60V34H92V54H60V98H40V54H8V34H40Z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 100 100"><path vector-effect="non-scaling-stroke" pathLength="100" d="M50 2C53 36 64 47 98 50C64 53 53 64 50 98C47 64 36 53 2 50C36 47 47 36 50 2Z"/></symbol>
+  <symbol id="i-halo" viewBox="0 0 100 40"><ellipse vector-effect="non-scaling-stroke" pathLength="100" cx="50" cy="20" rx="46" ry="14"/></symbol>
+  <symbol id="i-feather" viewBox="0 0 100 100"><path vector-effect="non-scaling-stroke" pathLength="100" d="M50 3C29 26 27 60 47 87L50 98L53 87C73 60 71 26 50 3Z"/><path vector-effect="non-scaling-stroke" d="M50 12V97M50 30L38 22M50 44L35 36M50 58L36 51M50 36L62 28M50 50L65 42M50 64L63 57"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 100 70"><path vector-effect="non-scaling-stroke" pathLength="100" d="M24 64C8 64 6 42 21 38C21 20 43 16 51 28C58 12 83 15 82 34C97 35 98 62 80 64Z"/></symbol>
+  <symbol id="i-wing" viewBox="0 0 100 80"><path vector-effect="non-scaling-stroke" pathLength="100" d="M4 50C30 18 62 6 96 4C90 20 82 28 72 32C82 34 86 38 86 42C76 48 66 48 58 48C66 52 68 56 66 60C54 64 40 62 30 58C34 64 32 68 28 72C18 72 10 64 4 56Z"/><path vector-effect="non-scaling-stroke" d="M22 52C42 38 62 28 84 20M24 56C40 52 54 48 70 46"/></symbol>
+  <symbol id="i-wings" viewBox="0 0 200 80"><use href="#i-wing" x="100" width="100" height="80"/><use href="#i-wing" x="-100" width="100" height="80" transform="scale(-1 1)"/></symbol>
 </svg>
 
 <header class="nav" id="nav">
@@ -50,6 +61,18 @@
       <div class="halo"></div>
       <canvas class="feathers" data-n="16"></canvas>
       <div class="cursor-light"></div>
+      <div class="decor">
+        <svg class="ico fl tw" style="--x:14%;--y:22%;--s:34px"><use href="#i-star"/></svg>
+        <svg class="ico fl tw" style="--x:84%;--y:30%;--s:22px;--d:-3s"><use href="#i-star"/></svg>
+        <svg class="ico fl tw" style="--x:24%;--y:70%;--s:18px;--d:-5s"><use href="#i-star"/></svg>
+        <svg class="ico fl" style="--x:50%;--y:14%;--s:150px;--d:-2s"><use href="#i-wings"/></svg>
+        <svg class="ico fl" style="--x:78%;--y:66%;--s:90px;--d:-6s"><use href="#i-cloud"/></svg>
+        <svg class="ico fl" style="--x:8%;--y:48%;--s:64px;--d:-1s"><use href="#i-cloud"/></svg>
+      </div>
+    </div>
+    <div class="sticker" aria-hidden="true">
+      <svg class="sticker-ring" viewBox="0 0 200 200"><defs><path id="circ" d="M100 100m-80 0a80 80 0 1 1 160 0a80 80 0 1 1-160 0"/></defs><text><textPath href="#circ" textLength="500">АГЕНТСТВО НАС#ЛИЯ ✦ TELEGRAM PRODUCTION ✦ EST. 2026 ✦</textPath></text></svg>
+      <svg class="ico draw sticker-cross"><use href="#i-cross"/></svg>
     </div>
     <div class="flash" aria-hidden="true"></div>
     <div class="tee">
@@ -65,10 +88,17 @@
     </div>
   </section>
 
+  <div class="ticker" aria-hidden="true"><div class="tk"><span>Стратегия</span><svg class="ico "><use href="#i-star"/></svg><span>Контент</span><svg class="ico "><use href="#i-cross"/></svg><span>Выпуск</span><svg class="ico "><use href="#i-halo"/></svg><span>Продвижение</span><svg class="ico "><use href="#i-feather"/></svg><span>Запуски</span><svg class="ico "><use href="#i-wings"/></svg><span>Стратегия</span><svg class="ico "><use href="#i-star"/></svg><span>Контент</span><svg class="ico "><use href="#i-cross"/></svg><span>Выпуск</span><svg class="ico "><use href="#i-halo"/></svg><span>Продвижение</span><svg class="ico "><use href="#i-feather"/></svg><span>Запуски</span><svg class="ico "><use href="#i-wings"/></svg></div></div>
+
   <!-- свет: слова проступают при скролле -->
   <section class="ascend">
     <div class="sticky">
       <div class="ring" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="decor" aria-hidden="true">
+        <svg class="ico fl" style="--x:16%;--y:24%;--s:70px"><use href="#i-feather"/></svg>
+        <svg class="ico fl tw" style="--x:82%;--y:70%;--s:30px;--d:-4s"><use href="#i-star"/></svg>
+        <svg class="ico fl" style="--x:80%;--y:20%;--s:90px;--d:-2s"><use href="#i-halo"/></svg>
+      </div>
       <p class="words">Автор сохраняет голос и&nbsp;не&nbsp;живёт в&nbsp;операционке. Всё остальное — на&nbsp;нас.</p>
     </div>
   </section>
@@ -90,6 +120,10 @@
   <section class="hush" id="reality">
     <div class="sticky">
       <span class="small">01 — Проверьте себя</span>
+      <div class="decor" aria-hidden="true">
+        <svg class="ico draw" style="--x:12%;--y:72%;--s:80px"><use href="#i-cross"/></svg>
+        <svg class="ico fl tw" style="--x:86%;--y:26%;--s:40px"><use href="#i-star"/></svg>
+      </div>
       <h2 class="dissolve">Вы замолкаете — и&nbsp;канал замолкает вместе с&nbsp;вами.</h2>
     </div>
   </section>
@@ -97,11 +131,12 @@
   <section class="block symptoms">
     <p class="lead wide">Стоит выключиться на один день — контент, команда и&nbsp;продажи останавливаются. Три симптома. Если совпало два — канал уже зависит от вас.</p>
     <div class="rows">
-      <div class="row"><span class="n">01</span><span class="t">Контент</span><h3>Посты выходят, только когда вы находите силы</h3><p>Канал держится не на системе, а на вашем свободном вечере.</p></div>
-      <div class="row"><span class="n">02</span><span class="t">Команда</span><h3>Без вашего ответа никто не двигается</h3><p>Темы, тексты и публикации каждый раз ждут личного согласования.</p></div>
-      <div class="row"><span class="n">03</span><span class="t">Запуск</span><h3>К продажам готовитесь в последний момент</h3><p>Прогрев сжимается до недели, и запуск не успевает набрать силу.</p></div>
+      <div class="row"><span class="n">01</span><span class="t"><svg class="ico row-ico"><use href="#i-feather"/></svg>Контент</span><h3>Посты выходят, только когда вы находите силы</h3><p>Канал держится не на системе, а на вашем свободном вечере.</p></div>
+      <div class="row"><span class="n">02</span><span class="t"><svg class="ico row-ico"><use href="#i-halo"/></svg>Команда</span><h3>Без вашего ответа никто не двигается</h3><p>Темы, тексты и публикации каждый раз ждут личного согласования.</p></div>
+      <div class="row"><span class="n">03</span><span class="t"><svg class="ico row-ico"><use href="#i-wing"/></svg>Запуск</span><h3>К продажам готовитесь в последний момент</h3><p>Прогрев сжимается до недели, и запуск не успевает набрать силу.</p></div>
     </div>
-    <div class="verdict">
+    <div class="verdict panel studio">
+      <div class="panel-bg" style="background-image:url(img/studio-cross.jpg)"></div>
       <h2 class="h">Проблема не в&nbsp;дисциплине. Каналу нужна система и&nbsp;команда.</h2>
       <div>
         <p>На бесплатной консультации разберём, где вы теряете время и деньги, и дадим три конкретных шага для проекта.</p>
@@ -115,19 +150,19 @@
     <div class="label"><span>02</span><span>Кейсы</span></div>
     <div class="case-grid">
       <article class="case">
-        <div class="orb"><div class="orb-glow"></div><p class="orb-num"><span data-count="180">0</span>+</p></div>
+        <div class="orb"><div class="orb-glow"></div><svg class="ico orb-ico"><use href="#i-wings"/></svg><p class="orb-num"><span data-count="180">0</span>+</p></div>
         <div class="case-head"><h3>Wake Up</h3><span>7 дней</span></div>
         <p>Соединили несколько воронок и частично автоматизировали запуск.</p>
         <dl><div><dt>Участники</dt><dd>180+</dd></div><div><dt>Средний чек</dt><dd>4 000 ₽</dd></div></dl>
       </article>
       <article class="case">
-        <div class="orb"><div class="orb-glow"></div><p class="orb-num"><span data-count="80">0</span>+</p></div>
+        <div class="orb"><div class="orb-glow"></div><svg class="ico orb-ico"><use href="#i-halo"/></svg><p class="orb-num"><span data-count="80">0</span>+</p></div>
         <div class="case-head"><h3>Wake Up Empire</h3><span>5 дней</span></div>
         <p>Больше 80 платных подписчиков на сильном прогреве и технически продуманном сайте.</p>
         <dl><div><dt>Участники</dt><dd>80+</dd></div><div><dt>Средний чек</dt><dd>4 990 ₽</dd></div></dl>
       </article>
       <article class="case">
-        <div class="orb"><div class="orb-glow"></div><p class="orb-num"><span data-count="100000">0</span>&nbsp;₽</p></div>
+        <div class="orb"><div class="orb-glow"></div><svg class="ico orb-ico"><use href="#i-star"/></svg><p class="orb-num"><span data-count="100000">0</span>&nbsp;₽</p></div>
         <div class="case-head"><h3>100 000 ₽ с нуля</h3><span>3 дня</span></div>
         <p>Широкий охват вместо высокого чека — и первый шаг к групповой работе за 60 000+ ₽.</p>
         <dl><div><dt>Участники</dt><dd>150+</dd></div><div><dt>Средний чек</dt><dd>1 750 ₽</dd></div></dl>
@@ -141,14 +176,15 @@
     <h2 class="h big">Берём ваш канал на&nbsp;себя.</h2>
     <p class="lead">Вы рассказываете о себе и своей цели. Дальше мы придумываем темы, пишем посты, находим читателей и помогаем продавать.</p>
     <ol class="steps">
-      <li><span>01</span><h3>Решаем, о чём канал</h3><p>Находим главную тему и объясняем, почему людям будет интересно читать именно вас.</p></li>
-      <li><span>02</span><h3>Пишем и выпускаем</h3><p>Узнаём, как вы говорите, придумываем темы, пишем тексты и публикуем вовремя.</p></li>
-      <li><span>03</span><h3>Находим читателей</h3><p>Рассказываем о канале там, где уже есть нужные вам люди, и смотрим, кто приходит.</p></li>
-      <li><span>04</span><h3>Продаём через канал</h3><p>Рассказываем о продукте так, чтобы было понятно, зачем он нужен и как его купить.</p></li>
+      <li><svg class="ico step-ico"><use href="#i-star"/></svg><span>01</span><h3>Решаем, о чём канал</h3><p>Находим главную тему и объясняем, почему людям будет интересно читать именно вас.</p></li>
+      <li><svg class="ico step-ico"><use href="#i-feather"/></svg><span>02</span><h3>Пишем и выпускаем</h3><p>Узнаём, как вы говорите, придумываем темы, пишем тексты и публикуем вовремя.</p></li>
+      <li><svg class="ico step-ico"><use href="#i-cloud"/></svg><span>03</span><h3>Находим читателей</h3><p>Рассказываем о канале там, где уже есть нужные вам люди, и смотрим, кто приходит.</p></li>
+      <li><svg class="ico step-ico"><use href="#i-wings"/></svg><span>04</span><h3>Продаём через канал</h3><p>Рассказываем о продукте так, чтобы было понятно, зачем он нужен и как его купить.</p></li>
     </ol>
   </section>
 
   <section class="interlude">
+    <div class="panel-bg kb" style="background-image:url(img/angel-girl.jpg)"></div>
     <canvas class="feathers" data-n="12" aria-hidden="true"></canvas>
     <p class="calm">Тихая система<br>вместо вечного аврала.</p>
   </section>
@@ -158,14 +194,14 @@
     <div class="label"><span>04</span><span>Люди за проектом</span></div>
     <div class="team-grid">
       <article class="person">
-        <img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy">
+        <div class="portrait"><img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy"><svg class="ico nimb"><use href="#i-halo"/></svg></div>
         <h3>Артём Бутов</h3>
         <span class="role">Продюсирование и продукт</span>
         <p>Создаёт сайты и контент для Telegram. Выстраивает путь от интереса к посту до покупки продукта.</p>
         <a href="https://t.me/lfbutov" target="_blank" rel="noopener" class="ul">@lfbutov</a>
       </article>
       <article class="person">
-        <img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy">
+        <div class="portrait"><img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy"><svg class="ico nimb"><use href="#i-halo"/></svg></div>
         <h3>Артём Федонко</h3>
         <span class="role">Клиенты и команда</span>
         <p>Находит клиентов, ведёт переговоры, собирает команду продаж. Аудитория — 15 000+ человек, запуски с общей прибылью больше $50 000.</p>
@@ -179,6 +215,7 @@
     <div class="label"><span>05</span><span>С чем можем помочь</span></div>
     <div class="fmt-list">
       <article class="fmt">
+        <svg class="ico fmt-ico"><use href="#i-wings"/></svg>
         <span class="n">01 / Ежемесячно</span>
         <h3>Полное продюсирование</h3>
         <p>Развиваем канал как медиа и продюсируем запуски продуктов.</p>
@@ -186,15 +223,18 @@
         <div class="price">от 120 000 ₽<small>/ месяц</small></div>
         <a href="#brief" class="btn" data-pick="Передать канал под ключ">Обсудить</a>
       </article>
-      <article class="fmt">
-        <span class="n">02 / Проект</span>
+      <article class="fmt photo">
+        <div class="panel-bg" style="background-image:url(img/wing-sneakers.jpg)"></div>
+        <svg class="ico fmt-ico"><use href="#i-star"/></svg>
+        <span class="n">02 / Проект — на взлёт</span>
         <h3>Запуск продукта</h3>
         <p>Прогрев, посты и вся операционная работа — на нас.</p>
         <ul><li>Запуск от 500 000 ₽</li><li>Продукт, готовый к продаже</li><li>Канал работает и после запуска</li></ul>
         <div class="price">после диагностики</div>
-        <a href="#brief" class="btn" data-pick="Запустить продукт в Telegram">Обсудить</a>
+        <a href="#brief" class="btn inv" data-pick="Запустить продукт в Telegram">Обсудить</a>
       </article>
       <article class="fmt dark">
+        <svg class="ico fmt-ico"><use href="#i-halo"/></svg>
         <span class="n">03 / Бесплатно</span>
         <h3>Консультация</h3>
         <p>Разберём канал и дадим три конкретных совета по монетизации.</p>
@@ -218,6 +258,11 @@
 
   <!-- анкета -->
   <section class="brief" id="brief">
+    <div class="decor" aria-hidden="true">
+      <svg class="ico draw big-cross" style="--x:84%;--y:46%;--s:min(30vw,380px)"><use href="#i-cross"/></svg>
+      <svg class="ico fl tw" style="--x:70%;--y:18%;--s:36px"><use href="#i-star"/></svg>
+      <svg class="ico fl" style="--x:92%;--y:84%;--s:60px;--d:-3s"><use href="#i-feather"/></svg>
+    </div>
     <div class="brief-in">
       <div class="label"><span>07</span><span>Короткая анкета</span></div>
       <h2 class="h big">Поймём задачу за&nbsp;минуту.</h2>
@@ -232,6 +277,7 @@
 
 <footer class="footer">
   <div class="rays foot-rays" aria-hidden="true"></div>
+  <svg class="ico foot-wings" aria-hidden="true"><use href="#i-wings"/></svg>
   <p class="print foot-print">Нас#лия</p>
   <div class="foot-row">
     <span>© 2026 Агентство Нас#лия</span>
@@ -240,6 +286,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=1792105648"></script>
+<script src="script.js?v=1792107059"></script>
 </body>
 </html>

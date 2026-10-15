@@ -17,7 +17,7 @@ nav.querySelectorAll(".nav-links a").forEach(a => a.addEventListener("click", ()
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
 }, { threshold: 0.1 });
-document.querySelectorAll(".label, .h, .lead, .row, .verdict, .case, .steps li, .person, .fmt, .faq details, .quiz, .video, .foot-print").forEach(el => {
+document.querySelectorAll(".label, .h, .lead, .row, .verdict, .case, .steps li, .person, .fmt, .faq details, .quiz, .video, .foot-print, .calm").forEach(el => {
   el.classList.add("rv");
   if (el.getBoundingClientRect().top < innerHeight) requestAnimationFrame(() => el.classList.add("in"));
   else io.observe(el);
@@ -95,3 +95,142 @@ document.querySelectorAll("[data-pick]").forEach(a => a.addEventListener("click"
 }));
 
 render();
+
+// ---------- ангельская анимация ----------
+const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+
+// перо: стержень + два опахала, в координатах длины 1
+const FEATHER = (() => {
+  const p = new Path2D();
+  p.moveTo(0, -.5);
+  p.bezierCurveTo(-.3, -.32, -.3, .18, -.03, .4);
+  p.lineTo(0, .5);
+  p.lineTo(.02, .4);
+  p.bezierCurveTo(.25, .2, .27, -.3, 0, -.5);
+  return p;
+})();
+
+function feathers(canvas) {
+  const ctx = canvas.getContext("2d");
+  const n = +canvas.dataset.n || 12;
+  let w, h, dpr, list = [], running = false, last = 0;
+  const spawn = (top) => {
+    const z = .35 + Math.random() * .65;
+    return { x: Math.random() * w, y: top ? -80 : Math.random() * h, z,
+      size: (40 + Math.random() * 60) * z * (w < 640 ? .75 : 1),
+      speed: (14 + Math.random() * 16) * z, amp: 30 + Math.random() * 60,
+      f: .25 + Math.random() * .35, ph: Math.random() * 6.28, tilt: Math.random() - .5 };
+  };
+  const resize = () => {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    w = canvas.clientWidth; h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    if (!list.length) list = Array.from({ length: n }, () => spawn(false));
+  };
+  const draw = (t) => {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    for (const f of list) {
+      const s = t * f.f + f.ph;
+      const x = f.x + Math.sin(s) * f.amp;
+      const rot = Math.sin(s + 1.57) * .55 + f.tilt;
+      const flip = .55 + .45 * Math.abs(Math.cos(s * .7));
+      ctx.save();
+      ctx.translate(x, f.y);
+      ctx.rotate(rot);
+      ctx.scale(f.size * flip, f.size);
+      ctx.globalAlpha = .45 + f.z * .5;
+      ctx.shadowColor = "rgba(60,58,50,.12)";
+      ctx.shadowBlur = 10 * f.z;
+      ctx.fillStyle = "#fff";
+      ctx.fill(FEATHER);
+      ctx.shadowBlur = 0;
+      ctx.lineWidth = 1.2 / f.size;
+      ctx.strokeStyle = "rgba(140,138,128,.35)";
+      ctx.beginPath(); ctx.moveTo(0, -.48); ctx.quadraticCurveTo(.02, 0, 0, .5); ctx.stroke();
+      ctx.strokeStyle = "rgba(140,138,128,.12)";
+      for (let i = -.36; i < .34; i += .07) {
+        ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(-.24, i - .09); ctx.moveTo(0, i); ctx.lineTo(.2, i - .09); ctx.stroke();
+      }
+      ctx.restore();
+    }
+  };
+  const loop = (now) => {
+    if (!running) return;
+    const dt = Math.min(.05, (now - last) / 1000 || 0); last = now;
+    for (const f of list) {
+      f.y += f.speed * dt;
+      if (f.y > h + 80) Object.assign(f, spawn(true));
+    }
+    draw(now / 1000);
+    requestAnimationFrame(loop);
+  };
+  resize();
+  new ResizeObserver(resize).observe(canvas);
+  if (calm) { draw(0); return; }
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !running) { running = true; last = performance.now(); requestAnimationFrame(loop); }
+    else if (!e.isIntersecting) running = false;
+  }).observe(canvas);
+}
+document.querySelectorAll("canvas.feathers").forEach(feathers);
+
+// свет под курсором
+document.querySelectorAll(".hero, .orb, .fmt").forEach(el => el.addEventListener("pointermove", e => {
+  const r = el.getBoundingClientRect();
+  el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  el.style.setProperty("--my", `${e.clientY - r.top}px`);
+}));
+
+// слова проступают из света
+const words = document.querySelector(".words");
+words.innerHTML = words.textContent.split(" ").map(w => `<span class="w">${w}</span>`).join(" ");
+const wordEls = [...words.querySelectorAll(".w")];
+const ascend = document.querySelector(".ascend");
+const ring = ascend.querySelector(".ring");
+
+// фраза растворяется вверх, как перо
+const hushTitle = document.querySelector(".dissolve");
+hushTitle.innerHTML = hushTitle.textContent.split(" ").map(w =>
+  `<span style="display:inline-block;white-space:nowrap">${[...w].map(c => `<span class="c" data-r="${Math.random().toFixed(3)}">${c}</span>`).join("")}</span>`
+).join(" ");
+const chars = [...hushTitle.querySelectorAll(".c")].map(el => ({ el, r: +el.dataset.r }));
+const hush = document.querySelector(".hush");
+
+const progress = (sec) => {
+  const r = sec.getBoundingClientRect();
+  return clamp(-r.top / (r.height - innerHeight));
+};
+function onScrollFx() {
+  const p = progress(ascend);
+  wordEls.forEach((w, i) => w.classList.toggle("on", calm || i / wordEls.length < p * 1.25));
+  ring.style.setProperty("--rs", .55 + p * .7);
+  ring.style.setProperty("--ro", .25 + p * .75);
+
+  const q = calm ? 0 : progress(hush);
+  for (const { el, r } of chars) {
+    const k = clamp((q - .2 - r * .45) / .3);
+    el.style.transform = k ? `translateY(${-k * 140}px) rotate(${(r - .5) * 40 * k}deg)` : "";
+    el.style.opacity = 1 - k;
+    el.style.filter = k ? `blur(${k * 10}px)` : "";
+  }
+}
+addEventListener("scroll", () => requestAnimationFrame(onScrollFx), { passive: true });
+onScrollFx();
+
+// счётчики
+const fmt = n => n.toLocaleString("ru-RU");
+const counter = new IntersectionObserver(entries => entries.forEach(e => {
+  if (!e.isIntersecting) return;
+  counter.unobserve(e.target);
+  const el = e.target, to = +el.dataset.count, t0 = performance.now(), dur = 2200;
+  if (calm) { el.textContent = fmt(to); return; }
+  const tick = now => {
+    const k = clamp((now - t0) / dur), ease = 1 - Math.pow(1 - k, 4);
+    el.textContent = fmt(Math.round(to * ease));
+    if (k < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}), { threshold: .5 });
+document.querySelectorAll("[data-count]").forEach(el => counter.observe(el));

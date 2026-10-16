@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1792108639">
+<link rel="stylesheet" href="style.css?v=1792109287">
 </head>
 <body>
 
@@ -83,24 +83,24 @@
       <canvas class="feathers" data-n="16"></canvas>
       <div class="cursor-light"></div>
       <div class="decor">
-        <svg class="ico fl tw" style="--x:14%;--y:22%;--s:34px"><use href="#i-star"/></svg>
-        <svg class="ico fl tw" style="--x:84%;--y:30%;--s:22px;--d:-3s"><use href="#i-star"/></svg>
-        <svg class="ico fl tw" style="--x:24%;--y:70%;--s:18px;--d:-5s"><use href="#i-star"/></svg>
-        <svg class="ico fl" style="--x:50%;--y:14%;--s:150px;--d:-2s"><use href="#i-wings"/></svg>
-        <svg class="ico fl" style="--x:78%;--y:66%;--s:90px;--d:-6s"><use href="#i-cloud"/></svg>
-        <svg class="ico fl" style="--x:8%;--y:48%;--s:64px;--d:-1s"><use href="#i-cloud"/></svg>
+        <svg class="c-obj float-obj " style="--x:50%;--y:15%;--s:230px;--d:0s" aria-hidden="true"><use href="#c-wings"/></svg>
+        <svg class="c-obj float-obj " style="--x:9%;--y:60%;--s:150px;--d:-2s" aria-hidden="true"><use href="#c-halo"/></svg>
+        <svg class="c-obj float-obj " style="--x:87%;--y:30%;--s:92px;--d:-4s" aria-hidden="true"><use href="#c-cross"/></svg>
+        <svg class="c-obj float-obj " style="--x:19%;--y:78%;--s:74px;--d:-6s" aria-hidden="true"><use href="#c-star"/></svg>
+        <svg class="c-obj float-obj " style="--x:80%;--y:76%;--s:96px;--d:-3s" aria-hidden="true"><use href="#c-heart"/></svg>
+        <svg class="c-obj float-obj " style="--x:68%;--y:10%;--s:40px;--d:-5s" aria-hidden="true"><use href="#c-star"/></svg>
       </div>
     </div>
     <div class="sticker" aria-hidden="true">
       <svg class="sticker-ring" viewBox="0 0 200 200"><defs><path id="circ" d="M100 100m-80 0a80 80 0 1 1 160 0a80 80 0 1 1-160 0"/></defs><text><textPath href="#circ" textLength="500">АГЕНТСТВО НАС#ЛИЯ ✦ TELEGRAM PRODUCTION ✦ EST. 2026 ✦</textPath></text></svg>
-      <svg class="ico draw sticker-cross"><use href="#i-cross"/></svg>
+      <svg class="c-obj sticker-cross" aria-hidden="true"><use href="#c-cross"/></svg>
     </div>
     <div class="flash" aria-hidden="true"></div>
     <div class="tee">
-      <h1 class="print">
+      <h1 class="lockup">
         <span class="p1">Агентство Нас#лия</span>
-        <span class="p2">TELEGRAM</span>
-        <span class="p3">2026</span>
+        <span class="p2 chrome-text">TELEGRAM</span>
+        <span class="p3 chrome-text">2026</span>
       </h1>
     </div>
     <div class="hero-meta">
@@ -124,27 +124,35 @@
     </div>
   </section>
 
-  <!-- видео -->
-  <section class="block intro" id="intro">
-    <div class="label"><span>00</span><span>Знакомство</span></div>
-    <div class="intro-grid">
-      <h2 class="h">Познакомимся?</h2>
-      <p class="lead">Минута о том, кто мы и как устроена работа.</p>
+  <!-- видео: плеер в окне -->
+  <section class="y2k intro2" id="intro">
+    <div class="aurora soft" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="y-head">
+      <span class="pill">00 · Знакомство</span>
+      <h2 class="chrome-text">Познакомимся?</h2>
+      <p>Минута о том, кто мы и как устроена работа.</p>
     </div>
-    <figure class="video">
-      <video controls playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" aria-label="Знакомство с агентством"></video>
-    </figure>
+    <div class="player">
+      <svg class="c-obj float-obj " style="--x:4%;--y:2%;--s:200px;--d:0s" aria-hidden="true"><use href="#c-wings"/></svg>
+      <svg class="c-obj float-obj " style="--x:97%;--y:88%;--s:80px;--d:-3s" aria-hidden="true"><use href="#c-star"/></svg>
+      <div class="win player-win">
+        <header class="win-bar"><i></i><i></i><i></i><span>intro.mov · 01:03</span></header>
+        <figure class="video">
+          <video controls playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" aria-label="Знакомство с агентством"></video>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <!-- ситуация -->
-  <!-- тишина: фраза растворяется вверх -->
+  <!-- тишина: хромированная фраза растворяется вверх -->
   <section class="hush" id="reality">
     <div class="sticky">
-      <span class="small">01 — Проверьте себя</span>
-      <div class="decor" aria-hidden="true">
-        <svg class="ico draw" style="--x:12%;--y:72%;--s:80px"><use href="#i-cross"/></svg>
-        <svg class="ico fl tw" style="--x:86%;--y:26%;--s:40px"><use href="#i-star"/></svg>
-      </div>
+      <div class="aurora soft" aria-hidden="true"><i></i><i></i><i></i></div>
+      <span class="pill hush-pill">01 · Проверьте себя</span>
+      <svg class="c-obj float-obj " style="--x:50%;--y:20%;--s:240px;--d:0s" aria-hidden="true"><use href="#c-halo"/></svg>
+      <svg class="c-obj float-obj " style="--x:11%;--y:72%;--s:86px;--d:-3s" aria-hidden="true"><use href="#c-cross"/></svg>
+      <svg class="c-obj float-obj " style="--x:88%;--y:30%;--s:64px;--d:-5s" aria-hidden="true"><use href="#c-star"/></svg>
       <h2 class="dissolve">Вы замолкаете — и&nbsp;канал замолкает вместе с&nbsp;вами.</h2>
     </div>
   </section>
@@ -346,7 +354,7 @@
   <!-- анкета -->
   <section class="brief" id="brief">
     <div class="decor" aria-hidden="true">
-      <svg class="ico draw big-cross" style="--x:84%;--y:46%;--s:min(30vw,380px)"><use href="#i-cross"/></svg>
+      <svg class="ico big-cross" style="--x:84%;--y:46%;--s:min(30vw,380px)"><use href="#i-cross"/></svg>
       <svg class="ico fl tw" style="--x:70%;--y:18%;--s:36px"><use href="#i-star"/></svg>
       <svg class="ico fl" style="--x:92%;--y:84%;--s:60px;--d:-3s"><use href="#i-feather"/></svg>
     </div>
@@ -373,6 +381,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=1792108639"></script>
+<script src="script.js?v=1792109287"></script>
 </body>
 </html>

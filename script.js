@@ -214,7 +214,7 @@ function onScrollFx() {
 
   const q = calm ? 0 : progress(hush);
   for (const { el, r } of chars) {
-    const k = clamp((q - .2 - r * .45) / .3);
+    const k = clamp((q - .35 - r * .4) / .25);
     el.style.transform = k ? `translateY(${-k * 140}px) rotate(${(r - .5) * 40 * k}deg)` : "";
     el.style.opacity = 1 - k;
     el.style.filter = k ? `blur(${k * 10}px)` : "";
@@ -236,7 +236,7 @@ document.querySelectorAll(".glass").forEach(g => {
 
 // окна кейсов можно перетаскивать (на широких экранах)
 let zTop = 5;
-document.querySelectorAll(".win").forEach(win => {
+document.querySelectorAll(".desk .win").forEach(win => {
   const bar = win.querySelector(".win-bar");
   win.addEventListener("pointerdown", () => { win.style.zIndex = ++zTop; });
   bar.addEventListener("pointerdown", e => {

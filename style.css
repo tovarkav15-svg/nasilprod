@@ -143,9 +143,9 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 .flash{position:absolute;left:50%;top:46%;z-index:4;width:40px;height:40px;margin:-20px;border-radius:50%;background:#ffffff;pointer-events:none;
   box-shadow:0 0 0 6px rgba(226,226,226,.8),0 0 120px 80px rgba(222,222,222,.7);animation:flash 2.4s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes flash{0%{transform:scale(0);opacity:1}35%{transform:scale(60);opacity:1}100%{transform:scale(80);opacity:0}}
-.hero .print span{display:block;animation:emerge 2.6s cubic-bezier(.2,.7,.2,1) both}
+.hero .lockup span{display:block;animation:emerge 2.6s cubic-bezier(.2,.7,.2,1) both}
 .hero .p1{animation-delay:.5s!important}.hero .p2{animation-delay:.75s!important}.hero .p3{animation-delay:1s!important}
-@keyframes emerge{from{opacity:0;filter:blur(18px);transform:translateY(18px) scale(1.04)}to{opacity:1;filter:blur(0);transform:none}}
+@keyframes emerge{from{opacity:0;filter:blur(18px);transform:translateY(18px) scale(1.04)}to{opacity:1;transform:none}}
 .hero-meta{animation:fadeup 1.6s 1.6s cubic-bezier(.2,.7,.2,1) both}
 @keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
@@ -162,7 +162,6 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
 
 /* тишина */
 .hush{height:220vh;position:relative}
-.hush .small{position:absolute;top:96px;left:var(--pad)}
 .dissolve{max-width:1300px;text-align:center;font-size:clamp(40px,7.4vw,120px);font-weight:700;letter-spacing:-.055em;line-height:.95}
 .dissolve .c{display:inline-block;will-change:transform,opacity,filter}
 
@@ -338,6 +337,34 @@ body::before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;op
   .discs::before{display:none}
 }
 @media (max-width:520px){ .discs{grid-template-columns:1fr} .disc-wrap{width:220px} }
+
+/* ---------- хромированные объекты в сцене ---------- */
+.float-obj{position:absolute;z-index:1;left:var(--x);top:var(--y);width:var(--s);height:var(--s);translate:-50% -50%;pointer-events:none;
+  animation:float 10s ease-in-out var(--d,0s) infinite,turn 8s ease-in-out var(--d,0s) infinite alternate}
+.hero .decor{z-index:2}
+
+/* hero: хромовый локап */
+.lockup{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:.95}
+.lockup .p1{color:var(--ink)}
+.hero .p2.chrome-text,.hero .p3.chrome-text{line-height:1;background-size:100% 1em}
+.sticker-cross{position:absolute;left:50%;top:50%;width:54px;height:54px;translate:-50% -50%}
+
+/* видео в окне */
+.player{position:relative;max-width:1180px;margin:0 auto}
+.player-win{position:relative;left:auto;top:auto;width:100%;rotate:0deg;z-index:2}
+.player-win .video{aspect-ratio:16/9}
+.player .float-obj{z-index:3}
+
+/* тишина */
+.hush .sticky{isolation:isolate}
+.hush-pill{position:absolute;top:96px;left:var(--pad)}
+.dissolve{position:relative;z-index:2;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}
+.dissolve .c{background:linear-gradient(180deg,#eeeeee 0%,#bdbdbd 24%,#6d6d6d 46%,#222222 52%,#848484 62%,#e6e6e6 84%,#a0a0a0 100%);background-size:100% 1em;-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+
+@media (max-width:640px){
+  .float-obj{scale:.6}
+  .hush-pill{top:84px}
+}
 
 /* появление */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}

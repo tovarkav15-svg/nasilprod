@@ -16,30 +16,14 @@ menuBtn.addEventListener("click", () => setMenu(!overlay.classList.contains("ope
 overlay.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
 addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 
-// ---------- появление и счётчики ----------
-const pending = new Set(document.querySelectorAll(".head, .grid3, .test-grid, .band, .stair-wrap, .chat-wrap, .brief-wrap, .angel-text, .foot-cta"));
+// ---------- плавное появление карточек ----------
+const pending = new Set(document.querySelectorAll(".grid3, .test-grid, .stair-wrap, .chat-wrap, .brief-wrap"));
 pending.forEach(el => el.classList.add("rv"));
-const counters = new Set(document.querySelectorAll("[data-count]"));
-const fmt = n => n.toLocaleString("ru-RU");
-function runCounter(el) {
-  const to = +el.dataset.count, t0 = performance.now(), dur = 2000;
-  const tick = now => {
-    const k = clamp((now - t0) / dur);
-    el.textContent = fmt(Math.round(to * (1 - Math.pow(1 - k, 4))));
-    if (k < 1) requestAnimationFrame(tick);
-  };
-  el.textContent = "0";
-  requestAnimationFrame(tick);
-}
 function sweep() {
   const h = innerHeight;
   for (const el of pending) {
     const r = el.getBoundingClientRect();
     if (r.top < h * .92 && r.bottom > 0) { el.classList.add("in"); pending.delete(el); }
-  }
-  for (const el of counters) {
-    const r = el.getBoundingClientRect();
-    if (r.top < h * .85 && r.bottom > 0) { counters.delete(el); if (!calm) runCounter(el); }
   }
 }
 
@@ -101,33 +85,13 @@ function feathers(canvas) {
 }
 document.querySelectorAll("canvas.feathers").forEach(feathers);
 
-// ---------- сцены, привязанные к прокрутке ----------
-const progress = sec => { const r = sec.getBoundingClientRect(); return clamp(-r.top / (r.height - innerHeight)); };
-const strip = document.querySelector(".strip");
-const lines = [...strip.querySelectorAll(".strip-line")];
-const portal = document.querySelector(".portal");
-const frame = portal.querySelector(".portal-frame");
-
-function scrollFx() {
-  // манифест: строки едут навстречу
-  const p = calm ? .5 : progress(strip);
-  lines.forEach((l, i) => {
-    const extra = Math.max(0, l.scrollWidth - innerWidth);
-    const x = i === 0 ? -p * extra : -(1 - p) * extra;
-    l.style.transform = `translateX(${x}px)`;
-  });
-  // видео: портал раскрывается
-  const v = calm ? 1 : clamp(progress(portal) / .7);
-  frame.style.setProperty("--p", v);
-  portal.style.setProperty("--to", clamp(1 - v * 2.2));
-  sweep();
-}
-addEventListener("scroll", scrollFx, { passive: true });
-addEventListener("resize", scrollFx);
-addEventListener("load", scrollFx);
-scrollFx();
+addEventListener("scroll", sweep, { passive: true });
+addEventListener("resize", sweep);
+addEventListener("load", sweep);
+sweep();
 
 // ---------- видео ----------
+const frame = document.querySelector(".video-frame");
 const video = frame.querySelector("video");
 frame.querySelector(".play").addEventListener("click", () => {
   video.controls = true;

@@ -3,14 +3,21 @@ const CONTACT_TG = "https://t.me/lfbutov";
 const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-// ---------- навигация ----------
-const nav = document.getElementById("nav");
-const burger = nav.querySelector(".burger");
-burger.addEventListener("click", () => burger.setAttribute("aria-expanded", nav.classList.toggle("open")));
-nav.querySelectorAll(".menu a").forEach(a => a.addEventListener("click", () => nav.classList.remove("open")));
+// ---------- меню ----------
+const overlay = document.getElementById("overlay");
+const menuBtn = document.getElementById("menuBtn");
+function setMenu(open) {
+  overlay.classList.toggle("open", open);
+  overlay.setAttribute("aria-hidden", !open);
+  menuBtn.setAttribute("aria-expanded", open);
+  menuBtn.textContent = open ? "Закрыть" : "Меню";
+}
+menuBtn.addEventListener("click", () => setMenu(!overlay.classList.contains("open")));
+overlay.querySelectorAll("a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 
-// ---------- появление и счётчики (по позиции, без IntersectionObserver) ----------
-const pending = new Set(document.querySelectorAll(".head, .grid3, .grid2, .player, .dark-panel, .discs, .faq-list, .brief-wrap, .angel-text"));
+// ---------- появление и счётчики ----------
+const pending = new Set(document.querySelectorAll(".head, .grid3, .test-grid, .band, .stair-wrap, .chat-wrap, .brief-wrap, .angel-text, .foot-cta"));
 pending.forEach(el => el.classList.add("rv"));
 const counters = new Set(document.querySelectorAll("[data-count]"));
 const fmt = n => n.toLocaleString("ru-RU");
@@ -46,7 +53,7 @@ const FEATHER = (() => {
   return p;
 })();
 function feathers(canvas) {
-  const ctx = canvas.getContext("2d"), n = +canvas.dataset.n || 12, dark = !!canvas.closest(".angel");
+  const ctx = canvas.getContext("2d"), n = +canvas.dataset.n || 12, dark = canvas.hasAttribute("data-dark") || !!canvas.closest(".angel");
   let w, h, dpr, list = [], last = 0;
   const spawn = top => {
     const z = .35 + Math.random() * .65;
@@ -94,37 +101,65 @@ function feathers(canvas) {
 }
 document.querySelectorAll("canvas.feathers").forEach(feathers);
 
-// ---------- слова проступают ----------
-const words = document.querySelector(".words");
-words.innerHTML = words.textContent.split(" ").map(w => `<span class="w">${w}</span>`).join(" ");
-const wordEls = [...words.querySelectorAll(".w")];
-const ascend = document.querySelector(".ascend");
-
-// ---------- фраза растворяется ----------
-const hushTitle = document.querySelector(".dissolve");
-hushTitle.innerHTML = hushTitle.textContent.split(" ").map(w =>
-  `<span style="display:inline-block;white-space:nowrap">${[...w].map(c => `<span class="c" data-r="${Math.random().toFixed(3)}">${c}</span>`).join("")}</span>`
-).join(" ");
-const chars = [...hushTitle.querySelectorAll(".c")].map(el => ({ el, r: +el.dataset.r }));
-const hush = document.querySelector(".hush");
-
+// ---------- сцены, привязанные к прокрутке ----------
 const progress = sec => { const r = sec.getBoundingClientRect(); return clamp(-r.top / (r.height - innerHeight)); };
+const strip = document.querySelector(".strip");
+const lines = [...strip.querySelectorAll(".strip-line")];
+const portal = document.querySelector(".portal");
+const frame = portal.querySelector(".portal-frame");
+
 function scrollFx() {
-  const p = progress(ascend);
-  wordEls.forEach((w, i) => w.classList.toggle("on", calm || i / wordEls.length < p * 1.25));
-  const q = calm ? 0 : progress(hush);
-  for (const { el, r } of chars) {
-    const k = clamp((q - .35 - r * .4) / .25);
-    el.style.transform = k ? `translateY(${-k * 140}px) rotate(${(r - .5) * 40 * k}deg)` : "";
-    el.style.opacity = 1 - k;
-    el.style.filter = k ? `blur(${k * 10}px)` : "";
-  }
+  // манифест: строки едут навстречу
+  const p = calm ? .5 : progress(strip);
+  lines.forEach((l, i) => {
+    const extra = Math.max(0, l.scrollWidth - innerWidth);
+    const x = i === 0 ? -p * extra : -(1 - p) * extra;
+    l.style.transform = `translateX(${x}px)`;
+  });
+  // видео: портал раскрывается
+  const v = calm ? 1 : clamp(progress(portal) / .7);
+  frame.style.setProperty("--p", v);
+  portal.style.setProperty("--to", clamp(1 - v * 2.2));
   sweep();
 }
 addEventListener("scroll", scrollFx, { passive: true });
 addEventListener("resize", scrollFx);
 addEventListener("load", scrollFx);
 scrollFx();
+
+// ---------- видео ----------
+const video = frame.querySelector("video");
+frame.querySelector(".play").addEventListener("click", () => {
+  video.controls = true;
+  video.play();
+  frame.classList.add("playing");
+});
+video.addEventListener("pause", () => { if (video.ended) frame.classList.remove("playing"); });
+
+// ---------- тест с циферблатом ----------
+const boxes = [...document.querySelectorAll(".tq input")];
+const verdicts = ["Отметьте, что совпадает", "Один звоночек. Система уже нужна.", "Канал зависит от вас. Проблема не в дисциплине — нужна система и команда.", "Всё держится на вас. Пора передать операционку."];
+function gauge() {
+  const n = boxes.filter(b => b.checked).length;
+  document.getElementById("gCount").textContent = n;
+  document.getElementById("gText").textContent = verdicts[n];
+  document.getElementById("dialFg").style.strokeDashoffset = 100 - n * 33.34;
+  document.getElementById("needle").style.transform = `rotate(${-90 + n * 60}deg)`;
+}
+boxes.forEach(b => b.addEventListener("change", gauge));
+
+// ---------- вопросы в чате ----------
+const chat = document.getElementById("chat");
+const say = (cls, html) => { const m = document.createElement("div"); m.className = `msg ${cls}`; m.innerHTML = html; chat.appendChild(m); chat.scrollTop = chat.scrollHeight; return m; };
+let busy = false;
+document.querySelectorAll(".qc").forEach(q => q.addEventListener("click", () => {
+  if (busy) return;
+  busy = true;
+  q.classList.add("used");
+  say("out", q.textContent);
+  const t = say("in typing", "<i></i><i></i><i></i>");
+  setTimeout(() => { t.remove(); say("in", q.dataset.a); busy = false; }, calm ? 0 : 1000);
+}));
 
 // ---------- стекло наклоняется за курсором ----------
 document.querySelectorAll(".tilt").forEach(g => {
@@ -134,27 +169,6 @@ document.querySelectorAll(".tilt").forEach(g => {
     g.style.setProperty("--ty", `${x * 12}deg`); g.style.setProperty("--tx", `${-y * 12}deg`);
   });
   g.addEventListener("pointerleave", () => { g.style.setProperty("--tx", "0deg"); g.style.setProperty("--ty", "0deg"); });
-});
-
-// ---------- окна кейсов можно перетаскивать ----------
-let zTop = 5;
-document.querySelectorAll(".desk .win").forEach(win => {
-  const bar = win.querySelector(".win-bar"), desk = win.parentElement;
-  win.addEventListener("pointerdown", () => { win.style.zIndex = ++zTop; });
-  bar.addEventListener("pointerdown", e => {
-    if (innerWidth <= 900) return;
-    e.preventDefault();
-    bar.setPointerCapture(e.pointerId);
-    const sx = e.clientX, sy = e.clientY, ox = win.offsetLeft, oy = win.offsetTop;
-    win.classList.add("held");
-    const move = ev => {
-      win.style.left = `${clamp(ox + ev.clientX - sx, -40, desk.clientWidth - win.offsetWidth + 40)}px`;
-      win.style.top = `${clamp(oy + ev.clientY - sy, -40, desk.clientHeight - 60)}px`;
-    };
-    const up = () => { win.classList.remove("held"); bar.removeEventListener("pointermove", move); bar.removeEventListener("pointerup", up); };
-    bar.addEventListener("pointermove", move);
-    bar.addEventListener("pointerup", up);
-  });
 });
 
 // ---------- анкета ----------

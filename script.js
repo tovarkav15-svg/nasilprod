@@ -135,6 +135,20 @@ document.querySelectorAll(".tilt").forEach(g => {
   g.addEventListener("pointerleave", () => { g.style.setProperty("--tx", "0deg"); g.style.setProperty("--ty", "0deg"); });
 });
 
+// ---------- нимб над курсором ----------
+const halo = document.querySelector(".halo-cursor");
+if (halo && matchMedia("(hover: hover)").matches && !calm) {
+  let tx = 0, ty = 0, x = 0, y = 0;
+  addEventListener("pointermove", e => { tx = e.clientX; ty = e.clientY - 26; halo.classList.add("on"); });
+  document.addEventListener("pointerleave", () => halo.classList.remove("on"));
+  const follow = () => {
+    x += (tx - x) * .18; y += (ty - y) * .18;
+    halo.style.transform = `translate(${x}px, ${y}px)`;
+    requestAnimationFrame(follow);
+  };
+  follow();
+}
+
 // ---------- анкета ----------
 const STEPS = [
   { k: "Задача", t: "Что хотите получить от Telegram?", h: "Выберите сценарий, который ближе всего к вашей ситуации.",

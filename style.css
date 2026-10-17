@@ -163,7 +163,7 @@ svg{overflow:visible}
 
 /* ---------- видео ---------- */
 .video-frame{position:relative;max-width:1180px;margin:0 auto;aspect-ratio:16/9;border-radius:28px;overflow:hidden;background:#000;box-shadow:0 40px 80px -40px rgba(0,0,0,.5)}
-.video-frame video{width:100%;height:100%;object-fit:cover;filter:grayscale(1);display:block}
+.video-frame video{width:100%;height:100%;object-fit:cover;display:block}
 .play{position:absolute;left:50%;top:50%;translate:-50% -50%;display:flex;align-items:center;gap:14px;height:68px;padding:0 28px 0 16px;border-radius:999px;color:#111;font-size:16px;font-weight:800;
   background:linear-gradient(180deg,#fff 0%,#eee 48%,#d8d8d8 52%,#f6f6f6 100%);border:1px solid #c4c4c4;box-shadow:0 20px 50px -20px rgba(0,0,0,.6);transition:transform .3s var(--ease)}
 .play:hover{transform:scale(1.05)}
@@ -375,6 +375,24 @@ svg{overflow:visible}
 .foot-big{border-color:#fff}
 .foot-row{border-color:#333;color:#9a9a9a}
 .foot-word{background:var(--chrome-d);background-size:100% 1em;-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* финальный экран со скалой */
+.final{position:relative;isolation:isolate;overflow:hidden;min-height:min(100svh,940px);display:flex;align-items:flex-end;padding:clamp(28px,5vw,72px) var(--pad)}
+.final-bg{position:absolute;inset:0;z-index:-3;background-size:cover;background-position:center 40%;filter:grayscale(1) contrast(1.08) brightness(.82);animation:kb 34s ease-in-out infinite alternate}
+.final-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0,rgba(10,10,10,0) 22%,rgba(10,10,10,.35) 45%,rgba(10,10,10,.82) 66%,var(--bg) 96%),linear-gradient(90deg,rgba(10,10,10,.6),rgba(10,10,10,0) 60%)}
+.final-sun{position:absolute;z-index:-2;left:24%;top:26%;width:min(70vw,900px);aspect-ratio:1;translate:-50% -50%;border-radius:50%;pointer-events:none;mix-blend-mode:screen;
+  background:radial-gradient(circle,rgba(255,255,255,.9) 0,rgba(255,255,255,.35) 18%,rgba(255,255,255,0) 60%);animation:breathe 8s ease-in-out infinite}
+.final .feathers{z-index:-1}
+.final-in{max-width:760px;display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.final h2{font-size:clamp(46px,7vw,116px)}
+.final p{color:#d4d4d4;font-size:18px;max-width:480px}
+.footer{padding-top:clamp(40px,5vw,72px)}
+
+/* нимб над курсором */
+.halo-cursor{position:fixed;z-index:70;left:0;top:0;width:44px;height:22px;pointer-events:none;opacity:0;transition:opacity .4s;translate:-50% -50%}
+.halo-cursor svg{width:100%;height:100%;animation:turn 3s ease-in-out infinite alternate}
+.halo-cursor.on{opacity:1}
+@media (hover:none){.halo-cursor{display:none}}
 
 /* появление */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s var(--ease)}

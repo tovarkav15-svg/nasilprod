@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1792198094">
+<link rel="stylesheet" href="style.css?v=1792236316">
 </head>
 <body>
 
@@ -154,7 +154,6 @@
 
   <!-- 03: лестница к свету -->
   <section class="sec stairs" id="work">
-    <div class="sec-photo" style="background-image:url(img/cliff-sun.jpg)"></div>
     <div class="head">
       <span class="pill">03 · Как мы ведём канал</span>
       <h2 class="chrome">Четыре ступени</h2>
@@ -275,11 +274,19 @@
 
 </main>
 
-<footer class="footer">
-  <div class="foot-cta">
+<section class="final">
+  <div class="final-bg" style="background-image:url(img/cliff-sun.jpg)"></div>
+  <div class="final-sun" aria-hidden="true"></div>
+  <canvas class="feathers" data-n="12" aria-hidden="true"></canvas>
+  <div class="final-in">
     <span class="pill">Готовы начать?</span>
-    <a href="#brief" class="foot-big">Обсудить канал ↗</a>
+    <h2 class="chrome">Пора выйти из&nbsp;операционки.</h2>
+    <p>Оставьте канал нам — а сами возвращайтесь к экспертизе. Первый разбор бесплатно.</p>
+    <a href="#brief" class="btn">Обсудить канал ↗</a>
   </div>
+</section>
+
+<footer class="footer">
   <p class="foot-word">Нас#лия</p>
   <div class="foot-row">
     <span>© 2026 Агентство Нас#лия</span>
@@ -289,6 +296,8 @@
   </div>
 </footer>
 
-<script src="script.js?v=1792198094"></script>
+<div class="halo-cursor" aria-hidden="true"><svg><use href="#c-halo"/></svg></div>
+
+<script src="script.js?v=1792236316"></script>
 </body>
 </html>

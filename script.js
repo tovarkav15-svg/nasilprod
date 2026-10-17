@@ -37,7 +37,7 @@ const FEATHER = (() => {
   return p;
 })();
 function feathers(canvas) {
-  const ctx = canvas.getContext("2d"), n = +canvas.dataset.n || 12, dark = canvas.hasAttribute("data-dark") || !!canvas.closest(".angel");
+  const ctx = canvas.getContext("2d"), n = +canvas.dataset.n || 12, dark = true;
   let w, h, dpr, list = [], last = 0;
   const spawn = top => {
     const z = .35 + Math.random() * .65;

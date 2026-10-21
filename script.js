@@ -17,7 +17,7 @@ overlay.querySelectorAll("a").forEach(a => a.addEventListener("click", () => set
 addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 
 // ---------- плавное появление карточек ----------
-const pending = new Set(document.querySelectorAll(".grid3, .case-cards, .stats-row, .stair-wrap, .chat-wrap, .brief-wrap"));
+const pending = new Set(document.querySelectorAll(".eq, .notif-grid, .grid3, .cpanel, .bento, .badges, .faq-items, .cform"));
 pending.forEach(el => el.classList.add("rv"));
 function sweep() {
   const h = innerHeight;
@@ -89,73 +89,6 @@ addEventListener("scroll", sweep, { passive: true });
 addEventListener("resize", sweep);
 addEventListener("load", sweep);
 sweep();
-
-// ---------- видео ----------
-const frame = document.querySelector(".video-frame");
-const video = frame.querySelector("video");
-frame.querySelector(".play").addEventListener("click", () => {
-  video.controls = true;
-  video.play();
-  frame.classList.add("playing");
-});
-video.addEventListener("pause", () => { if (video.ended) frame.classList.remove("playing"); });
-
-// ---------- 01: календарь «хаос → система» ----------
-(function chaos() {
-  const sec = document.querySelector(".chaos"), cal = document.getElementById("cal");
-  if (!sec || !cal) return;
-  const W = 12, cells = [];
-  for (let wk = 0; wk < W; wk++) for (let d = 0; d < 7; d++) {
-    const r = Math.random();
-    const chaosL = r < .2 ? 1 : r < .24 ? 2 : 0;                       // посты, когда есть силы
-    let sys = d < 5 ? 1 : (d === 6 && wk % 2 ? 1 : 0);                   // контент-план
-    if (wk >= 8 && wk <= 9) sys = d < 6 ? 2 : 1;                         // прогрев
-    if (wk >= 10) sys = d < 3 ? 3 : d < 6 ? 2 : 1;                       // запуск
-    const el = document.createElement("i");
-    cal.appendChild(el);
-    cells.push({ el, chaosL, sys, t: wk / W * .55 + Math.random() * .35 });
-  }
-  const pct = document.getElementById("calPct"), bar = document.getElementById("calBar"), title = document.getElementById("calTitle");
-  let last = -1;
-  function update() {
-    const r = sec.getBoundingClientRect();
-    const sticky = getComputedStyle(sec.firstElementChild).position === "sticky";
-    const p = calm ? 1 : sticky ? clamp(-r.top / (r.height - innerHeight) * 1.15) : clamp((innerHeight * .9 - r.top) / (r.height + innerHeight * .2));
-    const q = Math.round(p * 100);
-    if (q === last) return;
-    last = q;
-    cells.forEach(c => { c.el.className = "l" + (p > c.t ? c.sys : c.chaosL); });
-    pct.textContent = q; bar.style.width = q + "%";
-    title.textContent = p < .5 ? "Сейчас: посты, когда есть силы" : "С нами: контент-план → прогрев → запуск";
-  }
-  addEventListener("scroll", update, { passive: true }); addEventListener("resize", update); update();
-  document.querySelectorAll(".sym li").forEach(li => li.querySelector("button").addEventListener("click", () => {
-    const open = li.classList.toggle("open"); li.querySelector("button").setAttribute("aria-expanded", open);
-  }));
-})();
-
-// ---------- лента постов тянется мышкой ----------
-(function feed() {
-  const row = document.getElementById("feedRow");
-  if (!row) return;
-  let down = false, sx = 0, sl = 0;
-  row.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") return; down = true; sx = e.clientX; sl = row.scrollLeft; row.classList.add("drag"); });
-  addEventListener("pointermove", e => { if (!down) return; row.scrollLeft = sl - (e.clientX - sx); });
-  addEventListener("pointerup", () => { if (!down) return; down = false; row.classList.remove("drag"); });
-})();
-
-// ---------- вопросы в чате ----------
-const chat = document.getElementById("chat");
-const say = (cls, html) => { const m = document.createElement("div"); m.className = `msg ${cls}`; m.innerHTML = html; chat.appendChild(m); chat.scrollTop = chat.scrollHeight; return m; };
-let busy = false;
-document.querySelectorAll(".qc").forEach(q => q.addEventListener("click", () => {
-  if (busy) return;
-  busy = true;
-  q.classList.add("used");
-  say("out", q.textContent);
-  const t = say("in typing", "<i></i><i></i><i></i>");
-  setTimeout(() => { t.remove(); say("in", q.dataset.a); busy = false; }, calm ? 0 : 1000);
-}));
 
 // ---------- стекло наклоняется за курсором ----------
 document.querySelectorAll(".tilt").forEach(g => {
@@ -254,15 +187,16 @@ document.querySelectorAll(".tilt").forEach(g => {
 
 // ---------- отсчёт до следующего поста ----------
 (function nextPost() {
-  const el = document.getElementById("nextPost");
-  if (!el) return;
+  const els = ["nextPost", "nextPost2"].map(id => document.getElementById(id)).filter(Boolean);
+  if (!els.length) return;
   const slots = [10, 13, 16, 19, 21];
   const tick = () => {
     const now = new Date();
     let t = slots.map(hh => { const d = new Date(now); d.setHours(hh, 0, 0, 0); return d; }).find(d => d > now);
     if (!t) { t = new Date(now); t.setDate(t.getDate() + 1); t.setHours(slots[0], 0, 0, 0); }
     const s = Math.floor((t - now) / 1000), p = n => String(n).padStart(2, "0");
-    el.textContent = `${p(Math.floor(s / 3600))}:${p(Math.floor(s / 60) % 60)}:${p(s % 60)}`;
+    const txt = `${p(Math.floor(s / 3600))}:${p(Math.floor(s / 60) % 60)}:${p(s % 60)}`;
+    els.forEach(el => { el.textContent = txt; });
   };
   tick(); setInterval(tick, 1000);
 })();
@@ -326,6 +260,47 @@ document.querySelectorAll(".tilt").forEach(g => {
   requestAnimationFrame(frame);
 })();
 
+// ---------- видео-кружок ----------
+(function vc() {
+  const box = document.getElementById("vc");
+  if (!box) return;
+  const v = box.querySelector("video");
+  box.querySelector(".vc-play").addEventListener("click", () => { v.controls = true; v.play(); box.classList.add("playing"); });
+  v.addEventListener("ended", () => box.classList.remove("playing"));
+})();
+
+
+
+// ---------- кейсы-переключатель ----------
+(function cases() {
+  const tabs = [...document.querySelectorAll(".ctabs button")], slides = [...document.querySelectorAll(".cslide")];
+  const show = i => {
+    tabs.forEach((t, k) => { t.classList.toggle("on", k === i); t.setAttribute("aria-selected", k === i); });
+    slides.forEach((s, k) => s.classList.toggle("on", k === i));
+  };
+  tabs.forEach((t, i) => t.addEventListener("click", () => show(i)));
+})();
+
+// ---------- короткая заявка ----------
+(function contact() {
+  const form = document.getElementById("cform");
+  if (!form) return;
+  const chips = [...form.querySelectorAll(".chip")];
+  const pick = text => chips.forEach(c => { const on = c.textContent === text; c.classList.toggle("on", on); c.setAttribute("aria-pressed", on); });
+  chips.forEach(c => c.addEventListener("click", () => pick(c.textContent)));
+  // кнопки в форматах сразу выбирают задачу
+  document.querySelectorAll("[data-pick]").forEach(a => a.addEventListener("click", () => pick(a.dataset.pick)));
+  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(form));
+    const task = chips.find(c => c.classList.contains("on"))?.textContent || "—";
+    const text = ["Заявка с сайта Агентства Нас#лия", "", `Задача: ${task}`, `Имя: ${d.name}`, `Telegram: ${d.tg}`].join("\n");
+    navigator.clipboard?.writeText(text).catch(() => {});
+    form.innerHTML = `<div class="cform-done"><b>Заявка готова.</b><p class="cform-note">Мы скопировали текст — откройте чат и вставьте его.</p><pre>${esc(text)}</pre><a class="btn light" href="${CONTACT_TG}" target="_blank" rel="noopener">Открыть Telegram ↗</a></div>`;
+  });
+})();
+
 // ---------- нимб над курсором ----------
 const halo = document.querySelector(".halo-cursor");
 if (halo && matchMedia("(hover: hover)").matches && !calm) {
@@ -339,76 +314,3 @@ if (halo && matchMedia("(hover: hover)").matches && !calm) {
   };
   follow();
 }
-
-// ---------- анкета ----------
-const STEPS = [
-  { k: "Задача", t: "Что хотите получить от Telegram?", h: "Выберите сценарий, который ближе всего к вашей ситуации.",
-    o: ["Запустить продукт в Telegram", "Передать канал под ключ", "Вырастить аудиторию и продажи", "Начать с бесплатной консультации"] },
-  { k: "Стадия", t: "Сколько людей уже читают канал?", h: "Если каналов несколько — укажите основной.",
-    o: ["Канала ещё нет", "До 1 000 подписчиков", "1–5 тысяч", "5–20 тысяч", "Больше 20 тысяч"] },
-  { k: "Ниша", t: "В какой нише работаете?", h: "Нам важно понять продукт и будущую аудиторию.",
-    o: ["Образование / экспертность", "Бизнес / консалтинг", "Блог / медиа", "Агентство / услуги", "Другое"] },
-  { k: "Продукт", t: "На какой стадии продукт?", h: "Не страшно, если пока есть только идея — это тоже точка входа.",
-    o: ["Уже продаём", "Продукт есть, запусков не было", "Сейчас собираем продукт", "Пока только идея"] },
-  { k: "Результат", t: "Какой результат сейчас главный?", h: "Выберите один приоритет — остальное обсудим на созвоне.",
-    o: ["Запуск от 500 000 ₽", "Системные продажи из канала", "Рост сильной аудитории", "Полностью снять операционку", "Другое"] },
-  { k: "Масштаб", t: "Какой бюджет готовы вложить?", h: "Это помогает сразу предложить реалистичный формат работы.",
-    o: ["До 100 000 ₽", "100–300 тысяч ₽", "300–500 тысяч ₽", "От 500 000 ₽", "Сначала нужна оценка"] },
-  { k: "Контакт", t: "Куда прислать разбор?", h: "Только имя и Telegram — без телефона и длинных комментариев.", contact: true },
-];
-const answers = {};
-let step = 0;
-const qBody = document.getElementById("qBody");
-const qStep = document.getElementById("qStep");
-const qBar = document.getElementById("qBar");
-const qBack = document.getElementById("qBack");
-const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-function render() {
-  const s = STEPS[step];
-  qStep.textContent = `${step + 1} / ${STEPS.length}`;
-  qBar.style.width = `${((step + 1) / STEPS.length) * 100}%`;
-  qBack.hidden = step === 0;
-  let html = `<h3 class="q-title">${s.t}</h3><p class="q-hint">${s.h}</p>`;
-  if (s.contact) {
-    const c = answers.contact || {};
-    html += `<form class="fields" id="qForm">
-      <label>Как вас зовут<input class="field" name="name" required value="${esc(c.name || "")}"></label>
-      <label>Telegram<input class="field" name="tg" required placeholder="@username" value="${esc(c.tg || "")}"></label>
-      <label>Ваш сайт или канал (необязательно)<input class="field" name="site" value="${esc(c.site || "")}"></label>
-      <button class="btn" type="submit">Отправить заявку →</button></form>`;
-  } else {
-    html += `<div class="opts">${s.o.map((o, i) =>
-      `<button class="opt${answers[s.k] === o ? " on" : ""}" data-v="${esc(o)}"><span>${String(i + 1).padStart(2, "0")}</span>${o}</button>`).join("")}</div>
-      <form class="own" id="qOwn"><input class="field" placeholder="Напишите свой вариант"><button type="submit">→</button></form>`;
-  }
-  qBody.innerHTML = html;
-  qBody.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => pick(b.dataset.v)));
-  const own = document.getElementById("qOwn");
-  if (own) own.addEventListener("submit", e => { e.preventDefault(); const v = own.querySelector("input").value.trim(); if (v) pick(v); });
-  const form = document.getElementById("qForm");
-  if (form) form.addEventListener("submit", e => { e.preventDefault(); submit(Object.fromEntries(new FormData(form))); });
-}
-function pick(v) { answers[STEPS[step].k] = v; step++; render(); }
-qBack.addEventListener("click", () => { if (step > 0) { step--; render(); } });
-
-function submit(c) {
-  answers.contact = c;
-  const text = ["Заявка с сайта Агентства Нас#лия", "",
-    ...STEPS.filter(s => !s.contact).map(s => `${s.k}: ${answers[s.k] || "—"}`),
-    "", `Имя: ${c.name}`, `Telegram: ${c.tg}`, c.site ? `Сайт: ${c.site}` : ""].filter(Boolean).join("\n");
-  navigator.clipboard?.writeText(text).catch(() => {});
-  qStep.textContent = "Готово";
-  qBack.hidden = true;
-  qBody.innerHTML = `<div class="done"><h3 class="q-title">Ответы собраны.</h3>
-    <p class="q-hint">Мы скопировали анкету — отправьте её нам в Telegram, и мы вернёмся с разбором.</p>
-    <pre>${esc(text)}</pre>
-    <a class="btn" href="${CONTACT_TG}" target="_blank" rel="noopener">Отправить в Telegram</a></div>`;
-}
-
-// кнопки «Обсудить» в форматах предзаполняют первый шаг
-document.querySelectorAll("[data-pick]").forEach(a => a.addEventListener("click", () => {
-  step = 0; answers[STEPS[0].k] = a.dataset.pick; step = 1; render();
-}));
-
-render();

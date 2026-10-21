@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1792499920">
+<link rel="stylesheet" href="style.css?v=1792545039">
 </head>
 <body>
 
@@ -65,8 +65,14 @@
   <!-- HERO: референс на весь экран -->
   <section class="hero">
     <div class="hero-bg" style="background-image:url(img/studio-cross.jpg)"></div>
-    <canvas class="feathers" data-n="16" data-dark aria-hidden="true"></canvas>
-    <svg class="hero-cross" aria-hidden="true"><use href="#c-cross"/></svg>
+    <canvas class="swarm" aria-hidden="true"></canvas>
+    <div class="hud" aria-hidden="true">
+      <i class="hud-x"></i><i class="hud-y"></i><b class="hud-c">+</b>
+      <span class="tag" data-p="0"><em>+</em>посты <u>по графику</u></span>
+      <span class="tag" data-p="1"><em>+</em>прогрев <u>online</u></span>
+      <span class="tag" data-p="2"><em>+</em>запуск <u>идёт</u></span>
+      <span class="shape-name" id="shapeName">крест</span>
+    </div>
     <div class="hero-top">
       <span class="pill">Telegram production · est. 2026</span>
       <p>Продюсирование экспертов в&nbsp;Telegram. Стратегия, контент, выпуск, продвижение и&nbsp;запуски — одной командой.</p>
@@ -74,7 +80,8 @@
     <h1 class="hero-word"><span class="hero-small">Агентство</span><span class="chrome-d">Нас#лия</span></h1>
     <div class="hero-bottom">
       <a href="#brief" class="btn light">Разобрать канал бесплатно</a>
-      <span class="scroll-hint">Листайте ↓</span>
+      <span class="scroll-hint">(Листайте)</span>
+      <span class="next-post"><small>Следующий пост через</small><b id="nextPost">00:00:00</b></span>
     </div>
   </section>
 
@@ -114,6 +121,28 @@
         <p class="g-text" id="gText">Отметьте, что совпадает</p>
         <a href="#brief" class="btn" id="gCta">Разобрать канал бесплатно</a>
       </div>
+    </div>
+  </section>
+
+  <!-- кто делает работу -->
+  <section class="sec crew" id="crew">
+    <div class="head">
+      <span class="pill">Сейчас → с нами</span>
+      <h2 class="chrome">Кто делает работу</h2>
+      <p>Каждая точка — задача канала. Посмотрите, куда она уходит, когда за дело берётся команда.</p>
+    </div>
+    <div class="crew-box glass">
+      <div class="crew-switch" role="tablist">
+        <button class="on" data-mode="0" role="tab" aria-selected="true">Сейчас: всё на вас</button>
+        <button data-mode="1" role="tab" aria-selected="false">С агентством</button>
+      </div>
+      <canvas class="crew-canvas" aria-label="Схема распределения задач"></canvas>
+      <div class="crew-stats">
+        <div><small>Задач на авторе</small><b id="cs1">36</b></div>
+        <div><small>Людей в команде</small><b id="cs2">1</b></div>
+        <div><small>Что остаётся вам</small><b id="cs3">всё</b></div>
+      </div>
+      <p class="crew-note">* Схема для примера. Ваш расклад посчитаем на бесплатном разборе.</p>
     </div>
   </section>
 
@@ -298,6 +327,6 @@
 
 <div class="halo-cursor" aria-hidden="true"><svg><use href="#c-halo"/></svg></div>
 
-<script src="script.js?v=1792499920"></script>
+<script src="script.js?v=1792545039"></script>
 </body>
 </html>

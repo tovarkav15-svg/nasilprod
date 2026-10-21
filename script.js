@@ -17,7 +17,7 @@ overlay.querySelectorAll("a").forEach(a => a.addEventListener("click", () => set
 addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 
 // ---------- плавное появление карточек ----------
-const pending = new Set(document.querySelectorAll(".grid3, .test-grid, .stair-wrap, .chat-wrap, .brief-wrap"));
+const pending = new Set(document.querySelectorAll(".grid3, .test-grid, .case-cards, .stair-wrap, .chat-wrap, .brief-wrap"));
 pending.forEach(el => el.classList.add("rv"));
 function sweep() {
   const h = innerHeight;

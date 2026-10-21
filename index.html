@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1792545320">
+<link rel="stylesheet" href="style.css?v=1792545769">
 </head>
 <body>
 
@@ -85,6 +85,8 @@
     </div>
   </section>
 
+  <div class="marq" aria-hidden="true"><div class="marq-in"><span>Посты</span><svg aria-hidden="true"><use href="#c-star"/></svg><span>Кружки</span><svg aria-hidden="true"><use href="#c-halo"/></svg><span>Эфиры</span><svg aria-hidden="true"><use href="#c-cross"/></svg><span>Прогревы</span><svg aria-hidden="true"><use href="#c-heart"/></svg><span>Сайты</span><svg aria-hidden="true"><use href="#c-feather"/></svg><span>Воронки</span><svg aria-hidden="true"><use href="#c-star"/></svg><span>Запуски</span><svg aria-hidden="true"><use href="#c-wings"/></svg><span>Посты</span><svg aria-hidden="true"><use href="#c-star"/></svg><span>Кружки</span><svg aria-hidden="true"><use href="#c-halo"/></svg><span>Эфиры</span><svg aria-hidden="true"><use href="#c-cross"/></svg><span>Прогревы</span><svg aria-hidden="true"><use href="#c-heart"/></svg><span>Сайты</span><svg aria-hidden="true"><use href="#c-feather"/></svg><span>Воронки</span><svg aria-hidden="true"><use href="#c-star"/></svg><span>Запуски</span><svg aria-hidden="true"><use href="#c-wings"/></svg></div></div>
+
   <!-- ВИДЕО -->
   <section class="sec" id="intro">
     <div class="head">
@@ -98,28 +100,29 @@
     </div>
   </section>
 
-  <!-- 01: тест -->
-  <section class="sec test" id="symptoms">
-    <div class="head">
-      <span class="pill">01 · Проверьте себя</span>
-      <h2 class="chrome">Вы замолкаете — и&nbsp;канал замолкает вместе с&nbsp;вами</h2>
-      <p>Отметьте, что совпадает. Если два из трёх — канал уже зависит от вас.</p>
-    </div>
-    <div class="test-grid">
-      <div class="test-list">
-        <label class="tq"><input type="checkbox"><span class="sw"><i></i></span><span class="tq-t"><b>Посты выходят, только когда вы находите силы</b><em>Канал держится не на системе, а на вашем свободном вечере.</em></span></label>
-        <label class="tq"><input type="checkbox"><span class="sw"><i></i></span><span class="tq-t"><b>Без вашего ответа никто не двигается</b><em>Темы, тексты и публикации каждый раз ждут личного согласования.</em></span></label>
-        <label class="tq"><input type="checkbox"><span class="sw"><i></i></span><span class="tq-t"><b>К продажам готовитесь в последний момент</b><em>Прогрев сжимается до недели, и запуск не успевает набрать силу.</em></span></label>
+  <!-- 01: хаос → система -->
+  <section class="chaos" id="symptoms">
+    <div class="chaos-in">
+      <div class="chaos-left">
+        <span class="pill">01 · Проверьте себя</span>
+        <h2 class="chrome">Вы замолкаете — и&nbsp;канал замолкает</h2>
+        <p class="chaos-lead">Если совпало два симптома из трёх — канал уже зависит от вас.</p>
+        <ul class="sym">
+          <li><button aria-expanded="false"><span class="sym-n">01</span>Посты выходят, только когда вы находите силы<i>+</i></button><p>Канал держится не на системе, а на вашем свободном вечере.</p></li>
+          <li><button aria-expanded="false"><span class="sym-n">02</span>Без вашего ответа никто не двигается<i>+</i></button><p>Темы, тексты и публикации каждый раз ждут личного согласования.</p></li>
+          <li><button aria-expanded="false"><span class="sym-n">03</span>К продажам готовитесь в последний момент<i>+</i></button><p>Прогрев сжимается до недели, и запуск не успевает набрать силу.</p></li>
+        </ul>
+        <a href="#brief" class="btn">Разобрать канал бесплатно</a>
       </div>
-      <div class="gauge">
-        <svg class="dial" viewBox="0 0 200 118" aria-hidden="true">
-          <path class="dial-bg" d="M20 104A80 80 0 0 1 180 104" pathLength="100"/>
-          <path class="dial-fg" id="dialFg" d="M20 104A80 80 0 0 1 180 104" pathLength="100"/>
-          <g class="needle" id="needle"><line x1="100" y1="104" x2="100" y2="38"/><circle cx="100" cy="104" r="8"/></g>
-        </svg>
-        <p class="g-num chrome"><span id="gCount">0</span>/3</p>
-        <p class="g-text" id="gText">Отметьте, что совпадает</p>
-        <a href="#brief" class="btn" id="gCta">Разобрать канал бесплатно</a>
+      <div class="chaos-right glass">
+        <div class="cal-head"><b id="calTitle">Сейчас: посты, когда есть силы</b><span><em id="calPct">0</em>% · хаос → система</span></div>
+        <div class="cal-wrap">
+          <div class="cal-days"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
+          <div class="cal" id="cal"></div>
+        </div>
+        <div class="cal-weeks"><span>неделя 1</span><span>прогрев</span><span>запуск</span></div>
+        <div class="cal-legend"><span><i class="l0"></i>тишина</span><span><i class="l1"></i>пост</span><span><i class="l2"></i>прогрев</span><span><i class="l3"></i>запуск</span></div>
+        <div class="cal-bar"><i id="calBar"></i></div>
       </div>
     </div>
   </section>
@@ -199,6 +202,17 @@
     </div>
   </section>
 
+  <!-- в цифрах -->
+  <section class="stats">
+    <span class="pill">В цифрах</span>
+    <div class="stats-row">
+      <div><b class="chrome-d">120&nbsp;000&nbsp;₽</b><span>стоимость продюсирования в месяц — от</span></div>
+      <div><b class="chrome-d">500&nbsp;000&nbsp;₽+</b><span>планка запуска, к которой ведём канал</span></div>
+      <div><b class="chrome-d">15&nbsp;000+</b><span>человек — аудитория команды</span></div>
+      <div><b class="chrome-d">$50&nbsp;000+</b><span>общая прибыль запусков команды</span></div>
+    </div>
+  </section>
+
   <!-- 03: лестница к свету -->
   <section class="sec stairs" id="work">
     <div class="head">
@@ -213,6 +227,66 @@
       <article class="stair" style="--i:1"><span class="st-n">02</span><h3>Пишем и выпускаем</h3><p>Узнаём, как вы говорите, придумываем темы, пишем тексты и публикуем вовремя.</p></article>
       <article class="stair" style="--i:2"><span class="st-n">03</span><h3>Находим читателей</h3><p>Рассказываем о канале там, где уже есть нужные вам люди, и смотрим, кто приходит.</p></article>
       <article class="stair" style="--i:3"><span class="st-n">04</span><h3>Продаём через канал</h3><p>Рассказываем о продукте так, чтобы было понятно, зачем он нужен и как его купить.</p></article>
+    </div>
+  </section>
+
+  <!-- лента постов -->
+  <section class="sec feed" id="feed">
+    <div class="head">
+      <span class="pill">Контент</span>
+      <h2 class="chrome">Что выходит в канале</h2>
+      <p>Неделя канала, когда им занимается команда. Тяните ленту вбок.</p>
+    </div>
+    <div class="feed-row" id="feedRow">
+        <article class="fpost">
+          <span class="ftype"><b>Пн</b> · знакомство</span>
+          <div class="post">
+            <div class="post-head"><span class="post-ava"><svg aria-hidden="true"><use href="#c-star"/></svg></span><div><b>Ваш канал</b><small>сегодня, 12:00</small></div></div>
+            <p>Кто я и почему вам стоит остаться: три истории из практики, которые изменили мой подход.</p>
+          </div>
+        </article>
+        <article class="fpost">
+          <span class="ftype"><b>Вт</b> · польза</span>
+          <div class="post">
+            <div class="post-head"><span class="post-ava"><svg aria-hidden="true"><use href="#c-feather"/></svg></span><div><b>Ваш канал</b><small>сегодня, 12:00</small></div></div>
+            <p>Разбор: пять ошибок, из-за которых эксперт теряет клиентов ещё до консультации.</p>
+          </div>
+        </article>
+        <article class="fpost">
+          <span class="ftype"><b>Ср</b> · кружок</span>
+          <div class="post">
+            <div class="post-head"><span class="post-ava"><svg aria-hidden="true"><use href="#c-halo"/></svg></span><div><b>Ваш канал</b><small>сегодня, 12:00</small></div></div>
+            <div class="circle"><span>0:58</span></div><p>Как проходит мой обычный рабочий день — без фильтров.</p>
+          </div>
+        </article>
+        <article class="fpost">
+          <span class="ftype"><b>Чт</b> · кейс</span>
+          <div class="post">
+            <div class="post-head"><span class="post-ava"><svg aria-hidden="true"><use href="#c-heart"/></svg></span><div><b>Ваш канал</b><small>сегодня, 12:00</small></div></div>
+            <p>История ученицы: от первых шагов до результата за месяц. Что сработало, а что нет.</p>
+          </div>
+        </article>
+        <article class="fpost">
+          <span class="ftype"><b>Пт</b> · прогрев</span>
+          <div class="post">
+            <div class="post-head"><span class="post-ava"><svg aria-hidden="true"><use href="#c-cross"/></svg></span><div><b>Ваш канал</b><small>сегодня, 12:00</small></div></div>
+            <p>Открываю предзапись. Сначала — для тех, кто читает канал. Подробности в воскресенье.</p>
+          </div>
+        </article>
+        <article class="fpost">
+          <span class="ftype"><b>Сб</b> · эфир</span>
+          <div class="post">
+            <div class="post-head"><span class="post-ava"><svg aria-hidden="true"><use href="#c-star"/></svg></span><div><b>Ваш канал</b><small>сегодня, 12:00</small></div></div>
+            <p>Сегодня в 19:00 эфир: отвечаю на вопросы и рассказываю о новом потоке.</p>
+          </div>
+        </article>
+        <article class="fpost">
+          <span class="ftype"><b>Вс</b> · запуск</span>
+          <div class="post">
+            <div class="post-head"><span class="post-ava"><svg aria-hidden="true"><use href="#c-wings"/></svg></span><div><b>Ваш канал</b><small>сегодня, 12:00</small></div></div>
+            <p>Старт продаж. Мест немного — ссылка на оплату в закреплённом сообщении.</p>
+          </div>
+        </article>
     </div>
   </section>
 
@@ -345,6 +419,6 @@
 
 <div class="halo-cursor" aria-hidden="true"><svg><use href="#c-halo"/></svg></div>
 
-<script src="script.js?v=1792545320"></script>
+<script src="script.js?v=1792545769"></script>
 </body>
 </html>

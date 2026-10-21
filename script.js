@@ -17,7 +17,7 @@ overlay.querySelectorAll("a").forEach(a => a.addEventListener("click", () => set
 addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 
 // ---------- плавное появление карточек ----------
-const pending = new Set(document.querySelectorAll(".grid3, .test-grid, .case-cards, .stair-wrap, .chat-wrap, .brief-wrap"));
+const pending = new Set(document.querySelectorAll(".grid3, .case-cards, .stats-row, .stair-wrap, .chat-wrap, .brief-wrap"));
 pending.forEach(el => el.classList.add("rv"));
 function sweep() {
   const h = innerHeight;
@@ -100,17 +100,49 @@ frame.querySelector(".play").addEventListener("click", () => {
 });
 video.addEventListener("pause", () => { if (video.ended) frame.classList.remove("playing"); });
 
-// ---------- тест с циферблатом ----------
-const boxes = [...document.querySelectorAll(".tq input")];
-const verdicts = ["Отметьте, что совпадает", "Один звоночек. Система уже нужна.", "Канал зависит от вас. Проблема не в дисциплине — нужна система и команда.", "Всё держится на вас. Пора передать операционку."];
-function gauge() {
-  const n = boxes.filter(b => b.checked).length;
-  document.getElementById("gCount").textContent = n;
-  document.getElementById("gText").textContent = verdicts[n];
-  document.getElementById("dialFg").style.strokeDashoffset = 100 - n * 33.34;
-  document.getElementById("needle").style.transform = `rotate(${-90 + n * 60}deg)`;
-}
-boxes.forEach(b => b.addEventListener("change", gauge));
+// ---------- 01: календарь «хаос → система» ----------
+(function chaos() {
+  const sec = document.querySelector(".chaos"), cal = document.getElementById("cal");
+  if (!sec || !cal) return;
+  const W = 12, cells = [];
+  for (let wk = 0; wk < W; wk++) for (let d = 0; d < 7; d++) {
+    const r = Math.random();
+    const chaosL = r < .2 ? 1 : r < .24 ? 2 : 0;                       // посты, когда есть силы
+    let sys = d < 5 ? 1 : (d === 6 && wk % 2 ? 1 : 0);                   // контент-план
+    if (wk >= 8 && wk <= 9) sys = d < 6 ? 2 : 1;                         // прогрев
+    if (wk >= 10) sys = d < 3 ? 3 : d < 6 ? 2 : 1;                       // запуск
+    const el = document.createElement("i");
+    cal.appendChild(el);
+    cells.push({ el, chaosL, sys, t: wk / W * .55 + Math.random() * .35 });
+  }
+  const pct = document.getElementById("calPct"), bar = document.getElementById("calBar"), title = document.getElementById("calTitle");
+  let last = -1;
+  function update() {
+    const r = sec.getBoundingClientRect();
+    const sticky = getComputedStyle(sec.firstElementChild).position === "sticky";
+    const p = calm ? 1 : sticky ? clamp(-r.top / (r.height - innerHeight) * 1.15) : clamp((innerHeight * .9 - r.top) / (r.height + innerHeight * .2));
+    const q = Math.round(p * 100);
+    if (q === last) return;
+    last = q;
+    cells.forEach(c => { c.el.className = "l" + (p > c.t ? c.sys : c.chaosL); });
+    pct.textContent = q; bar.style.width = q + "%";
+    title.textContent = p < .5 ? "Сейчас: посты, когда есть силы" : "С нами: контент-план → прогрев → запуск";
+  }
+  addEventListener("scroll", update, { passive: true }); addEventListener("resize", update); update();
+  document.querySelectorAll(".sym li").forEach(li => li.querySelector("button").addEventListener("click", () => {
+    const open = li.classList.toggle("open"); li.querySelector("button").setAttribute("aria-expanded", open);
+  }));
+})();
+
+// ---------- лента постов тянется мышкой ----------
+(function feed() {
+  const row = document.getElementById("feedRow");
+  if (!row) return;
+  let down = false, sx = 0, sl = 0;
+  row.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") return; down = true; sx = e.clientX; sl = row.scrollLeft; row.classList.add("drag"); });
+  addEventListener("pointermove", e => { if (!down) return; row.scrollLeft = sl - (e.clientX - sx); });
+  addEventListener("pointerup", () => { if (!down) return; down = false; row.classList.remove("drag"); });
+})();
 
 // ---------- вопросы в чате ----------
 const chat = document.getElementById("chat");

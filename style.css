@@ -388,6 +388,77 @@ body{background:var(--bg)}
 .cc-num.long{font-size:clamp(46px,4.6vw,76px);margin-top:30px}
 @media (max-width:900px){.case-cards{grid-template-columns:1fr;max-width:520px}.ccard:nth-child(2){margin-top:0}}
 
+/* ---------- бегущая строка форматов ---------- */
+.marq{overflow:hidden;padding:18px 0;border-block:1px solid var(--line);background:var(--tint)}
+.marq-in{display:flex;align-items:center;gap:30px;width:max-content;animation:marqx 50s linear infinite}
+@keyframes marqx{to{transform:translateX(-50%)}}
+.marq span{font-size:clamp(22px,2.6vw,38px);font-weight:900;letter-spacing:-.04em;text-transform:uppercase}
+.marq svg{width:34px;height:34px}
+
+/* ---------- 01: хаос → система ---------- */
+.chaos{position:relative;height:240vh}
+.chaos-in{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(24px,4vw,64px);align-items:center;max-width:1360px;margin:0 auto;padding:90px var(--pad) 40px}
+.chaos-left{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.chaos-left h2{font-size:clamp(40px,5vw,84px)}
+.chaos-lead{color:var(--ink-2);font-size:17px}
+.sym{list-style:none;width:100%;border-top:1px solid var(--line)}
+.sym li{border-bottom:1px solid var(--line)}
+.sym button{width:100%;display:flex;align-items:center;gap:14px;padding:16px 0;text-align:left;font-size:clamp(17px,1.5vw,21px);font-weight:800;letter-spacing:-.03em;line-height:1.15}
+.sym-n{font-size:12px;color:var(--ink-3);font-weight:700}
+.sym i{flex:none;margin-left:auto;font-style:normal;width:26px;height:26px;display:grid;place-items:center;border-radius:6px;background:#111;color:#fff;font-weight:500;transition:transform .4s var(--ease)}
+.sym li.open i{transform:rotate(45deg)}
+.sym p{max-height:0;overflow:hidden;color:var(--ink-2);transition:max-height .5s var(--ease),padding .5s}
+.sym li.open p{max-height:90px;padding-bottom:14px}
+.chaos-right{padding:clamp(18px,2.4vw,30px);border-radius:30px;display:flex;flex-direction:column;gap:14px}
+.cal-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.cal-head b{font-size:clamp(17px,1.6vw,22px);font-weight:800;letter-spacing:-.03em}
+.cal-head span{font-size:13px;font-weight:700;color:var(--ink-3)}
+.cal-head em{font-style:normal;color:var(--ink);font-variant-numeric:tabular-nums}
+.cal-wrap{display:grid;grid-template-columns:auto 1fr;gap:10px}
+.cal-days{display:grid;grid-template-rows:repeat(7,1fr);font-size:11px;font-weight:700;color:var(--ink-3);align-items:center}
+.cal{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:1fr;gap:5px}
+.cal i,.cal-legend i{border-radius:6px;background:rgba(0,0,0,.08);transition:background .5s,transform .5s var(--ease),box-shadow .5s}
+.cal i{aspect-ratio:1}
+.cal .l1,.cal-legend .l1{background:#8a8a8a}
+.cal .l2,.cal-legend .l2{background:#3a3a3a}
+.cal .l3,.cal-legend .l3{background:linear-gradient(180deg,#666,#000 55%,#333)}
+.cal .l3{box-shadow:0 0 0 2px #fff,0 6px 12px rgba(0,0,0,.3);transform:scale(1.06)}
+.cal-weeks{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--ink-3);padding-left:30px}
+.cal-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;font-weight:700;color:var(--ink-2)}
+.cal-legend span{display:inline-flex;align-items:center;gap:6px}
+.cal-legend i{display:inline-block;width:12px;height:12px;border-radius:3px}
+.cal-bar{height:6px;border-radius:9px;background:rgba(0,0,0,.1);overflow:hidden}
+.cal-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#9a9a9a,#111)}
+
+/* ---------- в цифрах ---------- */
+.stats{background:#0d0d0d;color:#fff;padding:clamp(56px,7vw,100px) var(--pad);display:flex;flex-direction:column;align-items:center;gap:36px}
+.stats-row{width:100%;max-width:1360px;display:grid;grid-template-columns:repeat(4,1fr)}
+.stats-row div{padding:10px clamp(14px,2vw,28px);border-left:1px solid #2a2a2a;display:flex;flex-direction:column;gap:10px}
+.stats-row div:first-child{border-left:0}
+.stats-row b{font-size:clamp(32px,3.6vw,62px);letter-spacing:-.06em;white-space:nowrap}
+.stats-row span{color:#9a9a9a;font-size:15px;max-width:220px}
+
+/* ---------- лента постов ---------- */
+.feed-row{display:flex;align-items:flex-start;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px var(--pad) 40px;margin:0 calc(var(--pad) * -1);scrollbar-width:none;cursor:grab;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.feed-row::-webkit-scrollbar{display:none}
+.feed-row.drag{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.fpost{flex:none;width:min(320px,78vw);scroll-snap-align:start;display:flex;flex-direction:column;gap:10px}
+.fpost:nth-child(even){margin-top:40px}
+.ftype{font-size:13px;font-weight:600;color:var(--ink-2)}
+.ftype b{color:var(--ink);font-weight:800}
+.fpost .post{color:#eee;min-height:200px;box-shadow:0 30px 50px -30px rgba(0,0,0,.55)}
+.circle{align-self:center;width:150px;height:150px;border-radius:50%;display:grid;place-items:end center;padding-bottom:14px;background:radial-gradient(circle at 35% 30%,#5a5a5a,#111 70%);box-shadow:0 0 0 3px #2a2a2a,0 0 0 5px #7a7a7a}
+.circle span{font-size:12px;font-weight:700;background:rgba(0,0,0,.6);padding:3px 8px;border-radius:99px}
+
+@media (max-width:900px){
+  .chaos{height:auto}
+  .chaos-in{position:relative;height:auto;grid-template-columns:1fr;padding:70px var(--pad)}
+  .stats-row{grid-template-columns:1fr 1fr;row-gap:28px}
+  .stats-row div:nth-child(3){border-left:0}
+  .fpost:nth-child(even){margin-top:0}
+}
+
 /* нимб над курсором */
 .halo-cursor{position:fixed;z-index:70;left:0;top:0;width:44px;height:22px;pointer-events:none;opacity:0;transition:opacity .4s;translate:-50% -50%}
 .halo-cursor svg{width:100%;height:100%;animation:turn 3s ease-in-out infinite alternate}

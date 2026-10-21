@@ -231,7 +231,7 @@ document.querySelectorAll(".tilt").forEach(g => {
       you += ((mode ? .55 : 1) - you) * .08;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
       // связи «вы ↔ команда»
-      if (mode) { ctx.setLineDash([3, 5]); ctx.strokeStyle = "rgba(0,0,0,.25)"; N.forEach(n => { ctx.beginPath(); ctx.moveTo(c.x, c.y); ctx.lineTo(n.x, n.y); ctx.stroke(); }); ctx.setLineDash([]); }
+      if (mode) { ctx.setLineDash([3, 5]); ctx.strokeStyle = "rgba(255,255,255,.28)"; N.forEach(n => { ctx.beginPath(); ctx.moveTo(c.x, c.y); ctx.lineTo(n.x, n.y); ctx.stroke(); }); ctx.setLineDash([]); }
       tasks.forEach(k => {
         const owner = mode ? N[k.role] : c;
         const spread = mode ? 30 : 70 + Math.sin(time * 3 + k.a) * 10;
@@ -239,21 +239,21 @@ document.querySelectorAll(".tilt").forEach(g => {
         const gx = owner.x + Math.cos(ang) * spread * (.45 + k.r * .55), gy = owner.y + Math.sin(ang) * spread * (.45 + k.r * .55);
         if (!k.init) { k.x = gx; k.y = gy; k.init = true; }
         k.x += (gx - k.x) * (calm ? 1 : .06); k.y += (gy - k.y) * (calm ? 1 : .06);
-        ctx.strokeStyle = "rgba(0,0,0,.1)"; ctx.beginPath(); ctx.moveTo(owner.x, owner.y); ctx.lineTo(k.x, k.y); ctx.stroke();
-        ctx.fillStyle = "#111"; ctx.beginPath(); ctx.arc(k.x, k.y, 4.5, 0, 6.28); ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,.12)"; ctx.beginPath(); ctx.moveTo(owner.x, owner.y); ctx.lineTo(k.x, k.y); ctx.stroke();
+        ctx.fillStyle = "#fff"; ctx.shadowColor = "rgba(255,255,255,.8)"; ctx.shadowBlur = 8; ctx.beginPath(); ctx.arc(k.x, k.y, 3.5, 0, 6.28); ctx.fill();
       });
       ctx.font = "700 13px Inter Tight, sans-serif"; ctx.textAlign = "center";
       N.forEach((n, i) => {
         ctx.globalAlpha = mode ? 1 : .35;
-        ctx.fillStyle = "#fff"; ctx.strokeStyle = "rgba(0,0,0,.18)"; ctx.beginPath(); ctx.arc(n.x, n.y, 15, 0, 6.28); ctx.fill(); ctx.stroke();
-        ctx.fillStyle = "#111"; ctx.fillText(ROLES[i], n.x, n.y + (n.y < h / 2 ? -26 : 34));
+        ctx.shadowBlur = 0; ctx.fillStyle = "#0b0b0c"; ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.beginPath(); ctx.arc(n.x, n.y, 15, 0, 6.28); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = "#e6e6e6"; ctx.fillText(ROLES[i], n.x, n.y + (n.y < h / 2 ? -26 : 34));
       });
       ctx.globalAlpha = 1;
       // узел «Вы»: перегружен — пульсирует; с командой — спокойный
       const R = 30 * you + (mode ? 0 : Math.sin(time * 6) * 3);
-      if (!mode) { ctx.strokeStyle = "rgba(0,0,0,.25)"; ctx.beginPath(); ctx.arc(c.x, c.y, R + 14 + Math.sin(time * 6) * 4, 0, 6.28); ctx.stroke(); }
-      ctx.fillStyle = mode ? "#fff" : "#111"; ctx.strokeStyle = "#111"; ctx.beginPath(); ctx.arc(c.x, c.y, R, 0, 6.28); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = mode ? "#111" : "#fff"; ctx.font = "800 14px Inter Tight, sans-serif"; ctx.fillText("Вы", c.x, c.y + 5);
+      ctx.shadowBlur = 0; if (!mode) { ctx.strokeStyle = "rgba(255,255,255,.3)"; ctx.beginPath(); ctx.arc(c.x, c.y, R + 14 + Math.sin(time * 6) * 4, 0, 6.28); ctx.stroke(); }
+      ctx.fillStyle = mode ? "#0b0b0c" : "#fff"; ctx.strokeStyle = "#fff"; ctx.beginPath(); ctx.arc(c.x, c.y, R, 0, 6.28); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = mode ? "#fff" : "#111"; ctx.font = "800 14px Inter Tight, sans-serif"; ctx.fillText("Вы", c.x, c.y + 5);
     }
     requestAnimationFrame(frame);
   }
@@ -299,6 +299,30 @@ document.querySelectorAll(".tilt").forEach(g => {
     navigator.clipboard?.writeText(text).catch(() => {});
     form.innerHTML = `<div class="cform-done"><b>Заявка готова.</b><p class="cform-note">Мы скопировали текст — откройте чат и вставьте его.</p><pre>${esc(text)}</pre><a class="btn light" href="${CONTACT_TG}" target="_blank" rel="noopener">Открыть Telegram ↗</a></div>`;
   });
+})();
+
+// ---------- фон: звёздная пыль на весь сайт ----------
+(function stars() {
+  const c = document.querySelector("canvas.stars");
+  if (!c) return;
+  const ctx = c.getContext("2d"), n = innerWidth < 700 ? 70 : 150;
+  let w, h, dpr;
+  const pts = Array.from({ length: n }, () => ({ x: Math.random(), y: Math.random(), z: .2 + Math.random() * .8, t: Math.random() * 6.28, v: .00004 + Math.random() * .00008 }));
+  const resize = () => { dpr = Math.min(devicePixelRatio || 1, 2); w = innerWidth; h = innerHeight; c.width = w * dpr; c.height = h * dpr; };
+  resize(); addEventListener("resize", resize);
+  function frame(t) {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+    const sy = scrollY;
+    for (const p of pts) {
+      if (!calm) p.y -= p.v * p.z;
+      if (p.y < 0) p.y += 1;
+      const y = ((p.y * h - sy * .08 * p.z) % h + h) % h, x = p.x * w;
+      const a = (.25 + .55 * (Math.sin(t / 900 + p.t) * .5 + .5)) * p.z, s = p.z * 1.8;
+      ctx.globalAlpha = a; ctx.fillStyle = "#fff"; ctx.fillRect(x, y, s, s);
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 })();
 
 // ---------- нимб над курсором ----------

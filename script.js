@@ -17,7 +17,7 @@ overlay.querySelectorAll("a").forEach(a => a.addEventListener("click", () => set
 addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 
 // ---------- плавное появление карточек ----------
-const pending = new Set(document.querySelectorAll(".eq, .notif-grid, .grid3, .cpanel, .bento, .badges, .faq-items, .cform"));
+const pending = new Set(document.querySelectorAll(".mani-frame, .radar-grid, .orbit-grid, .board, .tl, .dossier, .grid3, .qa-grid, .cform"));
 pending.forEach(el => el.classList.add("rv"));
 function sweep() {
   const h = innerHeight;
@@ -201,84 +201,71 @@ document.querySelectorAll(".tilt").forEach(g => {
   tick(); setInterval(tick, 1000);
 })();
 
-// ---------- кто делает работу ----------
-(function crew() {
-  const canvas = document.querySelector(".crew-canvas");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  const ROLES = ["Стратегия", "Редактура", "Тексты", "Дизайн", "Продвижение", "Запуски"];
-  const tasks = Array.from({ length: 36 }, (_, i) => ({ role: i % 6, x: 0, y: 0, a: Math.random() * 6.28, r: Math.random(), init: false }));
-  const stats = [["36", "1", "всё"], ["2", "6", "экспертиза"]];
-  let mode = 0, w, h, dpr, touched = false, seen = false, you = 1;
-  const resize = () => { dpr = Math.min(devicePixelRatio || 1, 2); w = canvas.clientWidth; h = canvas.clientHeight; canvas.width = w * dpr; canvas.height = h * dpr; };
-  resize(); new ResizeObserver(resize).observe(canvas);
-  const btns = [...document.querySelectorAll(".crew-switch button")];
-  function setMode(m) {
-    mode = m;
-    btns.forEach(b => { const on = +b.dataset.mode === m; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
-    ["cs1", "cs2", "cs3"].forEach((id, i) => { document.getElementById(id).textContent = stats[m][i]; });
-  }
-  btns.forEach(b => b.addEventListener("click", () => { touched = true; setMode(+b.dataset.mode); }));
-  const nodes = () => {
-    const R = Math.min(w * .38, h * .38);
-    return ROLES.map((_, i) => { const a = -Math.PI / 2 + i * Math.PI * 2 / 6; return { x: w / 2 + Math.cos(a) * R * 1.15, y: h / 2 + Math.sin(a) * R }; });
-  };
+// ---------- видео с интерфейсом камеры ----------
+(function cam() {
+  const box = document.getElementById("cam");
+  if (!box) return;
+  const v = box.querySelector("video"), tc = document.getElementById("camTc");
+  const f = s => { s = Math.floor(s); return `00:${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; };
+  box.querySelector(".cam-play").addEventListener("click", () => { v.controls = true; v.play(); box.classList.add("playing"); });
+  v.addEventListener("timeupdate", () => { tc.textContent = `${f(v.currentTime)} / 01:03`; });
+  v.addEventListener("ended", () => box.classList.remove("playing"));
+})();
+
+// ---------- 01: радар находит симптомы ----------
+(function radar() {
+  const c = document.querySelector("canvas.radar");
+  if (!c) return;
+  const ctx = c.getContext("2d"), items = [...document.querySelectorAll(".finds li")];
+  const blips = [{ a: -0.9, r: .62 }, { a: 1.1, r: .42 }, { a: 2.7, r: .74 }].map(b => ({ ...b, glow: 0 }));
+  let w, dpr, ang = 0, last = 0;
+  const resize = () => { dpr = Math.min(devicePixelRatio || 1, 2); w = c.clientWidth; c.width = c.height = w * dpr; };
+  resize(); new ResizeObserver(resize).observe(c);
   function frame(t) {
-    const r = canvas.getBoundingClientRect();
+    const r = c.getBoundingClientRect();
     if (r.bottom > 0 && r.top < innerHeight) {
-      if (!seen && r.top < innerHeight * .6) { seen = true; setTimeout(() => { if (!touched) setMode(1); }, 1600); }
-      const time = t / 1000, N = nodes(), c = { x: w / 2, y: h / 2 };
-      you += ((mode ? .55 : 1) - you) * .08;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
-      // связи «вы ↔ команда»
-      if (mode) { ctx.setLineDash([3, 5]); ctx.strokeStyle = "rgba(255,255,255,.28)"; N.forEach(n => { ctx.beginPath(); ctx.moveTo(c.x, c.y); ctx.lineTo(n.x, n.y); ctx.stroke(); }); ctx.setLineDash([]); }
-      tasks.forEach(k => {
-        const owner = mode ? N[k.role] : c;
-        const spread = mode ? 30 : 70 + Math.sin(time * 3 + k.a) * 10;
-        const ang = k.a + time * (mode ? .4 : 1.6) * (k.r > .5 ? 1 : -1);
-        const gx = owner.x + Math.cos(ang) * spread * (.45 + k.r * .55), gy = owner.y + Math.sin(ang) * spread * (.45 + k.r * .55);
-        if (!k.init) { k.x = gx; k.y = gy; k.init = true; }
-        k.x += (gx - k.x) * (calm ? 1 : .06); k.y += (gy - k.y) * (calm ? 1 : .06);
-        ctx.strokeStyle = "rgba(255,255,255,.12)"; ctx.beginPath(); ctx.moveTo(owner.x, owner.y); ctx.lineTo(k.x, k.y); ctx.stroke();
-        ctx.fillStyle = "#fff"; ctx.shadowColor = "rgba(255,255,255,.8)"; ctx.shadowBlur = 8; ctx.beginPath(); ctx.arc(k.x, k.y, 3.5, 0, 6.28); ctx.fill();
+      const dt = Math.min(.05, (t - last) / 1000 || 0);
+      ang = (ang + dt * (calm ? 0 : 1.2)) % (Math.PI * 2);
+      const R = w / 2 - 6, cx = w / 2, cy = w / 2;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, w);
+      ctx.strokeStyle = "rgba(255,255,255,.14)"; ctx.lineWidth = 1;
+      [1, .75, .5, .25].forEach(k => { ctx.beginPath(); ctx.arc(cx, cy, R * k, 0, 6.283); ctx.stroke(); });
+      ctx.beginPath(); ctx.moveTo(cx - R, cy); ctx.lineTo(cx + R, cy); ctx.moveTo(cx, cy - R); ctx.lineTo(cx, cy + R); ctx.stroke();
+      for (let k = 0; k < 36; k++) { const a = k / 36 * 6.283, l = k % 3 ? 5 : 11; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); ctx.lineTo(cx + Math.cos(a) * (R - l), cy + Math.sin(a) * (R - l)); ctx.stroke(); }
+      // луч со шлейфом
+      const g = ctx.createConicGradient ? ctx.createConicGradient(ang - 1.2, cx, cy) : null;
+      if (g) { g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(1.2 / 6.283, "rgba(255,255,255,.22)"); g.addColorStop(1.2 / 6.283 + .001, "rgba(255,255,255,0)"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.283); ctx.fill(); }
+      ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(ang) * R, cy + Math.sin(ang) * R); ctx.stroke();
+      blips.forEach((b, i) => {
+        const a = ((b.a % 6.283) + 6.283) % 6.283, d = ((ang - a) % 6.283 + 6.283) % 6.283;
+        if (d < .08) { b.glow = 1; items[i]?.classList.add("hit"); }
+        b.glow = Math.max(calm ? 1 : .18, b.glow - dt * .35);
+        const x = cx + Math.cos(a) * R * b.r, y = cy + Math.sin(a) * R * b.r;
+        ctx.fillStyle = `rgba(255,255,255,${b.glow})`; ctx.shadowColor = "#fff"; ctx.shadowBlur = 18 * b.glow;
+        ctx.beginPath(); ctx.arc(x, y, 5, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0;
+        ctx.strokeStyle = `rgba(255,255,255,${b.glow * .6})`; ctx.beginPath(); ctx.arc(x, y, 12 + (1 - b.glow) * 16, 0, 6.283); ctx.stroke();
+        ctx.fillStyle = `rgba(255,255,255,${.35 + b.glow * .6})`; ctx.font = "700 11px Inter Tight, sans-serif"; ctx.fillText(`СИГНАЛ 0${i + 1}`, x + 16, y - 10);
       });
-      ctx.font = "700 13px Inter Tight, sans-serif"; ctx.textAlign = "center";
-      N.forEach((n, i) => {
-        ctx.globalAlpha = mode ? 1 : .35;
-        ctx.shadowBlur = 0; ctx.fillStyle = "#0b0b0c"; ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.beginPath(); ctx.arc(n.x, n.y, 15, 0, 6.28); ctx.fill(); ctx.stroke();
-        ctx.fillStyle = "#e6e6e6"; ctx.fillText(ROLES[i], n.x, n.y + (n.y < h / 2 ? -26 : 34));
-      });
-      ctx.globalAlpha = 1;
-      // узел «Вы»: перегружен — пульсирует; с командой — спокойный
-      const R = 30 * you + (mode ? 0 : Math.sin(time * 6) * 3);
-      ctx.shadowBlur = 0; if (!mode) { ctx.strokeStyle = "rgba(255,255,255,.3)"; ctx.beginPath(); ctx.arc(c.x, c.y, R + 14 + Math.sin(time * 6) * 4, 0, 6.28); ctx.stroke(); }
-      ctx.fillStyle = mode ? "#0b0b0c" : "#fff"; ctx.strokeStyle = "#fff"; ctx.beginPath(); ctx.arc(c.x, c.y, R, 0, 6.28); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = mode ? "#fff" : "#111"; ctx.font = "800 14px Inter Tight, sans-serif"; ctx.fillText("Вы", c.x, c.y + 5);
+      ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx, cy, 4, 0, 6.283); ctx.fill();
     }
+    last = t;
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
 })();
 
-// ---------- видео-кружок ----------
-(function vc() {
-  const box = document.getElementById("vc");
-  if (!box) return;
-  const v = box.querySelector("video");
-  box.querySelector(".vc-play").addEventListener("click", () => { v.controls = true; v.play(); box.classList.add("playing"); });
-  v.addEventListener("ended", () => box.classList.remove("playing"));
-})();
-
-
-
-// ---------- кейсы-переключатель ----------
-(function cases() {
-  const tabs = [...document.querySelectorAll(".ctabs button")], slides = [...document.querySelectorAll(".cslide")];
-  const show = i => {
-    tabs.forEach((t, k) => { t.classList.toggle("on", k === i); t.setAttribute("aria-selected", k === i); });
-    slides.forEach((s, k) => s.classList.toggle("on", k === i));
+// ---------- 02: роли на орбитах ----------
+(function orbit() {
+  const roles = [...document.querySelectorAll(".orb-role")], text = document.querySelector(".orbit-text");
+  if (!roles.length || !text) return;
+  const tip = document.createElement("div");
+  tip.className = "orb-tip"; tip.innerHTML = "<b>Наведите на роль</b><span>Шесть ролей ведут канал вокруг вас.</span>";
+  text.appendChild(tip);
+  const show = li => {
+    roles.forEach(r => r.querySelector("button").classList.toggle("on", r === li));
+    tip.innerHTML = `<b>${li.querySelector("b").textContent}</b><span>${li.querySelector("p").textContent}</span>`;
   };
-  tabs.forEach((t, i) => t.addEventListener("click", () => show(i)));
+  roles.forEach(li => { const b = li.querySelector("button"); b.addEventListener("mouseenter", () => show(li)); b.addEventListener("click", () => show(li)); b.addEventListener("focus", () => show(li)); });
 })();
 
 // ---------- короткая заявка ----------

@@ -11,254 +11,258 @@
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1792634055">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1792830520">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 </head>
 <body>
-<canvas class="stars" aria-hidden="true"></canvas>
 
-<!-- хромированные объекты -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <linearGradient id="g-chrome" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffffff"/><stop offset=".2" stop-color="#d6d6d6"/><stop offset=".44" stop-color="#7e7e7e"/>
-      <stop offset=".5" stop-color="#2e2e2e"/><stop offset=".57" stop-color="#a0a0a0"/><stop offset=".8" stop-color="#f7f7f7"/><stop offset="1" stop-color="#ababab"/>
-    </linearGradient>
-    <filter id="chrome" x="-25%" y="-25%" width="150%" height="150%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2.2" result="b"/>
-      <feSpecularLighting in="b" surfaceScale="5" specularConstant="1.2" specularExponent="26" lighting-color="#fff" result="s"><fePointLight x="-60" y="-120" z="160"/></feSpecularLighting>
-      <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/>
-      <feComposite in="SourceGraphic" in2="s2" operator="arithmetic" k1="0" k2="1" k3=".9" k4="0" result="lit"/>
-      <feDropShadow in="lit" dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity=".22"/>
-    </filter>
-  </defs>
-  <symbol id="c-cross" viewBox="-10 -10 120 120"><path filter="url(#chrome)" fill="url(#g-chrome)" stroke="#fff" d="M38 0H62V30H94V54H62V100H38V54H6V30H38Z"/></symbol>
-  <symbol id="c-star" viewBox="-10 -10 120 120"><path filter="url(#chrome)" fill="url(#g-chrome)" stroke="#fff" d="M50 0C54 34 66 46 100 50C66 54 54 66 50 100C46 66 34 54 0 50C34 46 46 34 50 0Z"/></symbol>
-  <symbol id="c-halo" viewBox="-6 -6 112 52"><ellipse filter="url(#chrome)" cx="50" cy="20" rx="44" ry="14" fill="none" stroke="url(#g-chrome)" stroke-width="9"/></symbol>
-  <symbol id="c-heart" viewBox="-10 -10 120 110"><path filter="url(#chrome)" fill="url(#g-chrome)" stroke="#fff" d="M50 90C20 66 0 50 0 28C0 12 12 0 27 0C38 0 46 6 50 14C54 6 62 0 73 0C88 0 100 12 100 28C100 50 80 66 50 90Z"/></symbol>
-  <symbol id="c-wings" viewBox="-10 -10 220 100"><g filter="url(#chrome)" fill="url(#g-chrome)" stroke="#fff">
-    <path d="M104 50C130 18 162 6 196 4C190 20 182 28 172 32C182 34 186 38 186 42C176 48 166 48 158 48C166 52 168 56 166 60C154 64 140 62 130 58C134 64 132 68 128 72C118 72 110 64 104 56Z"/>
-    <path d="M96 50C70 18 38 6 4 4C10 20 18 28 28 32C18 34 14 38 14 42C24 48 34 48 42 48C34 52 32 56 34 60C46 64 60 62 70 58C66 64 68 68 72 72C82 72 90 64 96 56Z"/></g></symbol>
-  <symbol id="c-feather" viewBox="-10 -10 120 120"><g filter="url(#chrome)"><path fill="url(#g-chrome)" stroke="#fff" d="M50 3C28 26 26 60 47 87L50 98L53 87C74 60 72 26 50 3Z"/><path fill="none" stroke="#444" stroke-width="1.4" d="M50 14V96"/></g></symbol>
-</svg>
+<!-- 3D-сцена на весь сайт -->
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
 
-<header class="nav" id="nav">
+<!-- прелоадер -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="ld-in">
+    <span class="ld-tag">Агентство</span>
+    <p class="ld-word">Нас#лия</p>
+    <div class="ld-bar"><i id="ldBar"></i></div>
+    <span class="ld-num" id="ldNum">000</span>
+  </div>
+</div>
+
+<header class="nav">
   <a href="#top" class="logo">Нас#лия</a>
+  <nav class="nav-links">
+    <a href="#manifest">Манифест</a>
+    <a href="#symptoms">Ситуация</a>
+    <a href="#cases">Кейсы</a>
+    <a href="#work">Процесс</a>
+    <a href="#formats">Форматы</a>
+  </nav>
+  <a href="#brief" class="nav-cta magnet">Обсудить канал</a>
   <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="overlay">Меню</button>
 </header>
 
 <div class="overlay" id="overlay" aria-hidden="true">
   <nav class="ov-links">
-    <a href="#symptoms"><span>01</span>Диагностика</a>
-    <a href="#crew"><span>02</span>Команда канала</a>
-    <a href="#cases"><span>03</span>Кейсы</a>
-    <a href="#work"><span>04</span>Процесс</a>
-    <a href="#team"><span>—</span>Люди</a>
-    <a href="#formats"><span>05</span>Форматы</a>
-    <a href="#faq"><span>06</span>Вопросы</a>
+    <a href="#manifest"><span>01</span>Манифест</a>
+    <a href="#symptoms"><span>02</span>Ситуация</a>
+    <a href="#crew"><span>03</span>Команда канала</a>
+    <a href="#cases"><span>04</span>Кейсы</a>
+    <a href="#work"><span>05</span>Процесс</a>
+    <a href="#formats"><span>06</span>Форматы</a>
     <a href="#brief"><span>07</span>Заявка</a>
   </nav>
-  <svg class="ov-wings" aria-hidden="true"><use href="#c-wings"/></svg>
   <div class="ov-foot"><a href="https://t.me/lfbutov" target="_blank" rel="noopener">Telegram ↗</a><span>Агентство Нас#лия © 2026</span></div>
 </div>
 
 <main id="top">
 
-  <!-- HERO: референс на весь экран -->
-  <section class="hero">
-    <div class="hero-bg" style="background-image:url(img/studio-cross.jpg)"></div>
-    <canvas class="swarm" aria-hidden="true"></canvas>
-    <div class="hud" aria-hidden="true">
-      <i class="hud-x"></i><i class="hud-y"></i><b class="hud-c">+</b>
-      <span class="tag" data-p="0"><em>+</em>посты <u>по графику</u></span>
-      <span class="tag" data-p="1"><em>+</em>прогрев <u>online</u></span>
-      <span class="tag" data-p="2"><em>+</em>запуск <u>идёт</u></span>
-      <span class="shape-name" id="shapeName">крест</span>
-    </div>
+  <!-- HERO -->
+  <section class="hero" data-scene="0">
     <div class="hero-top">
-      <span class="pill">Telegram production · est. 2026</span>
+      <span class="tag">Telegram production · est. 2026</span>
       <p>Продюсирование экспертов в&nbsp;Telegram. Стратегия, контент, выпуск, продвижение и&nbsp;запуски — одной командой.</p>
     </div>
-    <h1 class="hero-word"><span class="hero-small">Агентство</span><span class="chrome-d">Нас#лия</span></h1>
+    <h1 class="hero-word"><span class="hero-small">Агентство</span><span class="chrome">Нас#лия</span></h1>
     <div class="hero-bottom">
-      <a href="#brief" class="btn light">Разобрать канал бесплатно</a>
-      <span class="scroll-hint">(Листайте)</span>
+      <a href="#brief" class="btn magnet">Разобрать канал бесплатно</a>
+      <span class="scroll-cue"><i></i>Листайте</span>
       <span class="next-post"><small>Следующий пост через</small><b id="nextPost">00:00:00</b></span>
     </div>
   </section>
 
-  <!-- манифест в рамке прибора -->
-  <section class="sec mani">
-    <div class="mani-frame">
-      <span class="mk mk-tl">(манифест)</span><span class="mk mk-tr">N 55°45′ · E 37°37′</span><span class="mk mk-bl">REF / 001</span><span class="mk mk-br">Нас#лия</span>
-      <p class="mani-q">Автор сохраняет голос и&nbsp;не&nbsp;живёт в&nbsp;операционке.</p>
-    </div>
-    <div class="mani-facts">
-      <div><span>Голос</span><b>ваш</b></div>
-      <div><span>Операционка</span><b>наша</b></div>
-      <div><span>Результат</span><b>общий</b></div>
-    </div>
-  </section>
-
-  <!-- видео: кинокадр с интерфейсом камеры -->
-  <section class="sec cam" id="intro">
-    <div class="cam-head"><span class="pill">00 · Знакомство</span><h2 class="chrome">Познакомимся?</h2><p>Минута о том, кто мы и как устроена работа.</p></div>
-    <div class="cam-frame" id="cam">
-      <video playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" aria-label="Знакомство с агентством"></video>
-      <div class="cam-ui" aria-hidden="true">
-        <span class="cam-rec"><i></i>REC</span>
-        <span class="cam-tc" id="camTc">00:00:00 / 01:03</span>
-        <span class="cam-lbl">CAM 01 · ЗНАКОМСТВО</span>
-        <span class="cam-iso">ISO 800 · 24 FPS</span>
-        <i class="cam-c tl"></i><i class="cam-c tr"></i><i class="cam-c bl"></i><i class="cam-c br"></i>
-      </div>
-      <button class="cam-play" aria-label="Смотреть видео"><svg class="" aria-hidden="true"><use href="#c-star"/></svg><span>Смотреть</span></button>
-    </div>
-  </section>
-
-  <!-- 01: радар-диагностика -->
-  <section class="sec radar-sec" id="symptoms">
-    <div class="radar-grid">
-      <div class="radar-text">
-        <span class="pill">01 · Диагностика</span>
-        <h2 class="chrome">Вы замолкаете — и&nbsp;канал замолкает</h2>
-        <ul class="finds">
-          <li data-b="0"><span class="f-st">обнаружено</span><b>Посты выходят, только когда вы находите силы</b><p>Канал держится не на системе, а на вашем свободном вечере.</p></li>
-          <li data-b="1"><span class="f-st">обнаружено</span><b>Без вашего ответа никто не двигается</b><p>Темы, тексты и публикации каждый раз ждут личного согласования.</p></li>
-          <li data-b="2"><span class="f-st">обнаружено</span><b>К продажам готовитесь в последний момент</b><p>Прогрев сжимается до недели, и запуск не успевает набрать силу.</p></li>
-        </ul>
-        <p class="radar-note">Два сигнала из трёх — канал уже зависит от вас.</p>
-      </div>
-      <div class="radar-box"><canvas class="radar" aria-label="Радар симптомов"></canvas></div>
-    </div>
-  </section>
-
-  <!-- 02: команда канала на орбитах -->
-  <section class="sec orbit-sec" id="crew">
-    <div class="orbit-grid">
-      <div class="orbit">
-        <i class="ring r1"></i><i class="ring r2"></i>
-        <div class="orb-core"><b>Вы</b><span>экспертиза</span></div>
-        <ul class="orb-roles"><li class="orb-role" style="--i:0"><button><span class="orb-dot"></span><b>Стратегия</b></button><p>Тема канала, позиционирование, контент-план</p></li><li class="orb-role" style="--i:1"><button><span class="orb-dot"></span><b>Редактура</b></button><p>Голос автора, проверка смыслов</p></li><li class="orb-role" style="--i:2"><button><span class="orb-dot"></span><b>Тексты</b></button><p>Посты, прогревы, продающие тексты</p></li><li class="orb-role" style="--i:3"><button><span class="orb-dot"></span><b>Дизайн</b></button><p>Оформление, обложки, сайт</p></li><li class="orb-role" style="--i:4"><button><span class="orb-dot"></span><b>Продвижение</b></button><p>Посевы, реклама, рост аудитории</p></li><li class="orb-role" style="--i:5"><button><span class="orb-dot"></span><b>Запуски</b></button><p>Продукт, воронка, продажи</p></li></ul>
-      </div>
-      <div class="orbit-text">
-        <span class="pill">02 · Команда канала</span>
-        <h2 class="chrome">Вы в центре. Работа — вокруг</h2>
-        <p>Шесть ролей ведут канал, пока вы занимаетесь экспертизой. От вас — голос и согласование, остальное делает команда.</p>
-        <p class="orbit-hint">Наведите на роль, чтобы увидеть, что она делает.</p>
+  <!-- 01 МАНИФЕСТ -->
+  <section class="sec manifest" id="manifest" data-scene="1">
+    <div class="mf-text">
+      <span class="tag">01 · Манифест</span>
+      <h2 class="big">Автор сохраняет голос и&nbsp;не&nbsp;живёт в&nbsp;операционке.</h2>
+      <div class="mf-pairs">
+        <div><small>От вас</small><b>Экспертиза, голос, обратная связь</b></div>
+        <div><small>От нас</small><b>Стратегия, тексты, выпуск, продвижение, запуски</b></div>
       </div>
     </div>
   </section>
 
-  <!-- 03: табло запусков -->
-  <section class="sec board-sec" id="cases">
-    <div class="head"><span class="pill">03 · Кейсы</span><h2 class="chrome">Табло запусков</h2></div>
-    <div class="board">
-      <div class="lrow lhead"><span>№</span><span>Проект</span><span>Срок</span><span>Участники</span><span>Чек</span><span>Результат</span><span>Статус</span></div>
-        <details class="lrow">
-          <summary><span class="l-n">01</span><b class="l-name">Wake Up</b><span>7 дней</span><span>180+</span><span>4 000 ₽</span><span class="l-res">180+ человек в продукте</span><span class="l-st"><i></i>завершён</span></summary>
-          <p>За неделю соединили несколько воронок и частично автоматизировали запуск.</p>
-        </details>
-        <details class="lrow">
-          <summary><span class="l-n">02</span><b class="l-name">Wake Up Empire</b><span>5 дней</span><span>80+</span><span>от 4 990 ₽</span><span class="l-res">80+ платных подписчиков</span><span class="l-st"><i></i>завершён</span></summary>
-          <p>Сильный прогрев и технически продуманный сайт — основа запуска.</p>
-        </details>
-        <details class="lrow">
-          <summary><span class="l-n">03</span><b class="l-name">С нуля</b><span>3 дня</span><span>150+</span><span>1 750 ₽</span><span class="l-res">100 000 ₽ выручки</span><span class="l-st"><i></i>завершён</span></summary>
-          <p>Широкий охват вместо высокого чека — и первый шаг к групповой работе за 60&nbsp;000+&nbsp;₽.</p>
-        </details>
+  <!-- ВИДЕО: встаёт из наклона -->
+  <section class="sec vid" id="intro" data-scene="2">
+    <div class="vid-head"><span class="tag">00 · Знакомство</span><h2 class="chrome mid">Познакомимся?</h2></div>
+    <div class="vid-stage">
+      <div class="vid-card" id="vidCard">
+        <video playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" aria-label="Знакомство с агентством"></video>
+        <button class="vid-play magnet" aria-label="Смотреть видео"><span>▶</span>Смотреть · 01:03</button>
+      </div>
     </div>
   </section>
 
-  <!-- 04: процесс-шкала -->
-  <section class="sec tl-sec" id="work">
-    <div class="head"><span class="pill">04 · Как мы ведём канал</span><h2 class="chrome">Процесс</h2><p>Вы рассказываете о себе и своей цели. Дальше — четыре этапа.</p></div>
-    <ol class="tl"><i class="tl-line" aria-hidden="true"><b></b></i><li><span class="tl-t">T+1</span><i class="tl-dot"></i><h3>Решаем, о чём канал</h3><p>Находим главную тему и объясняем, почему людям будет интересно читать именно вас.</p></li><li><span class="tl-t">T+2</span><i class="tl-dot"></i><h3>Пишем и выпускаем</h3><p>Узнаём, как вы говорите, придумываем темы, пишем тексты и публикуем вовремя.</p></li><li><span class="tl-t">T+3</span><i class="tl-dot"></i><h3>Находим читателей</h3><p>Рассказываем о канале там, где уже есть нужные вам люди, и смотрим, кто приходит.</p></li><li><span class="tl-t">T+4</span><i class="tl-dot"></i><h3>Продаём через канал</h3><p>Рассказываем о продукте так, чтобы было понятно, зачем он нужен и как его купить.</p></li></ol>
+  <!-- 02 СИМПТОМЫ: 3D-стопка -->
+  <section class="sec sym" id="symptoms" data-scene="3">
+    <div class="sym-head">
+      <span class="tag">02 · Проверьте себя</span>
+      <h2 class="chrome mid">Вы замолкаете — и&nbsp;канал замолкает</h2>
+      <p>Если совпало два из трёх — канал уже зависит от вас.</p>
+    </div>
+    <div class="sym-stack">
+      <article class="sym-card tilt"><span class="s-n">01</span><small>Контент</small><h3>Посты выходят, только когда вы находите силы</h3><p>Канал держится не на системе, а на вашем свободном вечере.</p></article>
+      <article class="sym-card tilt"><span class="s-n">02</span><small>Команда</small><h3>Без вашего ответа никто не двигается</h3><p>Темы, тексты и публикации каждый раз ждут личного согласования.</p></article>
+      <article class="sym-card tilt"><span class="s-n">03</span><small>Запуск</small><h3>К продажам готовитесь в последний момент</h3><p>Прогрев сжимается до недели, и запуск не успевает набрать силу.</p></article>
+    </div>
   </section>
 
-  <!-- 05: досье -->
-  <section class="sec ds-sec" id="team">
-    <div class="head"><span class="pill">Люди за проектом</span><h2 class="chrome">Досье</h2></div>
-    <div class="dossiers">
-      <article class="dossier">
-        <div class="ds-photo"><img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy"><i class="ds-cross"></i><span class="ds-code">AB-001</span><svg class="ds-halo" aria-hidden="true"><use href="#c-halo"/></svg></div>
-        <div class="ds-info">
-          <span class="pill sm">Досье · AB-001</span>
-          <h3>Артём Бутов</h3>
-          <dl><div><dt>Роль</dt><dd>Продюсирование и продукт</dd></div><div><dt>Зона</dt><dd>Сайты, контент, путь к покупке</dd></div><div><dt>Связь</dt><dd><a href="https://t.me/lfbutov" target="_blank" rel="noopener">@lfbutov ↗</a></dd></div></dl>
-          <p>Создаёт сайты и контент для Telegram. Выстраивает путь от интереса к посту до покупки продукта.</p>
-        </div>
+  <!-- 03 КОМАНДА КАНАЛА: 3D-цилиндр -->
+  <section class="sec crew" id="crew" data-scene="4">
+    <div class="crew-head">
+      <span class="tag">03 · Команда канала</span>
+      <h2 class="chrome mid">Шесть ролей вокруг вас</h2>
+      <p>Тяните барабан — каждая грань делает свою часть работы. От вас — только голос и согласование.</p>
+    </div>
+    <div class="drum-stage" id="drumStage">
+      <div class="drum" id="drum">
+        <div class="face" style="--i:0"><span>01</span><h3>Стратегия</h3><p>Тема канала, позиционирование, контент-план</p></div>
+        <div class="face" style="--i:1"><span>02</span><h3>Редактура</h3><p>Голос автора и проверка смыслов</p></div>
+        <div class="face" style="--i:2"><span>03</span><h3>Тексты</h3><p>Посты, прогревы, продающие тексты</p></div>
+        <div class="face" style="--i:3"><span>04</span><h3>Дизайн</h3><p>Оформление, обложки, сайт</p></div>
+        <div class="face" style="--i:4"><span>05</span><h3>Продвижение</h3><p>Посевы, реклама, рост аудитории</p></div>
+        <div class="face" style="--i:5"><span>06</span><h3>Запуски</h3><p>Продукт, воронка, продажи</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 КЕЙСЫ: coverflow -->
+  <section class="sec cases" id="cases" data-scene="5">
+    <div class="cases-head">
+      <span class="tag">04 · Кейсы</span>
+      <h2 class="chrome mid">Запуски</h2>
+    </div>
+    <div class="flow" id="flow">
+      <article class="fcard" data-i="0">
+        <small>Кейс 01 · 7 дней</small>
+        <p class="f-num chrome">180+</p>
+        <span class="f-cap">человек вошли в продукт</span>
+        <h3>Wake Up</h3>
+        <p>За неделю соединили несколько воронок и частично автоматизировали запуск.</p>
+        <dl><div><dt>Средний чек</dt><dd>4 000 ₽</dd></div><div><dt>Срок</dt><dd>7 дней</dd></div></dl>
       </article>
-      <article class="dossier">
-        <div class="ds-photo"><img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy"><i class="ds-cross"></i><span class="ds-code">AF-002</span><svg class="ds-halo" aria-hidden="true"><use href="#c-halo"/></svg></div>
-        <div class="ds-info">
-          <span class="pill sm">Досье · AF-002</span>
-          <h3>Артём Федонко</h3>
-          <dl><div><dt>Роль</dt><dd>Клиенты и команда</dd></div><div><dt>Зона</dt><dd>Переговоры, сделки, продажи</dd></div><div><dt>Связь</dt><dd><a href="https://t.me/+soEcPH8C9oRlNTZi" target="_blank" rel="noopener">Telegram-канал ↗</a></dd></div></dl>
-          <p>Находит клиентов, ведёт переговоры, собирает команду продаж. Аудитория — 15&nbsp;000+ человек, запуски с общей прибылью больше $50&nbsp;000.</p>
-        </div>
+      <article class="fcard" data-i="1">
+        <small>Кейс 02 · 5 дней</small>
+        <p class="f-num chrome">80+</p>
+        <span class="f-cap">платных подписчиков</span>
+        <h3>Wake Up Empire</h3>
+        <p>Сильный прогрев и технически продуманный сайт — основа запуска.</p>
+        <dl><div><dt>Средний чек</dt><dd>от 4 990 ₽</dd></div><div><dt>Срок</dt><dd>5 дней</dd></div></dl>
+      </article>
+      <article class="fcard" data-i="2">
+        <small>Кейс 03 · 3 дня</small>
+        <p class="f-num chrome sm">100&nbsp;000&nbsp;₽</p>
+        <span class="f-cap">выручка за три дня</span>
+        <h3>С нуля</h3>
+        <p>Широкий охват вместо высокого чека — и первый шаг к групповой работе за 60&nbsp;000+&nbsp;₽.</p>
+        <dl><div><dt>Участники</dt><dd>150+</dd></div><div><dt>Средний чек</dt><dd>1 750 ₽</dd></div></dl>
       </article>
     </div>
+    <div class="flow-nav">
+      <button class="fbtn magnet" id="flowPrev" aria-label="Предыдущий кейс">←</button>
+      <span id="flowIdx">01 / 03</span>
+      <button class="fbtn magnet" id="flowNext" aria-label="Следующий кейс">→</button>
+    </div>
   </section>
 
-  <!-- УСЛУГИ -->
-  <section class="sec sec-tint" id="formats">
-    <div class="head">
-      <span class="pill">05 · С чем можем помочь</span>
-      <h2 class="chrome">Форматы</h2>
+  <!-- 05 ПРОЦЕСС: горизонтальная прокрутка -->
+  <section class="hz" id="work" data-scene="6">
+    <div class="hz-pin">
+      <div class="hz-head"><span class="tag">05 · Как мы ведём канал</span><h2 class="chrome mid">Процесс</h2><span class="hz-count"><b id="hzNow">01</b> / 04</span></div>
+      <div class="hz-track" id="hzTrack">
+        <article class="hz-card"><span class="hz-n">01</span><h3>Решаем, о чём канал</h3><p>Находим главную тему и объясняем, почему людям будет интересно читать именно вас.</p></article>
+        <article class="hz-card"><span class="hz-n">02</span><h3>Пишем и выпускаем</h3><p>Узнаём, как вы говорите, придумываем темы, пишем тексты и публикуем вовремя.</p></article>
+        <article class="hz-card"><span class="hz-n">03</span><h3>Находим читателей</h3><p>Рассказываем о канале там, где уже есть нужные вам люди, и смотрим, кто приходит.</p></article>
+        <article class="hz-card"><span class="hz-n">04</span><h3>Продаём через канал</h3><p>Рассказываем о продукте так, чтобы было понятно, зачем он нужен и как его купить.</p></article>
+      </div>
+      <div class="hz-bar"><i id="hzBar"></i></div>
     </div>
-    <div class="grid3 tiers">
-      <article class="glass tier tilt">
-        <svg class="glass-obj wide"><use href="#c-wings"/></svg>
-        <span class="pill sm">01 · Ежемесячно</span>
+  </section>
+
+  <!-- 06 ЛЮДИ: голографические карты -->
+  <section class="sec team" id="team" data-scene="7">
+    <div class="team-head"><span class="tag">Люди за проектом</span><h2 class="chrome mid">Команда</h2></div>
+    <div class="holos">
+      <article class="holo">
+        <div class="holo-in">
+          <img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy">
+          <i class="holo-shine"></i>
+          <div class="holo-info"><small>Продюсирование и продукт</small><h3>Артём Бутов</h3><p>Создаёт сайты и контент для Telegram. Выстраивает путь от интереса к посту до покупки продукта.</p><a href="https://t.me/lfbutov" target="_blank" rel="noopener">@lfbutov ↗</a></div>
+        </div>
+      </article>
+      <article class="holo">
+        <div class="holo-in">
+          <img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy">
+          <i class="holo-shine"></i>
+          <div class="holo-info"><small>Клиенты и команда</small><h3>Артём Федонко</h3><p>Находит клиентов, ведёт переговоры, собирает команду продаж. Аудитория — 15&nbsp;000+ человек, запуски с общей прибылью больше $50&nbsp;000.</p><a href="https://t.me/+soEcPH8C9oRlNTZi" target="_blank" rel="noopener">Telegram-канал ↗</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 07 ФОРМАТЫ -->
+  <section class="sec formats" id="formats" data-scene="8">
+    <div class="formats-head"><span class="tag">06 · С чем можем помочь</span><h2 class="chrome mid">Форматы</h2></div>
+    <div class="tiers">
+      <article class="tier tilt">
+        <small>01 · Ежемесячно</small>
         <h3>Полное продюсирование</h3>
         <p>Развиваем канал как медиа и продюсируем запуски продуктов.</p>
         <ul><li>Широкая аудитория</li><li>Контент по системе</li><li>Запуск от 500 000 ₽</li><li>База для следующих запусков</li></ul>
-        <p class="price chrome">от 120 000 ₽<small>/ мес</small></p>
-        <a href="#brief" class="btn" data-pick="Передать канал под ключ">Обсудить</a>
+        <p class="price">от 120 000 ₽<small>/ мес</small></p>
+        <a href="#brief" class="btn ghost" data-pick="Передать канал под ключ">Обсудить</a>
       </article>
-      <article class="tier tier-dark tilt">
-        <svg class="glass-obj"><use href="#c-star"/></svg>
-        <span class="pill sm">02 · Проект</span>
+      <article class="tier tier-hi tilt">
+        <small>02 · Проект</small>
         <h3>Запуск продукта</h3>
         <p>Прогрев, посты и вся операционная работа — на нас.</p>
         <ul><li>Запуск от 500 000 ₽</li><li>Продукт, готовый к продаже</li><li>Канал работает и после запуска</li></ul>
-        <p class="price chrome-d">после диагностики</p>
-        <a href="#brief" class="btn light" data-pick="Запустить продукт в Telegram">Обсудить</a>
+        <p class="price">после диагностики</p>
+        <a href="#brief" class="btn dark" data-pick="Запустить продукт в Telegram">Обсудить</a>
       </article>
-      <article class="glass tier tilt">
-        <svg class="glass-obj"><use href="#c-heart"/></svg>
-        <span class="pill sm">03 · Бесплатно</span>
+      <article class="tier tilt">
+        <small>03 · Бесплатно</small>
         <h3>Консультация</h3>
         <p>Разберём канал и дадим три конкретных совета по монетизации.</p>
         <ul><li>Потенциал канала</li><li>Три идеи монетизации</li><li>Понятные условия работы</li></ul>
-        <p class="price chrome">0 ₽</p>
-        <a href="#brief" class="btn" data-pick="Начать с бесплатной консультации">Записаться</a>
+        <p class="price">0 ₽</p>
+        <a href="#brief" class="btn ghost" data-pick="Начать с бесплатной консультации">Записаться</a>
       </article>
     </div>
   </section>
 
-  <!-- 06: вопросы сеткой -->
-  <section class="sec qa-sec" id="faq">
-    <div class="head"><span class="pill">06 · Перед стартом</span><h2 class="chrome">Вопросы</h2></div>
-    <div class="qa-grid"><article class="qa"><span class="qa-n">Q.01</span><h3>Что можно передать вам?</h3><p>Контент, сайт и запуск продукта в Telegram. Берём канал целиком или подключаемся к отдельному запуску.</p></article><article class="qa"><span class="qa-n">Q.02</span><h3>Что потребуется от меня?</h3><p>Ваша экспертиза и обратная связь. Мы превращаем их в посты, упаковку и продажи — с сохранением вашего голоса.</p></article><article class="qa"><span class="qa-n">Q.03</span><h3>Сколько стоит работа?</h3><p>Продюсирование — от 120 000 ₽ в месяц. Отдельный запуск оценим после знакомства с задачей.</p></article><article class="qa"><span class="qa-n">Q.04</span><h3>С чего начнём?</h3><p>С бесплатного разбора: посмотрим канал или идею, найдём точки роста и предложим три следующих шага.</p></article></div>
+  <!-- ВОПРОСЫ -->
+  <section class="sec faq" id="faq" data-scene="9">
+    <div class="faq-head"><span class="tag">Перед стартом</span><h2 class="chrome mid">Вопросы</h2></div>
+    <div class="faq-list">
+      <details><summary>Что можно передать вам?<i>+</i></summary><p>Контент, сайт и запуск продукта в Telegram. Берём канал целиком или подключаемся к отдельному запуску.</p></details>
+      <details><summary>Что потребуется от меня?<i>+</i></summary><p>Ваша экспертиза и обратная связь. Мы превращаем их в посты, упаковку и продажи — с сохранением вашего голоса.</p></details>
+      <details><summary>Сколько стоит работа?<i>+</i></summary><p>Продюсирование — от 120 000 ₽ в месяц. Отдельный запуск оценим после знакомства с задачей.</p></details>
+      <details><summary>С чего начнём?<i>+</i></summary><p>С бесплатного разбора: посмотрим канал или идею, найдём точки роста и предложим три следующих шага.</p></details>
+    </div>
   </section>
 
-  <!-- 07: заявка -->
-  <section class="contact" id="brief">
-    <div class="contact-bg" style="background-image:url(img/cliff-sun.jpg)"></div>
-    <canvas class="feathers" data-n="10" data-dark aria-hidden="true"></canvas>
+  <!-- ЗАЯВКА -->
+  <section class="sec contact" id="brief" data-scene="10">
     <div class="contact-in">
       <div class="contact-text">
-        <span class="pill">07 · Заявка</span>
-        <h2 class="chrome-d">Разберём ваш канал бесплатно</h2>
+        <span class="tag">07 · Заявка</span>
+        <h2 class="chrome big">Разберём ваш канал бесплатно</h2>
         <p>Оставьте Telegram — предложим три конкретных шага для вашего проекта.</p>
       </div>
       <form class="cform" id="cform">
-        <div class="chips" role="group" aria-label="Задача"><button type="button" class="chip" aria-pressed="false">Запустить продукт в Telegram</button><button type="button" class="chip" aria-pressed="false">Передать канал под ключ</button><button type="button" class="chip" aria-pressed="false">Вырастить аудиторию и продажи</button><button type="button" class="chip on" aria-pressed="true">Начать с бесплатной консультации</button></div>
+        <div class="chips" role="group" aria-label="Задача">
+          <button type="button" class="chip" aria-pressed="false">Запустить продукт в Telegram</button>
+          <button type="button" class="chip" aria-pressed="false">Передать канал под ключ</button>
+          <button type="button" class="chip" aria-pressed="false">Вырастить аудиторию и продажи</button>
+          <button type="button" class="chip on" aria-pressed="true">Начать с бесплатной консультации</button>
+        </div>
         <label>Как вас зовут<input class="field" name="name" required autocomplete="name"></label>
         <label>Telegram<input class="field" name="tg" required placeholder="@username"></label>
-        <button class="btn light" type="submit">Отправить заявку ↗</button>
+        <button class="btn magnet" type="submit">Отправить заявку ↗</button>
         <p class="cform-note">Скопируем заявку и откроем Telegram — останется нажать «Отправить».</p>
       </form>
     </div>
@@ -266,21 +270,19 @@
 
 </main>
 
-<footer class="foot2">
-  <div class="f2-row">
-    <a href="#top" class="f2-logo">Нас#лия</a>
-    <nav class="f2-nav"><a href="#symptoms">Диагностика</a><a href="#cases">Кейсы</a><a href="#work">Процесс</a><a href="#formats">Форматы</a><a href="#brief">Заявка</a></nav>
-    <a href="#top" class="f2-up" aria-label="Наверх">↑</a>
-  </div>
-  <div class="f2-row f2-meta">
-    <span>© 2026 Агентство Нас#лия · Артём Бутов × Артём Федонко</span>
-    <span>Следующий пост через <b id="nextPost2">00:00:00</b></span>
+<footer class="foot" data-scene="11">
+  <p class="foot-word chrome">Нас#лия</p>
+  <div class="foot-row">
+    <span>© 2026 Агентство Нас#лия</span>
+    <span>Артём Бутов × Артём Федонко</span>
     <a href="https://t.me/lfbutov" target="_blank" rel="noopener">Telegram ↗</a>
+    <a href="#top">Наверх ↑</a>
   </div>
 </footer>
 
-<div class="halo-cursor" aria-hidden="true"><svg><use href="#c-halo"/></svg></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
 
-<script src="script.js?v=1792634055"></script>
+<script src="app.js?v=1792830520"></script>
+<script type="module" src="scene.js?v=1792830520"></script>
 </body>
 </html>

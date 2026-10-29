@@ -44,10 +44,12 @@ addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
     return [s * (.06 + Math.cos(th) * L * t) + rnd(-.02, .02), -Math.sin(th) * L * t * .95 + rnd(-.02, .02) - .05, Math.sin(t * Math.PI) * .18 * s * .6 + rnd(-.03, .03)];
   };
   const SHAPES = [["крест", cross], ["нимб", halo], ["крылья", wings]];
+  // палитра каждой фигуры: крест — синий/голубой, нимб — лайм/голубой, крылья — розовый/оранжевый
+  const PAL = [[[59, 91, 255], [46, 197, 255]], [[198, 255, 58], [46, 197, 255]], [[255, 61, 139], [255, 90, 36]]];
   const sets = SHAPES.map(([, g]) => Array.from({ length: N }, g));
   const P = Array.from({ length: N }, () => ({ x: rnd(-2, 2), y: rnd(-2, 2), z: rnd(-2, 2), vx: 0, vy: 0, vz: 0, ox: 0, oy: 0,
-    k: rnd(.02, .045), b: Math.random() < .08 ? 1 : 0, w: rnd(0, 6.28) }));
-  let shape = 0, w, h, dpr, rotY = 0, mx = -9999, my = -9999, tx = 0, ty = 0;
+    k: rnd(.02, .045), b: Math.random() < .08 ? 1 : 0, w: rnd(0, 6.28), g: Math.random() < .18 ? 0 : Math.random() < .5 ? 1 : 2 }));
+  let shape = 0, prev = 0, mix = 1, w, h, dpr, rotY = 0, mx = -9999, my = -9999, tx = 0, ty = 0;
     const tags = [...hero.querySelectorAll(".tag")];
   const tagIdx = [7, 1500 % N, 911];
 
@@ -55,7 +57,7 @@ addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
   resize(); new ResizeObserver(resize).observe(canvas);
   hero.addEventListener("pointermove", e => { const r = hero.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; tx = (mx / w - .5); ty = (my / h - .5); });
   hero.addEventListener("pointerleave", () => { mx = my = -9999; tx = ty = 0; });
-  const next = () => { shape = (shape + 1) % SHAPES.length;  };
+  const next = () => { prev = shape; shape = (shape + 1) % SHAPES.length; mix = 0; };
   if (!calm) setInterval(next, 5600);
 
   let rx = 0;
@@ -68,6 +70,9 @@ addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
       const scale = Math.min(w, h) * (w < 700 ? .34 : .33), ox = w / 2, oy = h * .5;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
       ctx.globalCompositeOperation = "lighter";
+      // цвет группы плавно переходит к палитре новой фигуры
+      mix = Math.min(1, mix + .02);
+      const col = [[242, 242, 238], ...[0, 1].map(j => PAL[shape][j].map((v, q) => Math.round(PAL[prev][j][q] + (v - PAL[prev][j][q]) * mix)))].map(c => `rgb(${c})`);
       for (let i = 0; i < N; i++) {
         const p = P[i], g = T[i], wob = Math.sin(time * 1.3 + p.w) * .012;
         p.vx = (p.vx + (g[0] + wob - p.x) * p.k) * .86; p.vy = (p.vy + (g[1] + wob - p.y) * p.k) * .86; p.vz = (p.vz + (g[2] - p.z) * p.k) * .86;
@@ -79,16 +84,17 @@ addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
         if (d2 < 14000) { const d = Math.sqrt(d2) || 1, f = (118 - d) * .09; p.ox += dx / d * f; p.oy += dy / d * f; }
         p.ox *= .9; p.oy *= .9; X += p.ox; Y += p.oy;
         p.sx = X; p.sy = Y;
-        const a = Math.max(.25, Math.min(1, (1.5 - z2) * .7));
-        const s = (p.b ? 2.8 : 1.6) * per;
-        ctx.globalAlpha = a * (p.b ? 1 : .8);
-        ctx.fillStyle = p.b ? (p.w > 5.6 ? "#f3efd9" : "#ffffff") : "#cfcfcb";
-        ctx.fillRect(X - s / 2, Y - s / 2, s, s);
+        p.a = Math.max(.25, Math.min(1, (1.5 - z2) * .7)) * (p.b ? 1 : .8);
+        p.s = (p.b ? 2.8 : 1.6) * per;
+      }
+      for (let g = 0; g < 3; g++) {
+        ctx.fillStyle = col[g];
+        for (let i = 0; i < N; i++) { const p = P[i]; if (p.g !== g) continue; ctx.globalAlpha = p.a; ctx.fillRect(p.sx - p.s / 2, p.sy - p.s / 2, p.s, p.s); }
       }
       ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
       tags.forEach((el, k) => {
         const p = P[tagIdx[k]];
-        const X = Math.min(w - 170, Math.max(12, p.sx + 10)), Y = Math.min(h - 30, Math.max(70, p.sy - 9));
+        const X = Math.min(w - 190, Math.max(12, p.sx + 10)), Y = Math.min(h - 30, Math.max(70, p.sy - 9));
         el.style.transform = `translate(${X}px, ${Y}px)`; el.classList.add("on");
       });
     }
@@ -113,14 +119,12 @@ addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
   tick(); setInterval(tick, 1000);
 })();
 
-// ---------- прокрутка: светлая секция, лента кейсов, появление ----------
-const lights = [...document.querySelectorAll("[data-light]")];
+// ---------- прокрутка: лента кейсов, появление ----------
 const work = document.getElementById("cases"), track = document.getElementById("workTrack");
-const pending = new Set(document.querySelectorAll(".mani-text, .mani-grid, .video, .acc, .crew-box, .steps, .nums, .people, .cards"));
+const pending = new Set(document.querySelectorAll(".mani-text, .mani-grid, .video, .bento, .crew-box, .road, .people, .stickers, .cards, .qa"));
 pending.forEach(el => el.classList.add("rv"));
 function onScroll() {
-  const H = innerHeight, mid = H * .5;
-  document.body.classList.toggle("is-light", lights.some(s => { const r = s.getBoundingClientRect(); return r.top < mid && r.bottom > mid; }));
+  const H = innerHeight;
   if (work && track) {
     const r = work.getBoundingClientRect(), pinned = getComputedStyle(work.firstElementChild).position === "sticky";
     const p = pinned ? clamp(-r.top / (r.height - H)) : 0;
@@ -146,6 +150,7 @@ addEventListener("scroll", onScroll, { passive: true }); addEventListener("resiz
   if (!c) return;
   const ctx = c.getContext("2d");
   const ROLES = ["Стратегия", "Редактура", "Тексты", "Дизайн", "Продвижение", "Запуски"];
+  const RC = ["#3b5bff", "#2ec5ff", "#8b5cff", "#ff3d8b", "#ff5a24", "#c6ff3a"];
   const tasks = Array.from({ length: 36 }, (_, i) => ({ role: i % 6, x: 0, y: 0, a: Math.random() * 6.28, r: Math.random(), init: false }));
   const stats = [["36", "1", "всё"], ["2", "7", "экспертиза"]];
   let mode = 0, w, h, dpr, touched = false, seen = false, you = 1;
@@ -162,27 +167,28 @@ addEventListener("scroll", onScroll, { passive: true }); addEventListener("resiz
       const time = t / 1000, N = nodes(), C = { x: w / 2, y: h / 2 };
       you += ((mode ? .6 : 1) - you) * .08;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
-      if (mode) { ctx.setLineDash([2, 6]); ctx.strokeStyle = "rgba(236,236,232,.28)"; N.forEach(n => { ctx.beginPath(); ctx.moveTo(C.x, C.y); ctx.lineTo(n.x, n.y); ctx.stroke(); }); ctx.setLineDash([]); }
+      if (mode) { ctx.setLineDash([2, 6]); ctx.strokeStyle = "rgba(242,242,238,.25)"; N.forEach(n => { ctx.beginPath(); ctx.moveTo(C.x, C.y); ctx.lineTo(n.x, n.y); ctx.stroke(); }); ctx.setLineDash([]); }
       tasks.forEach(k => {
         const o = mode ? N[k.role] : C, sp = mode ? 30 : 74 + Math.sin(time * 3 + k.a) * 10;
         const ang = k.a + time * (mode ? .35 : 1.5) * (k.r > .5 ? 1 : -1);
         const gx = o.x + Math.cos(ang) * sp * (.4 + k.r * .6), gy = o.y + Math.sin(ang) * sp * (.4 + k.r * .6);
         if (!k.init) { k.x = gx; k.y = gy; k.init = true; }
         k.x += (gx - k.x) * (calm ? 1 : .06); k.y += (gy - k.y) * (calm ? 1 : .06);
-        ctx.strokeStyle = "rgba(236,236,232,.1)"; ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(k.x, k.y); ctx.stroke();
-        ctx.fillStyle = "#ececE8"; ctx.fillRect(k.x - 2, k.y - 2, 4, 4);
+        ctx.strokeStyle = "rgba(242,242,238,.1)"; ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(k.x, k.y); ctx.stroke();
+        ctx.fillStyle = mode ? RC[k.role] : "#ff3d8b"; ctx.beginPath(); ctx.arc(k.x, k.y, 3, 0, 6.28); ctx.fill();
       });
-      ctx.font = "400 13px Inter, sans-serif"; ctx.textAlign = "center";
+      ctx.font = "600 13px Inter, sans-serif"; ctx.textAlign = "center";
       N.forEach((n, i) => {
         ctx.globalAlpha = mode ? 1 : .3;
-        ctx.strokeStyle = "#ececE8"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(n.x, n.y, 9, 0, 6.28); ctx.stroke(); ctx.lineWidth = 1;
-        ctx.fillStyle = "#ececE8"; ctx.fillText(ROLES[i], n.x, n.y + (n.y < h / 2 ? -22 : 30));
+        ctx.fillStyle = RC[i]; ctx.beginPath(); ctx.arc(n.x, n.y, 11, 0, 6.28); ctx.fill();
+        const hw = ctx.measureText(ROLES[i]).width / 2 + 4;
+        ctx.fillStyle = "#f2f2ee"; ctx.fillText(ROLES[i], clamp(n.x, hw, w - hw), n.y + (n.y < h / 2 ? -22 : 30));
       });
       ctx.globalAlpha = 1;
       const R = 22 * you + (mode ? 0 : Math.sin(time * 6) * 2);
-      if (!mode) { ctx.strokeStyle = "rgba(243,239,217,.35)"; ctx.beginPath(); ctx.arc(C.x, C.y, R + 12 + Math.sin(time * 6) * 3, 0, 6.28); ctx.stroke(); }
-      ctx.fillStyle = "#f3efd9"; ctx.beginPath(); ctx.arc(C.x, C.y, R, 0, 6.28); ctx.fill();
-      ctx.fillStyle = "#111"; ctx.font = "500 13px Inter, sans-serif"; ctx.fillText("Вы", C.x, C.y + 4);
+      if (!mode) { ctx.strokeStyle = "rgba(255,61,139,.5)"; ctx.beginPath(); ctx.arc(C.x, C.y, R + 12 + Math.sin(time * 6) * 3, 0, 6.28); ctx.stroke(); }
+      ctx.fillStyle = "#c6ff3a"; ctx.beginPath(); ctx.arc(C.x, C.y, R, 0, 6.28); ctx.fill();
+      ctx.fillStyle = "#0b0b0e"; ctx.font = "700 13px Inter, sans-serif"; ctx.fillText("Вы", C.x, C.y + 4);
     }
     requestAnimationFrame(frame);
   }
@@ -211,7 +217,7 @@ addEventListener("scroll", onScroll, { passive: true }); addEventListener("resiz
       pct.textContent = Math.round(p * 100) + "%";
       const time = t / 1000, gw = Math.min(w * .62, 900), cs = gw / W, gx = w - gw - Math.max(16, w * .04), gy = h * .5 - cs * D / 2 + 30;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
-      ctx.font = "400 11px Inter, sans-serif"; ctx.fillStyle = `rgba(236,236,232,${.5 * p})`;
+      ctx.font = "400 11px Inter, sans-serif"; ctx.fillStyle = `rgba(242,242,238,${.5 * p})`;
       ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].forEach((n, i) => ctx.fillText(n, gx - 26, gy + i * cs + cs / 2 + 4));
       for (const k of cells) {
         const q = clamp((p - k.t) / .3), e = q * q * (3 - 2 * q);
@@ -221,9 +227,9 @@ addEventListener("scroll", onScroll, { passive: true }); addEventListener("resiz
         const lvl = e > .9 ? k.lvl : (k.lvl ? 1 : 0);
         const size = 4 + e * (cs * .62 - 4);
         ctx.globalAlpha = lvl ? .35 + e * .65 : .18 + e * .1;
-        ctx.fillStyle = lvl === 3 ? "#f3efd9" : "#ececE8";
-        if (e > .9 && lvl === 0) { ctx.strokeStyle = "rgba(236,236,232,.25)"; ctx.strokeRect(x - size / 2, y - size / 2, size, size); }
-        else { const s = lvl === 2 && e > .9 ? size * .78 : size; ctx.fillRect(x - s / 2, y - s / 2, s, s); }
+        ctx.fillStyle = lvl === 3 ? "#c6ff3a" : lvl === 2 ? "#ff3d8b" : lvl === 1 ? "#3b5bff" : "#f2f2ee";
+        if (e > .9 && lvl === 0) { ctx.strokeStyle = "rgba(242,242,238,.2)"; ctx.strokeRect(x - size / 2, y - size / 2, size, size); }
+        else { const s = size, rr = Math.min(s / 2, 2 + e * 4); ctx.beginPath(); ctx.roundRect(x - s / 2, y - s / 2, s, s, rr); ctx.fill(); }
       }
       ctx.globalAlpha = 1;
     }
@@ -247,6 +253,6 @@ addEventListener("scroll", onScroll, { passive: true }); addEventListener("resiz
     const task = chips.find(c => c.classList.contains("on"))?.textContent || "—";
     const text = ["Заявка с сайта Агентства Нас#лия", "", `Задача: ${task}`, `Имя: ${d.name}`, `Telegram: ${d.tg}`].join("\n");
     navigator.clipboard?.writeText(text).catch(() => {});
-    form.innerHTML = `<div class="done"><b>Заявка готова.</b><span class="lbl" style="margin:0">Мы скопировали текст — откройте чат и вставьте его.</span><pre>${esc(text)}</pre><a class="pill" href="${CONTACT_TG}" target="_blank" rel="noopener">Открыть Telegram ↗</a></div>`;
+    form.innerHTML = `<div class="done"><b>Заявка готова.</b><span>Мы скопировали текст — откройте чат и вставьте его.</span><pre>${esc(text)}</pre><a class="pill" href="${CONTACT_TG}" target="_blank" rel="noopener">Открыть Telegram ↗</a></div>`;
   });
 })();

@@ -11,24 +11,23 @@
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793159253">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1793200200">
 </head>
 <body>
 
 <header class="nav">
-  <a href="#top" class="logo">нас#лия<sup>®</sup></a>
-  <a href="#cases" class="nav-mid">Кейсы</a>
+  <a href="#top" class="logo">нас<i>#</i>лия</a>
   <nav class="nav-right">
+    <a href="#cases">Кейсы</a>
     <a href="#formats">Форматы</a>
-    <a href="#brief">Контакт</a>
+    <a href="#brief" class="nav-cta">Разбор 0 ₽</a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="overlay">Меню</button>
   </nav>
 </header>
 
 <div class="overlay" id="overlay" aria-hidden="true">
   <nav class="ov-links">
-    <a href="#manifest">Манифест</a>
     <a href="#services">Услуги</a>
     <a href="#crew">Команда канала</a>
     <a href="#process">Процесс</a>
@@ -46,114 +45,97 @@
   <section class="hero">
     <canvas class="swarm" aria-hidden="true"></canvas>
     <div class="hud" aria-hidden="true">
-      <i class="hud-x"></i><i class="hud-y"></i><b class="hud-c">+</b>
-      <span class="tag"><em>+</em>Посты <u>по графику</u></span>
-      <span class="tag"><em>+</em>Прогрев <u>online</u></span>
-      <span class="tag"><em>+</em>Запуск <u>идёт</u></span>
+      <span class="tag t1"><em>+</em>Посты по графику</span>
+      <span class="tag t2"><em>+</em>Прогрев online</span>
+      <span class="tag t3"><em>+</em>Запуск идёт</span>
     </div>
-    <h1 class="hero-title"><span class="l1">Пишет.</span><span class="l2">Продаёт.</span><span class="l3">Без вас<sup>(TG)</sup></span></h1>
+    <h1 class="hero-title"><span>Пишет.</span><span class="l2">Продаёт.</span><span class="l3">Без вас<b class="badge">TG</b></span></h1>
     <div class="hero-side">
-      <p><b>Нас#лия делает Telegram-каналы экспертов, которые снаружи продают, а внутри работают без автора.</b> Стратегия, контент, выпуск, продвижение и запуски — одной командой.</p>
-      <div class="hero-btns"><a href="#brief" class="pill">Разобрать канал ↗</a><a href="#cases" class="pill ghost">Смотреть кейсы →</a></div>
+      <p>Telegram-каналы экспертов, которые продают — а&nbsp;вы не&nbsp;живёте в&nbsp;операционке.</p>
+      <div class="hero-btns"><a href="#brief" class="pill">Разобрать канал ↗</a><a href="#cases" class="pill ghost">Кейсы →</a></div>
     </div>
     <div class="hero-foot">
-      <div><small>Продюсирование</small><span>от 120 000 ₽ в месяц</span></div>
-      <span class="scroll">(Скролл)<i></i></span>
-      <div class="r"><small>Следующий пост через</small><span id="nextPost">00:00:00</span></div>
+      <div class="hf-chip c-blue"><small>Продюсирование</small><span>от 120 000 ₽/мес</span></div>
+      <div class="hf-chip c-lime"><small>Следующий пост через</small><span id="nextPost">00:00:00</span></div>
     </div>
   </section>
 
-  <!-- (Манифест) -->
+  <!-- Снаружи / внутри -->
   <section class="sec mani" id="manifest">
-    <span class="lbl">(Манифест)</span>
-    <p class="mani-text">Снаружи канал должен <b>продавать</b>: темы, тексты, прогрев и понятный путь к покупке. Внутри — <b>работать без автора</b>: операционку забирает команда, автор отвечает голосом и экспертизой. Мы делаем <b>обе стороны</b> одной командой.</p>
+    <h2 class="mani-text">Снаружи канал <mark class="m-orange">продаёт</mark>. Внутри&nbsp;— <mark class="m-blue">работает без&nbsp;вас</mark>.</h2>
     <div class="mani-grid">
-      <div><small>Снаружи</small><b>Контент, прогрев, путь к покупке</b><span>→ больше читателей и продаж</span></div>
-      <div><small>Внутри</small><b>Темы, тексты, выпуск, согласования</b><span>→ автор не живёт в операционке</span></div>
-      <div class="hl"><small>нас#лия</small><b>Одна команда, один план</b><span>голос остаётся вашим</span></div>
+      <div class="tile c-orange"><small>Снаружи</small><b>Контент, прогрев, путь к покупке</b></div>
+      <div class="tile c-blue"><small>Внутри</small><b>Темы, тексты, выпуск, согласования</b></div>
+      <div class="tile c-lime"><small>От вас</small><b>Голос и экспертиза</b></div>
     </div>
   </section>
 
-  <!-- (Знакомство) -->
+  <!-- Видео -->
   <section class="sec intro" id="intro">
-    <div class="intro-head"><span class="lbl">(Знакомство)</span><h2 class="h2">Агентство за минуту</h2></div>
     <figure class="video" id="video">
       <video playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" aria-label="Знакомство с агентством"></video>
-      <button class="vplay" aria-label="Смотреть видео">Смотреть <span>01:03</span></button>
+      <span class="v-lbl">Агентство за минуту</span>
+      <button class="vplay" aria-label="Смотреть видео">▶ <span>01:03</span></button>
     </figure>
   </section>
 
-  <!-- (Услуги) -->
+  <!-- Услуги: бенто -->
   <section class="sec svc" id="services">
-    <div class="sec-head"><span class="lbl">(Услуги)</span><h2 class="h2">Берём канал целиком или&nbsp;собираем один запуск</h2><p>Можно начать с бесплатного разбора и дойти до полного продюсирования — или сразу передать запуск.</p></div>
-    <div class="acc">
-      <details open>
-        <summary><i class="dot"></i><span class="acc-t">Полное продюсирование</span><span class="acc-m">ежемесячно · от 120 000 ₽</span><b class="plus"></b></summary>
-        <div class="acc-b"><p>Развиваем канал как медиа и продюсируем запуски продуктов: стратегия, темы, тексты, выпуск по графику, продвижение и продажи.</p><ul class="chips"><li>Стратегия</li><li>Контент</li><li>Продвижение</li><li>Запуски от 500 000 ₽</li></ul></div>
-      </details>
-      <details>
-        <summary><i class="dot"></i><span class="acc-t">Запуск продукта</span><span class="acc-m">проект · после диагностики</span><b class="plus"></b></summary>
-        <div class="acc-b"><p>Прогрев, посты и вся операционная работа — на нас. Продукт готов к продаже, канал продолжает работать после запуска.</p><ul class="chips"><li>Прогрев</li><li>Посты</li><li>Воронка</li><li>Продажи</li></ul></div>
-      </details>
-      <details>
-        <summary><i class="dot"></i><span class="acc-t">Сайт и упаковка</span><span class="acc-m">в рамках запуска</span><b class="plus"></b></summary>
-        <div class="acc-b"><p>Сайт и оформление, через которые легко купить: путь от интереса к посту до оплаты продукта.</p><ul class="chips"><li>Сайт</li><li>Оформление</li><li>Путь клиента</li></ul></div>
-      </details>
-      <details>
-        <summary><i class="dot"></i><span class="acc-t">Бесплатная консультация</span><span class="acc-m">0 ₽ · один созвон</span><b class="plus"></b></summary>
-        <div class="acc-b"><p>Разберём канал и дадим три конкретных совета по монетизации — и понятные условия дальнейшей работы.</p><ul class="chips"><li>Разбор</li><li>3 шага</li><li>Монетизация</li></ul></div>
-      </details>
+    <div class="sec-head"><span class="lbl c-pink">Услуги</span><h2 class="h2">Берём канал целиком или&nbsp;один запуск</h2></div>
+    <div class="bento">
+      <article class="bx big c-blue"><small>ежемесячно</small><h3>Полное продюсирование</h3><ul class="chips"><li>Стратегия</li><li>Контент</li><li>Продвижение</li><li>Запуски</li></ul><b>от 120 000 ₽</b></article>
+      <article class="bx c-orange"><small>проект</small><h3>Запуск продукта</h3><b>после диагностики</b></article>
+      <article class="bx c-violet"><small>в рамках запуска</small><h3>Сайт и упаковка</h3><b>путь до оплаты</b></article>
+      <article class="bx wide c-lime"><small>один созвон</small><h3>Бесплатный разбор</h3><b>0 ₽ · 3 совета по монетизации</b><a href="#brief" class="bx-go" data-pick="Начать с бесплатной консультации">→</a></article>
     </div>
   </section>
 
-  <!-- (Внутри · команда канала) -->
+  <!-- Команда канала: было/стало -->
   <section class="sec crew" id="crew">
-    <div class="sec-head"><span class="lbl">(Внутри · команда канала)</span><h2 class="h2">Канал эксперта: 1&nbsp;человек → 6&nbsp;ролей и&nbsp;вы</h2></div>
+    <div class="sec-head"><span class="lbl c-sky">Внутри</span><h2 class="h2">1&nbsp;человек → 6&nbsp;ролей и&nbsp;вы</h2></div>
     <div class="crew-box">
       <div class="crew-top">
         <div class="seg" role="tablist"><button class="on" data-m="0">Было</button><button data-m="1">Стало</button></div>
         <dl class="crew-stats">
-          <div><dt>Задач на авторе</dt><dd id="cs1">36</dd></div>
-          <div><dt>Людей в работе</dt><dd id="cs2">1</dd></div>
-          <div><dt>Остаётся вам</dt><dd id="cs3">всё</dd></div>
+          <div class="st c-pink"><dt>Задач на вас</dt><dd id="cs1">36</dd></div>
+          <div class="st c-sky"><dt>Людей в работе</dt><dd id="cs2">1</dd></div>
+          <div class="st c-lime"><dt>Остаётся вам</dt><dd id="cs3">всё</dd></div>
         </dl>
       </div>
       <canvas class="crew-canvas" aria-label="Схема: кто делает работу в канале"></canvas>
-      <div class="crew-legend"><span><i class="lg-you"></i>Вы</span><span><i class="lg-role"></i>Роль команды</span><span><i class="lg-task"></i>Задача канала</span><em>* Схема для примера. Ваш расклад посчитаем на разборе.</em></div>
     </div>
   </section>
 
-  <!-- (Процесс) — светлая секция -->
-  <section class="sec proc light" id="process" data-light>
-    <div class="sec-head"><span class="lbl">(Процесс)</span><h2 class="h2">От разбора до канала, который продаёт</h2><p>Можно пройти весь путь или взять один этап. Каждый шаг заканчивается результатом, который остаётся у вас.</p></div>
-    <ol class="steps">
-      <li><span class="s-n">01</span><h3>Разбор</h3><p>Смотрим канал или идею: тему, аудиторию, контент и продукт.</p><em>→ три конкретных шага</em></li>
-      <li><span class="s-n">02</span><h3>Стратегия</h3><p>Находим главную тему и объясняем, почему людям будет интересно читать именно вас.</p><em>→ тема и контент-план</em></li>
-      <li><span class="s-n">03</span><h3>Выпуск</h3><p>Узнаём, как вы говорите, пишем тексты и публикуем вовремя.</p><em>→ посты по графику</em></li>
-      <li><span class="s-n">04</span><h3>Продвижение</h3><p>Рассказываем о канале там, где уже есть нужные вам люди.</p><em>→ новые читатели</em></li>
-      <li><span class="s-n">05</span><h3>Запуск</h3><p>Рассказываем о продукте так, чтобы было понятно, зачем он нужен и как его купить.</p><em>→ продажи</em></li>
+  <!-- Процесс: дорожка -->
+  <section class="sec proc" id="process">
+    <div class="sec-head"><span class="lbl c-lime">Процесс</span><h2 class="h2">5 шагов до канала, который продаёт</h2></div>
+    <ol class="road">
+      <li class="c-sky"><i>1</i><h3>Разбор</h3><span>3 конкретных шага</span></li>
+      <li class="c-blue"><i>2</i><h3>Стратегия</h3><span>тема и контент-план</span></li>
+      <li class="c-violet"><i>3</i><h3>Выпуск</h3><span>посты по графику</span></li>
+      <li class="c-pink"><i>4</i><h3>Продвижение</h3><span>новые читатели</span></li>
+      <li class="c-orange"><i>5</i><h3>Запуск</h3><span>продажи</span></li>
     </ol>
   </section>
 
   <!-- Работы: горизонтальная лента -->
   <section class="work" id="cases">
     <div class="work-pin">
-      <h2 class="work-title">Работы<sup>(3)</sup></h2>
+      <h2 class="work-title">Кейсы<sup>3</sup></h2>
       <div class="work-track" id="workTrack">
-        <article class="wcard">
-          <div class="wc-img" style="background-image:url(img/station.jpg)"></div>
-          <div class="wc-body"><span>Кейс 01 · 7 дней</span><p class="wc-num">180+</p><h3>Wake Up</h3><p>Соединили несколько воронок и частично автоматизировали запуск. Средний чек — около 4&nbsp;000&nbsp;₽.</p></div>
+        <article class="wcard c-blue">
+          <div class="wc-img" style="background-image:url(img/station.jpg)"><span>7 дней</span></div>
+          <div class="wc-body"><h3>Wake Up</h3><p class="wc-num">180+</p><p>несколько воронок · чек ~4&nbsp;000&nbsp;₽</p></div>
         </article>
-        <article class="wcard">
-          <div class="wc-img" style="background-image:url(img/cliff-sun.jpg)"></div>
-          <div class="wc-body"><span>Кейс 02 · 5 дней</span><p class="wc-num">80+</p><h3>Wake Up Empire</h3><p>Платные подписчики за пять дней: сильный прогрев и технически продуманный сайт. Чек от 4&nbsp;990&nbsp;₽.</p></div>
+        <article class="wcard c-orange">
+          <div class="wc-img" style="background-image:url(img/cliff-sun.jpg)"><span>5 дней</span></div>
+          <div class="wc-body"><h3>Wake Up Empire</h3><p class="wc-num">80+</p><p>платных подписчиков · от 4&nbsp;990&nbsp;₽</p></div>
         </article>
-        <article class="wcard">
-          <div class="wc-img" style="background-image:url(img/erd-hoodie.jpg)"></div>
-          <div class="wc-body"><span>Кейс 03 · 3 дня</span><p class="wc-num">100&nbsp;000&nbsp;₽</p><h3>С нуля</h3><p>Широкий охват вместо высокого чека: 150+ участников и первый шаг к групповой работе за 60&nbsp;000+&nbsp;₽.</p></div>
+        <article class="wcard c-pink">
+          <div class="wc-img" style="background-image:url(img/erd-hoodie.jpg)"><span>3 дня</span></div>
+          <div class="wc-body"><h3>С нуля</h3><p class="wc-num">100K&nbsp;₽</p><p>150+ участников · чек 1&nbsp;750&nbsp;₽</p></div>
         </article>
       </div>
-      <p class="work-hint">Скролл — листать</p>
     </div>
   </section>
 
@@ -162,63 +144,56 @@
     <div class="chaos-pin">
       <canvas class="chaos-canvas" aria-hidden="true"></canvas>
       <div class="chaos-text">
-        <h2 class="h2">Канал выходит по&nbsp;плану, а&nbsp;не&nbsp;когда есть силы</h2>
-        <p>Хаотичные посты собираются в систему: 12 недель контент-плана, прогрев и неделя запуска.</p>
+        <h2 class="h2">Канал по&nbsp;плану, а&nbsp;не&nbsp;когда есть силы</h2>
+        <div class="chaos-legend"><span><i class="c-blue"></i>пост</span><span><i class="c-pink"></i>прогрев</span><span><i class="c-lime"></i>запуск</span></div>
       </div>
       <div class="chaos-meter"><span>Хаос → система</span><b id="chaosPct">0%</b></div>
     </div>
   </section>
 
-  <!-- (В цифрах) -->
-  <section class="sec num">
-    <div class="sec-head"><span class="lbl">(В цифрах)</span><h2 class="h2">Что стоит за командой</h2></div>
-    <div class="nums">
-      <div><b>120&nbsp;000&nbsp;₽</b><span>стоимость продюсирования в месяц — от</span></div>
-      <div><b>500&nbsp;000&nbsp;₽+</b><span>планка запуска, к которой ведём канал</span></div>
-      <div><b>15&nbsp;000+</b><span>человек — аудитория команды</span></div>
-      <div><b>$50&nbsp;000+</b><span>общая прибыль запусков команды</span></div>
-    </div>
-  </section>
-
   <div class="marq" aria-hidden="true"><div class="marq-in">
-    <span>Посты</span><i>+</i><span>Кружки</span><i>+</i><span>Эфиры</span><i>+</i><span>Прогревы</span><i>+</i><span>Сайты</span><i>+</i><span>Воронки</span><i>+</i><span>Запуски</span><i>+</i><span>Telegram</span><i>+</i>
-    <span>Посты</span><i>+</i><span>Кружки</span><i>+</i><span>Эфиры</span><i>+</i><span>Прогревы</span><i>+</i><span>Сайты</span><i>+</i><span>Воронки</span><i>+</i><span>Запуски</span><i>+</i><span>Telegram</span><i>+</i>
+    <span>Посты</span><i>✦</i><span>Кружки</span><i>✦</i><span>Эфиры</span><i>✦</i><span>Прогревы</span><i>✦</i><span>Сайты</span><i>✦</i><span>Воронки</span><i>✦</i><span>Запуски</span><i>✦</i>
+    <span>Посты</span><i>✦</i><span>Кружки</span><i>✦</i><span>Эфиры</span><i>✦</i><span>Прогревы</span><i>✦</i><span>Сайты</span><i>✦</i><span>Воронки</span><i>✦</i><span>Запуски</span><i>✦</i>
   </div></div>
 
-  <!-- (Команда) -->
+  <!-- Команда + цифры -->
   <section class="sec team" id="team">
-    <div class="sec-head"><span class="lbl">(Команда)</span><h2 class="h2">Люди за проектом</h2></div>
+    <div class="sec-head"><span class="lbl c-orange">Команда</span><h2 class="h2">Люди за проектом</h2></div>
     <div class="people">
-      <article class="person"><img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy"><div><small>Продюсирование и продукт</small><h3>Артём Бутов</h3><p>Создаёт сайты и контент для Telegram. Выстраивает путь от интереса к посту до покупки продукта.</p><a href="https://t.me/lfbutov" target="_blank" rel="noopener">@lfbutov ↗</a></div></article>
-      <article class="person"><img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy"><div><small>Клиенты и команда</small><h3>Артём Федонко</h3><p>Находит клиентов, ведёт переговоры, собирает команду продаж. Аудитория — 15&nbsp;000+ человек, запуски с общей прибылью больше $50&nbsp;000.</p><a href="https://t.me/+soEcPH8C9oRlNTZi" target="_blank" rel="noopener">Telegram-канал ↗</a></div></article>
+      <article class="person"><img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy"><div><small class="c-violet">Продукт и продюсирование</small><h3>Артём Бутов</h3><a href="https://t.me/lfbutov" target="_blank" rel="noopener">@lfbutov ↗</a></div></article>
+      <article class="person"><img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy"><div><small class="c-sky">Клиенты и команда</small><h3>Артём Федонко</h3><a href="https://t.me/+soEcPH8C9oRlNTZi" target="_blank" rel="noopener">Telegram-канал ↗</a></div></article>
+    </div>
+    <div class="stickers">
+      <div class="sk c-lime"><b>15 000+</b><span>аудитория команды</span></div>
+      <div class="sk c-pink"><b>$50 000+</b><span>прибыль запусков</span></div>
+      <div class="sk c-blue"><b>500K ₽+</b><span>планка запуска</span></div>
     </div>
   </section>
 
-  <!-- (Форматы) -->
+  <!-- Форматы -->
   <section class="sec fmt" id="formats">
-    <div class="sec-head"><span class="lbl">(Форматы)</span><h2 class="h2">Можно начать с&nbsp;любой стороны</h2><p>Условия называем до старта: вы видите стоимость и что получите в итоге.</p></div>
+    <div class="sec-head"><span class="lbl c-violet">Форматы</span><h2 class="h2">Начните с&nbsp;любой стороны</h2></div>
     <div class="cards">
-      <article><small>ежемесячно</small><h3>Полное продюсирование</h3><p>Развиваем канал как медиа и продюсируем запуски продуктов.</p><ul><li>Широкая аудитория</li><li>Контент по системе</li><li>Запуск от 500 000 ₽</li><li>База для следующих запусков</li></ul><b class="price">от 120 000 ₽ / мес</b><a href="#brief" data-pick="Передать канал под ключ">Обсудить →</a></article>
-      <article class="hl"><small>чаще всего · проект</small><h3>Запуск продукта</h3><p>Прогрев, посты и вся операционная работа — на нас.</p><ul><li>Запуск от 500 000 ₽</li><li>Продукт, готовый к продаже</li><li>Канал работает и после запуска</li></ul><b class="price">после диагностики</b><a href="#brief" data-pick="Запустить продукт в Telegram">Обсудить →</a></article>
-      <article><small>бесплатно</small><h3>Консультация</h3><p>Разберём канал и дадим три конкретных совета по монетизации.</p><ul><li>Потенциал канала</li><li>Три идеи монетизации</li><li>Понятные условия работы</li></ul><b class="price">0 ₽</b><a href="#brief" data-pick="Начать с бесплатной консультации">Записаться →</a></article>
+      <article class="card"><small>ежемесячно</small><h3>Продюсирование</h3><ul><li>Контент по системе</li><li>Широкая аудитория</li><li>Запуск от 500 000 ₽</li></ul><b class="price">от 120 000 ₽/мес</b><a href="#brief" class="pill ghost" data-pick="Передать канал под ключ">Обсудить →</a></article>
+      <article class="card c-lime"><small><em>чаще всего</em> проект</small><h3>Запуск продукта</h3><ul><li>Прогрев и посты</li><li>Вся операционка на нас</li><li>Канал живёт и после</li></ul><b class="price">после диагностики</b><a href="#brief" class="pill dark" data-pick="Запустить продукт в Telegram">Обсудить →</a></article>
+      <article class="card c-violet"><small>бесплатно</small><h3>Консультация</h3><ul><li>Потенциал канала</li><li>3 идеи монетизации</li><li>Понятные условия</li></ul><b class="price">0 ₽</b><a href="#brief" class="pill" data-pick="Начать с бесплатной консультации">Записаться →</a></article>
     </div>
   </section>
 
-  <!-- (Вопросы) -->
+  <!-- Вопросы -->
   <section class="sec faq" id="faq">
-    <div class="sec-head"><span class="lbl">(Вопросы)</span><h2 class="h2">Что обычно спрашивают на первом созвоне</h2></div>
-    <div class="acc">
-      <details><summary><span class="acc-t">Что можно передать вам?</span><b class="plus"></b></summary><div class="acc-b"><p>Контент, сайт и запуск продукта в Telegram. Берём канал целиком или подключаемся к отдельному запуску.</p></div></details>
-      <details><summary><span class="acc-t">Что потребуется от меня?</span><b class="plus"></b></summary><div class="acc-b"><p>Ваша экспертиза и обратная связь. Мы превращаем их в посты, упаковку и продажи — с сохранением вашего голоса.</p></div></details>
-      <details><summary><span class="acc-t">Сколько стоит работа?</span><b class="plus"></b></summary><div class="acc-b"><p>Продюсирование — от 120 000 ₽ в месяц. Отдельный запуск оценим после знакомства с задачей.</p></div></details>
-      <details><summary><span class="acc-t">С чего начнём?</span><b class="plus"></b></summary><div class="acc-b"><p>С бесплатного разбора: посмотрим канал или идею, найдём точки роста и предложим три следующих шага.</p></div></details>
+    <div class="sec-head"><span class="lbl c-sky">Вопросы</span><h2 class="h2">Коротко о&nbsp;главном</h2></div>
+    <div class="qa">
+      <details><summary>Что можно передать вам?<b class="plus"></b></summary><p>Контент, сайт и запуск продукта — целиком или по отдельности.</p></details>
+      <details><summary>Что нужно от меня?<b class="plus"></b></summary><p>Экспертиза и обратная связь. Голос остаётся вашим.</p></details>
+      <details><summary>Сколько стоит?<b class="plus"></b></summary><p>Продюсирование — от 120 000 ₽/мес. Запуск оценим после знакомства.</p></details>
+      <details><summary>С чего начнём?<b class="plus"></b></summary><p>С бесплатного разбора и трёх следующих шагов.</p></details>
     </div>
   </section>
 
-  <!-- (Контакт) -->
+  <!-- Контакт -->
   <section class="sec ct" id="brief">
-    <span class="lbl">(Контакт)</span>
-    <h2 class="ct-title">Соберём<br>ваш<br>канал</h2>
+    <h2 class="ct-title">Соберём<br>ваш <mark class="m-lime">канал</mark></h2>
     <form class="cform" id="cform">
       <div class="chips pick" role="group" aria-label="Задача">
         <button type="button" class="chip" aria-pressed="false">Запустить продукт в Telegram</button>
@@ -228,14 +203,14 @@
       </div>
       <label><small>Как вас зовут</small><input class="field" name="name" required autocomplete="name"></label>
       <label><small>Telegram</small><input class="field" name="tg" required placeholder="@username"></label>
-      <div class="cform-row"><button class="pill" type="submit">Отправить заявку ↗</button><span>Скопируем заявку и откроем Telegram — останется нажать «Отправить».</span></div>
+      <div class="cform-row"><button class="pill" type="submit">Отправить заявку ↗</button><span>Скопируем заявку и откроем Telegram.</span></div>
     </form>
   </section>
 
 </main>
 
 <footer class="ft">
-  <p class="ft-word">нас#лия<sup>®</sup></p>
+  <p class="ft-word">нас#лия</p>
   <div class="ft-row">
     <span>© 2026 Агентство Нас#лия</span>
     <span>Артём Бутов × Артём Федонко</span>
@@ -244,6 +219,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=1793159253"></script>
+<script src="app.js?v=1793200200"></script>
 </body>
 </html>

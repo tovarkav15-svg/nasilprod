@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793500200">
+<link rel="stylesheet" href="style.css?v=1793500300">
 </head>
 <body>
 
@@ -82,32 +82,42 @@
     <span>Посты</span><svg class="mark"><use href="#ast"/></svg><span>Прогревы</span><svg class="mark"><use href="#hash"/></svg><span>Запуски</span><svg class="mark"><use href="#ast"/></svg><span>Воронки</span><svg class="mark"><use href="#hash"/></svg><span>Сайты</span><svg class="mark"><use href="#ast"/></svg><span>Кружки</span><svg class="mark"><use href="#hash"/></svg>
   </div></div>
 
-  <!-- МАНИФЕСТ -->
-  <section class="mani" id="manifest">
-    <div class="grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <span class="side-lbl">Манифест</span>
-    <div class="mani-l">
-      <small>Снаружи</small>
-      <h3>Продаёт</h3>
-      <p>Темы, тексты, прогрев, путь к покупке.</p>
-      <b class="deg">180+</b>
-      <span class="deg-cap">за 7 дней — кейс Wake Up</span>
+  <!-- ДО / ПОСЛЕ -->
+  <section class="ba grain" id="manifest">
+    <div class="ba-head">
+      <div>
+        <span class="cap">01 | До и после</span>
+        <h2 class="h2">Канал до<br>и после нас</h2>
+      </div>
+      <span class="ba-hint">← тяни шторку →</span>
     </div>
-    <div class="mani-c">
-      <svg class="huge-hash spin-slow"><use href="#hash"/></svg>
-      <img src="img/angel-wall.jpg" alt="" class="statue">
-      <span class="vert" aria-hidden="true"><i>Г</i><i>О</i><i>Л</i><i>О</i><i>С</i></span>
-      <div class="note"><img src="img/obj-clip.png" alt="" class="note-clip"><b>Заметка №1</b><p>От вас — только голос. Остальное — наше.</p><span>подпись: ________</span></div>
-      <div class="mini-tabs"><span>Автор</span><b>Голос</b><span>Команда</span></div>
+    <div class="ba-box" id="ba" style="--x:50%">
+      <div class="ba-side ba-before">
+        <img src="img/angel-wall.jpg" alt="" class="ba-img">
+        <div class="ba-txt">
+          <small>до · ручной режим</small>
+          <ul><li>Посты ночью</li><li>Прогрев «как пойдёт»</li><li>Запуск раз в полгода</li><li>Охваты падают</li></ul>
+          <b class="ba-num">3 ч / день</b><span class="ba-cap">уходит у автора на канал</span>
+        </div>
+        <span class="ba-stamp">хаос</span>
+      </div>
+      <div class="ba-side ba-after">
+        <img src="img/angel-wall.jpg" alt="" class="ba-img">
+        <span class="ba-halo" aria-hidden="true"></span>
+        <div class="ba-txt">
+          <small>после · нас#лия</small>
+          <ul><li>Посты по графику</li><li>Прогрев ведёт к покупке</li><li>Запуск без выгорания</li><li>Аудитория растёт</li></ul>
+          <b class="ba-num">0 ч</b><span class="ba-cap">операционки на авторе</span>
+        </div>
+        <span class="ba-stamp">система</span>
+      </div>
+      <div class="ba-handle" role="slider" tabindex="0" aria-label="До и после" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><i>‹ ›</i></div>
     </div>
-    <div class="mani-r">
-      <small>Внутри</small>
-      <h3>Без вас</h3>
-      <p>Операционку забирает команда.</p>
-      <b class="deg">6 ролей</b>
-      <span class="deg-cap">вместо одного уставшего автора</span>
+    <div class="ba-foot">
+      <div><b>180+</b><span>за 7 дней — кейс Wake Up</span></div>
+      <div><b>6 ролей</b><span>вместо одного уставшего автора</span></div>
+      <div><b>1 голос</b><span>всё, что нужно от вас</span></div>
     </div>
-    <div class="mani-foot"><span>01 | Манифест</span><span class="num">01<br><b>08</b></span></div>
   </section>
 
   <!-- ТЕСТ КАНАЛА: лист как на стакане -->
@@ -316,6 +326,6 @@
   <video playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" controls aria-label="Знакомство с агентством"></video>
 </div>
 
-<script src="app.js?v=1793500200"></script>
+<script src="app.js?v=1793500300"></script>
 </body>
 </html>

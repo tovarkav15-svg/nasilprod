@@ -137,8 +137,8 @@ if (ctTitle) {
   ctTitle.innerHTML = lines.map(l => `<span class="ln">${[...l].map(ch => `<i>${ch}</i>`).join("")}</span>`).join("");
   [...ctTitle.querySelectorAll("i")].forEach((s, i) => { s.style.transitionDelay = `${i * .05}s`; });
 }
-const pending = new Set(document.querySelectorAll(".mani, .sheet, .crew-top, .receipt, .desk, .people, .cards, .qa, .cform, .ct-title"));
-pending.forEach(el => { if (!el.matches(".mani, .ct-title, .receipt")) el.classList.add("rv"); });
+const pending = new Set(document.querySelectorAll(".ba, .sheet, .crew-top, .receipt, .desk, .people, .cards, .qa, .cform, .ct-title"));
+pending.forEach(el => { if (!el.matches(".ba, .ct-title, .receipt")) el.classList.add("rv"); });
 function onScroll() {
   const H = innerHeight;
   for (const el of pending) { const r = el.getBoundingClientRect(); if (r.top < H * .85 && r.bottom > 0) { el.classList.add("in"); pending.delete(el); } }
@@ -173,6 +173,34 @@ addEventListener("scroll", onScroll, { passive: true }); addEventListener("resiz
   document.getElementById("playVideo")?.addEventListener("click", () => set(true));
   document.getElementById("vclose").addEventListener("click", () => set(false));
   addEventListener("keydown", e => { if (e.key === "Escape") { set(false); setMenu(false); } });
+})();
+
+// ---------- до / после: шторка ----------
+(function beforeAfter() {
+  const box = document.getElementById("ba"), h = box?.querySelector(".ba-handle");
+  if (!box) return;
+  let x = 50, on = false, touched = false;
+  const set = v => { x = clamp(v, 4, 96); box.style.setProperty("--x", x + "%"); h.setAttribute("aria-valuenow", Math.round(x)); };
+  const at = e => { const r = box.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); };
+  box.addEventListener("pointerdown", e => { on = touched = true; box.setPointerCapture(e.pointerId); box.classList.add("drag"); at(e); });
+  box.addEventListener("pointermove", e => { if (on) at(e); });
+  const end = () => { on = false; box.classList.remove("drag"); };
+  box.addEventListener("pointerup", end); box.addEventListener("pointercancel", end);
+  h.addEventListener("keydown", e => { if (e.key === "ArrowLeft" || e.key === "ArrowRight") { touched = true; set(x + (e.key === "ArrowLeft" ? -5 : 5)); e.preventDefault(); } });
+  if (calm || shot) return;
+  // подсказка: шторка сама качается при первом показе
+  new IntersectionObserver((es, io) => {
+    if (!es[0].isIntersecting) return; io.disconnect();
+    const t0 = performance.now() + 900;
+    const tick = t => {
+      if (touched) return;
+      const k = (t - t0) / 2600;
+      if (k < 0) return requestAnimationFrame(tick);
+      if (k > 1) return set(50);
+      set(50 + Math.sin(k * Math.PI * 2) * 30 * (1 - k)); requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, { threshold: .5 }).observe(box);
 })();
 
 // ---------- кейсы: папки открывают окно ----------

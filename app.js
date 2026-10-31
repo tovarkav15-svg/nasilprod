@@ -145,6 +145,60 @@ function onScroll() {
 }
 addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll); addEventListener("load", onScroll); onScroll();
 
+// ---------- анимации: заголовки по словам, очередь появления, счётчики ----------
+document.querySelectorAll(".h2").forEach(h => {
+  let k = 0;
+  h.innerHTML = h.innerHTML.split("<br>").map(line => line.trim().split(/\s+/).map(w => `<span class="wd"><i style="--d:${(k++ * .07).toFixed(2)}s">${w}</i></span>`).join(" ")).join("<br>");
+});
+const stag = [".about-grid li", ".gloss > div", ".proc-steps li", ".ba-foot > div", ".stats > div", ".qa details", ".si-col", ".chips .chip"];
+stag.forEach(sel => document.querySelectorAll(sel).forEach((el, i) => { el.classList.add("st"); el.style.setProperty("--i", i % 8); }));
+document.querySelectorAll(".lead, .test-lead, .svc-lead, .person-p").forEach(el => el.classList.add("st"));
+
+function countUp(el) {
+  if (calm || shot) return;
+  if (!el.dataset.txt) el.dataset.txt = el.textContent;
+  const src = el.dataset.txt, m = src.match(/\d[\d\s\u00a0]*/);
+  if (!m) return;
+  const to = parseInt(m[0].replace(/\D/g, ""), 10), t0 = performance.now(), dur = 1400;
+  const fmt = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  const tail = /\s$/.test(m[0]) ? " " : "";
+  (function step(t) {
+    const k = clamp((t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+    el.textContent = src.replace(m[0], fmt(Math.round(to * e)) + tail);
+    if (k < 1) requestAnimationFrame(step);
+  })(t0);
+}
+const counters = new Set(document.querySelectorAll(".ba-foot b, .stats b, .case.on .case-txt b"));
+const anim = [...document.querySelectorAll(".h2, .st, .cap, .cards")];
+if (calm || shot) anim.forEach(el => el.classList.add("in"));
+else {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add("in"); io.unobserve(e.target);
+    if (counters.has(e.target)) countUp(e.target);
+  }), { rootMargin: "0px 0px -12% 0px" });
+  anim.forEach(el => io.observe(el)); counters.forEach(el => io.observe(el));
+}
+
+// ---------- кнопки тянутся за курсором ----------
+if (fine && !calm) document.querySelectorAll(".pill").forEach(b => {
+  b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect(); b.style.setProperty("--mx", (e.clientX - r.left - r.width / 2) * .25 + "px"); b.style.setProperty("--my", (e.clientY - r.top - r.height / 2) * .35 + "px"); });
+  b.addEventListener("pointerleave", () => { b.style.setProperty("--mx", "0px"); b.style.setProperty("--my", "0px"); });
+});
+
+// ---------- бегущая строка и полоска прогресса следуют за скроллом ----------
+(function scrollFx() {
+  const bar = document.createElement("i"); bar.className = "progress"; document.body.appendChild(bar);
+  const marq = document.querySelector(".marq-in")?.getAnimations()[0];
+  let last = scrollY, speed = 1;
+  (function loop() {
+    const d = scrollY - last; last = scrollY;
+    bar.style.transform = `scaleX(${clamp(scrollY / (document.documentElement.scrollHeight - innerHeight))})`;
+    if (marq && !calm) { const target = d === 0 ? Math.sign(speed) || 1 : Math.sign(d) * (1 + Math.min(6, Math.abs(d) / 6)); speed += (target - speed) * .08; marq.playbackRate = speed; }
+    requestAnimationFrame(loop);
+  })();
+})();
+
 // ---------- услуги: кадры плёнки + шкала ----------
 (function film() {
   const sec = document.getElementById("services");
@@ -209,6 +263,8 @@ addEventListener("scroll", onScroll, { passive: true }); addEventListener("resiz
   fs.forEach((f, i) => f.addEventListener("click", () => {
     fs.forEach((x, j) => x.classList.toggle("on", i === j)); cs.forEach((x, j) => x.classList.toggle("on", i === j));
     title.textContent = names[i];
+    if (!calm) document.querySelector(".win").animate([{ transform: "scale(.96)", opacity: .5 }, { transform: "none", opacity: 1 }], { duration: 550, easing: "cubic-bezier(.2,.8,.2,1)" });
+    const b = cs[i].querySelector(".case-txt b"); if (b) countUp(b);
   }));
 })();
 

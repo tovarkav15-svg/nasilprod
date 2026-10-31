@@ -33,12 +33,13 @@ let px = innerWidth / 2, py = innerHeight / 2, vel = 0;
   const dot = document.querySelector(".cursor"), big = document.querySelector(".big");
   let lx = px, ly = py, cx = px, cy = py, lastY = scrollY;
   addEventListener("pointermove", e => { px = e.clientX; py = e.clientY; dot?.classList.add("on"); });
-  document.addEventListener("pointerover", e => dot?.classList.toggle("big", !!e.target.closest("a, button, summary, .row")));
+  document.addEventListener("pointerover", e => dot?.classList.toggle("big", !!e.target.closest("a, button, summary, label, .obj")));
   (function loop() {
     const sv = Math.abs(scrollY - lastY); lastY = scrollY;
     vel += (Math.min(1, (Math.hypot(px - lx, py - ly) + sv * 1.5) / 90) - vel) * .12;
     lx = px; ly = py;
     if (big && !calm) big.style.setProperty("--v", vel.toFixed(3));
+    if (!calm) document.documentElement.style.setProperty("--sr", `${(performance.now() / 1000 * 14 + scrollY * .18) % 360}deg`);
     if (dot && fine) { cx += (px - cx) * .25; cy += (py - cy) * .25; dot.style.transform = `translate(${cx}px,${cy}px)`; }
     requestAnimationFrame(loop);
   })();
@@ -136,8 +137,8 @@ if (ctTitle) {
   ctTitle.innerHTML = lines.map(l => `<span class="ln">${[...l].map(ch => `<i>${ch}</i>`).join("")}</span>`).join("");
   [...ctTitle.querySelectorAll("i")].forEach((s, i) => { s.style.transitionDelay = `${i * .05}s`; });
 }
-const pending = new Set(document.querySelectorAll(".mani, .crew-top, .cols, .rows, .people, .cards, .qa, .cform, .ct-title"));
-pending.forEach(el => { if (!el.matches(".mani, .ct-title")) el.classList.add("rv"); });
+const pending = new Set(document.querySelectorAll(".mani, .sheet, .crew-top, .receipt, .desk, .people, .cards, .qa, .cform, .ct-title"));
+pending.forEach(el => { if (!el.matches(".mani, .ct-title, .receipt")) el.classList.add("rv"); });
 function onScroll() {
   const H = innerHeight;
   for (const el of pending) { const r = el.getBoundingClientRect(); if (r.top < H * .85 && r.bottom > 0) { el.classList.add("in"); pending.delete(el); } }
@@ -174,20 +175,67 @@ addEventListener("scroll", onScroll, { passive: true }); addEventListener("resiz
   addEventListener("keydown", e => { if (e.key === "Escape") { set(false); setMenu(false); } });
 })();
 
-// ---------- кейсы: картинка за курсором ----------
-(function cases() {
-  const img = document.querySelector(".cur-img"), rows = [...document.querySelectorAll(".row")];
-  if (!img || !fine) return;
-  let x = 0, y = 0, on = false;
-  rows.forEach(r => {
-    r.addEventListener("pointerenter", () => { img.style.backgroundImage = `url(${r.dataset.img})`; img.classList.add("on"); on = true; });
-    r.addEventListener("pointerleave", () => { img.classList.remove("on"); on = false; });
+// ---------- кейсы: папки открывают окно ----------
+(function folders() {
+  const fs = [...document.querySelectorAll(".folder")], cs = [...document.querySelectorAll(".case")], title = document.getElementById("winTitle");
+  const names = ["WAKE_UP — 7 дней", "EMPIRE — 5 дней", "С_НУЛЯ — 3 дня"];
+  fs.forEach((f, i) => f.addEventListener("click", () => {
+    fs.forEach((x, j) => x.classList.toggle("on", i === j)); cs.forEach((x, j) => x.classList.toggle("on", i === j));
+    title.textContent = names[i];
+  }));
+})();
+
+// ---------- объекты можно таскать ----------
+(function drag() {
+  if (!fine) return;
+  document.querySelectorAll("[data-drag]").forEach(el => {
+    let sx = 0, sy = 0, dx = 0, dy = 0, lx = 0, on = false;
+    el.addEventListener("pointerdown", e => { on = true; el.setPointerCapture(e.pointerId); sx = e.clientX - dx; sy = e.clientY - dy; lx = e.clientX; el.classList.add("grab"); e.preventDefault(); });
+    el.addEventListener("pointermove", e => {
+      if (!on) return;
+      dx = e.clientX - sx; dy = e.clientY - sy;
+      el.style.setProperty("--dx", dx + "px"); el.style.setProperty("--dy", dy + "px");
+      el.style.setProperty("--tilt", clamp((e.clientX - lx) * .8, -18, 18) + "deg"); lx = e.clientX;
+    });
+    const end = () => { on = false; el.classList.remove("grab"); el.style.setProperty("--tilt", "0deg"); };
+    el.addEventListener("pointerup", end); el.addEventListener("pointercancel", end);
   });
-  (function loop() {
-    x += (px - x) * .14; y += (py - y) * .14;
-    if (on || img.classList.contains("on")) img.style.translate = `${x}px ${y}px`;
-    requestAnimationFrame(loop);
-  })();
+})();
+
+// ---------- тестовый лист канала ----------
+(function sheet() {
+  const f = document.getElementById("sheet");
+  if (!f) return;
+  const boxes = [...f.querySelectorAll(".rows-chk input")], face = document.getElementById("face");
+  const hints = ["Light — пока справляетесь сами, нужен план", "Medium — отдаём часть работы команде", "Dark — забираем канал целиком"];
+  const faces = ["× ×<br>ᵕ", "• •<br>—", "^ ^<br>◡", "★ ★<br>◡"];
+  const verdicts = ["Канал пока живёт на силе воли. Начнём с разбора.", "Фундамент есть. Не хватает системы — её и соберём.", "Почти готовы к запуску. Нужен прогрев и команда.", "Сильная база. Пора масштабировать и запускать."];
+  const update = () => {
+    const n = boxes.filter(b => b.checked).length, lvl = n <= 1 ? 0 : n === 2 ? 1 : n === 3 ? 2 : 3;
+    document.getElementById("scoreDots").textContent = "●".repeat(n) + "○".repeat(4 - n);
+    document.getElementById("scoreN").textContent = `${n} / 4`;
+    document.getElementById("verdict").textContent = verdicts[lvl];
+    face.innerHTML = faces[lvl]; face.classList.remove("pop"); void face.offsetWidth; face.classList.add("pop");
+    const r = +f.querySelector("[name=roast]:checked").value;
+    document.getElementById("roastHint").textContent = hints[r];
+    document.getElementById("sheetBtn").dataset.pick = r === 2 ? "Передать канал под ключ" : n >= 3 ? "Запустить продукт в Telegram" : "Начать с бесплатной консультации";
+  };
+  f.addEventListener("change", update);
+  setTimeout(() => face.classList.remove("pop"), 10);
+})();
+
+// ---------- даты и штрихкоды ----------
+(function details() {
+  const d = new Date().toLocaleDateString("ru-RU");
+  ["sheetDate", "rcDate"].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = d; });
+  let seed = 7;
+  const r = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  document.querySelectorAll(".barcode").forEach(svg => {
+    let x = 0, bars = "";
+    while (x < 200) { const w = 1 + Math.floor(r() * 4); if (r() > .4) bars += `<rect x="${x}" width="${w}" height="100"/>`; x += w + 1; }
+    svg.setAttribute("viewBox", `0 0 ${x} 100`); svg.setAttribute("preserveAspectRatio", "none");
+    svg.innerHTML = `<g fill="currentColor">${bars}</g>`;
+  });
 })();
 
 // ---------- команда канала: было → стало ----------

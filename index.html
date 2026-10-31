@@ -11,17 +11,23 @@
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793400100">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1793500200">
 </head>
 <body>
+
+<!-- знаки: звёздочка и решётка -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ast" viewBox="-55 -55 110 110"><g fill="currentColor"><polygon points="-7,-2 7,-2 10,-52 -10,-52"/><polygon points="-7,-2 7,-2 10,-52 -10,-52" transform="rotate(72)"/><polygon points="-7,-2 7,-2 10,-52 -10,-52" transform="rotate(144)"/><polygon points="-7,-2 7,-2 10,-52 -10,-52" transform="rotate(216)"/><polygon points="-7,-2 7,-2 10,-52 -10,-52" transform="rotate(288)"/><circle r="9"/></g></symbol>
+  <symbol id="hash" viewBox="0 0 100 100"><g fill="currentColor"><polygon points="31,6 45,6 37,94 23,94"/><polygon points="61,6 75,6 67,94 53,94"/><polygon points="12,28 92,28 90,42 10,42"/><polygon points="8,58 88,58 86,72 6,72"/></g></symbol>
+</svg>
 
 <div class="cursor" aria-hidden="true"></div>
 
 <header class="nav">
-  <a href="#top" class="logo">нас#лия</a>
+  <div class="logo-wrap"><a href="#top" class="logo">нас#лия</a><span class="logo-meta">Telegram-продакшн<br>вып. 2026 · арт. НАС-001</span></div>
   <nav class="nav-list">
-    <a href="#manifest">Манифест</a>
+    <a href="#test">Тест канала</a>
     <a href="#services">Услуги</a>
     <a href="#cases">Кейсы</a>
     <a href="#formats">Форматы</a>
@@ -33,8 +39,8 @@
 <div class="overlay" id="overlay" aria-hidden="true">
   <nav class="ov-links">
     <a href="#manifest">Манифест</a>
+    <a href="#test">Тест канала</a>
     <a href="#services">Услуги</a>
-    <a href="#crew">Команда канала</a>
     <a href="#process">Процесс</a>
     <a href="#cases">Кейсы</a>
     <a href="#formats">Форматы</a>
@@ -44,7 +50,7 @@
 
 <main id="top">
 
-  <!-- HERO: фото-ангел, крылья из частиц, размытые буквы -->
+  <!-- HERO -->
   <section class="hero" id="hero">
     <canvas class="wings" aria-hidden="true"></canvas>
     <div class="hud" aria-hidden="true">
@@ -52,17 +58,18 @@
       <span class="tag"><em>+</em>Прогрев <u>online</u></span>
     </div>
     <div class="stage">
-      <figure class="angel"><img src="img/angel-girl.jpg" alt="Ангел"></figure>
-      <span class="lb lb-l">Мы —</span>
+      <figure class="angel"><img src="img/angel-girl.jpg" alt="Ангел"><figcaption>илл. 01 — ангел-хранитель канала</figcaption></figure>
+      <span class="lb lb-l"><svg class="mark spin"><use href="#ast"/></svg>Мы —</span>
       <span class="lb lb-r">Нас#лия</span>
       <span class="lb lb-rr">и мы</span>
       <h1 class="big">
-        <span class="w w1" data-dir="-1">Продю</span>
-        <span class="w w2" data-dir="1">сируем</span>
+        <span class="w w1">Продю</span>
+        <span class="w w2">сируем</span>
         <span class="sub">экспертов в Telegram</span>
       </h1>
     </div>
-    <div class="hero-cta"><a href="#brief" class="pill">Разобрать канал ↗</a></div>
+    <div class="obj obj-cup" data-drag style="--rot:-14deg"><img src="img/obj-cup.png" alt="Стакан кофе" draggable="false"><span class="hint">тащи ↗</span></div>
+    <div class="hero-cta"><a href="#brief" class="pill">Разобрать канал ↗</a><span class="cta-note">0 ₽ · 1 созвон · 3 совета</span></div>
     <div class="hero-bar">
       <span>Скролл ↓</span>
       <span class="hb-mid">от 120 000 ₽ / мес</span>
@@ -70,50 +77,90 @@
     </div>
   </section>
 
-  <!-- МАНИФЕСТ: сетка колонок, статуя, вертикальные буквы -->
+  <div class="marq" aria-hidden="true"><div class="marq-in">
+    <span>Посты</span><svg class="mark"><use href="#ast"/></svg><span>Прогревы</span><svg class="mark"><use href="#hash"/></svg><span>Запуски</span><svg class="mark"><use href="#ast"/></svg><span>Воронки</span><svg class="mark"><use href="#hash"/></svg><span>Сайты</span><svg class="mark"><use href="#ast"/></svg><span>Кружки</span><svg class="mark"><use href="#hash"/></svg>
+    <span>Посты</span><svg class="mark"><use href="#ast"/></svg><span>Прогревы</span><svg class="mark"><use href="#hash"/></svg><span>Запуски</span><svg class="mark"><use href="#ast"/></svg><span>Воронки</span><svg class="mark"><use href="#hash"/></svg><span>Сайты</span><svg class="mark"><use href="#ast"/></svg><span>Кружки</span><svg class="mark"><use href="#hash"/></svg>
+  </div></div>
+
+  <!-- МАНИФЕСТ -->
   <section class="mani" id="manifest">
     <div class="grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <span class="side-lbl">Манифест</span>
     <div class="mani-l">
       <small>Снаружи</small>
       <h3>Продаёт</h3>
-      <p>Темы, тексты, прогрев и путь к покупке.</p>
+      <p>Темы, тексты, прогрев, путь к покупке.</p>
       <b class="deg">180+</b>
+      <span class="deg-cap">за 7 дней — кейс Wake Up</span>
     </div>
     <div class="mani-c">
-      <span class="huge-hash">#</span>
+      <svg class="huge-hash spin-slow"><use href="#hash"/></svg>
       <img src="img/angel-wall.jpg" alt="" class="statue">
       <span class="vert" aria-hidden="true"><i>Г</i><i>О</i><i>Л</i><i>О</i><i>С</i></span>
+      <div class="note"><img src="img/obj-clip.png" alt="" class="note-clip"><b>Заметка №1</b><p>От вас — только голос. Остальное — наше.</p><span>подпись: ________</span></div>
       <div class="mini-tabs"><span>Автор</span><b>Голос</b><span>Команда</span></div>
     </div>
     <div class="mani-r">
       <small>Внутри</small>
       <h3>Без вас</h3>
-      <p>Операционку забирает команда. От вас — экспертиза.</p>
+      <p>Операционку забирает команда.</p>
       <b class="deg">6 ролей</b>
+      <span class="deg-cap">вместо одного уставшего автора</span>
     </div>
     <div class="mani-foot"><span>01 | Манифест</span><span class="num">01<br><b>08</b></span></div>
   </section>
 
-  <!-- УСЛУГИ: слайдер с огромным фоновым словом -->
+  <!-- ТЕСТ КАНАЛА: лист как на стакане -->
+  <section class="sec test" id="test">
+    <div class="test-l">
+      <span class="cap">02 | Тест канала</span>
+      <h2 class="h2">Прожарка<br>канала</h2>
+      <p class="test-lead">Отметьте, что уже есть. Мы скажем, что делать дальше — на созвоне за чашку кофе.</p>
+      <div class="cup-big obj" data-drag style="--rot:8deg"><img src="img/obj-cup.png" alt="" draggable="false"></div>
+    </div>
+    <form class="sheet" id="sheet" onsubmit="return false">
+      <img src="img/obj-clip.png" alt="" class="sheet-clip">
+      <div class="sheet-head"><b>Тестовый лист канала</b><span>форма НАС-02 · <i id="sheetDate"></i></span></div>
+      <div class="roast"><span>Уровень прожарки</span>
+        <label><input type="radio" name="roast" value="0">Light</label>
+        <label><input type="radio" name="roast" value="1" checked>Medium</label>
+        <label><input type="radio" name="roast" value="2">Dark</label>
+      </div>
+      <p class="roast-hint" id="roastHint">Medium — отдаём часть работы команде</p>
+      <div class="rows-chk">
+        <label><span>Посты выходят регулярно</span><input type="checkbox"><i></i></label>
+        <label><span>Есть продукт для продажи</span><input type="checkbox"><i></i></label>
+        <label><span>Аудитория растёт сама</span><input type="checkbox"><i></i></label>
+        <label><span>Есть прогрев и воронка</span><input type="checkbox"><i></i></label>
+      </div>
+      <div class="score"><span>Оценка</span><b id="scoreDots">○○○○</b><span id="scoreN">0 / 4</span></div>
+      <div class="comment"><span>Комментарий продюсера</span>
+        <div class="comment-box"><b class="face" id="face">× ×<br>ᵕ</b><p id="verdict">Канал пока живёт на силе воли. Начнём с разбора.</p></div>
+      </div>
+      <a href="#brief" class="pill" id="sheetBtn" data-pick="Начать с бесплатной консультации">Отправить лист на разбор ↗</a>
+      <svg class="barcode" id="bc1" aria-hidden="true"></svg>
+    </form>
+  </section>
+
+  <!-- УСЛУГИ: слайдер -->
   <section class="svc" id="services">
+    <span class="svc-cap cap">03 | Услуги</span>
     <nav class="svc-tabs" role="tablist">
       <button class="on" data-i="0">Продюсирование</button>
       <button data-i="1">Запуск</button>
       <button data-i="2">Сайт</button>
       <button data-i="3">Разбор</button>
     </nav>
-    <div class="svc-stage">
-      <div class="svc-word" aria-hidden="true"><span class="on">Медиа</span><span>Запуск</span><span>Сайт</span><span>Разбор</span></div>
-      <div class="svc-items">
-        <article class="si on"><div class="arch"><img src="img/studio-cross.jpg" alt=""></div><h3>Полное продюсирование</h3><p>Канал как медиа + запуски · от 120 000 ₽/мес</p></article>
-        <article class="si"><div class="arch"><img src="img/cliff-sun.jpg" alt=""></div><h3>Запуск продукта</h3><p>Прогрев, посты и продажи на нас · после диагностики</p></article>
-        <article class="si"><div class="arch"><img src="img/station.jpg" alt=""></div><h3>Сайт и упаковка</h3><p>Путь от поста до оплаты · в рамках запуска</p></article>
-        <article class="si"><div class="arch"><img src="img/erd-hoodie.jpg" alt=""></div><h3>Бесплатный разбор</h3><p>Потенциал канала и 3 совета · 0 ₽</p></article>
-      </div>
+    <div class="svc-word" aria-hidden="true"><span class="on">Медиа</span><span>Запуск</span><span>Сайт</span><span>Разбор</span></div>
+    <div class="svc-items">
+      <article class="si on"><div class="arch"><img src="img/studio-cross.jpg" alt=""></div><h3>Полное продюсирование</h3><p>Канал как медиа + запуски</p><b class="si-price">от 120 000 ₽/мес</b></article>
+      <article class="si"><div class="arch"><img src="img/cliff-sun.jpg" alt=""></div><h3>Запуск продукта</h3><p>Прогрев, посты, продажи — на нас</p><b class="si-price">после диагностики</b></article>
+      <article class="si"><div class="arch"><img src="img/station.jpg" alt=""></div><h3>Сайт и упаковка</h3><p>Путь от поста до оплаты</p><b class="si-price">в рамках запуска</b></article>
+      <article class="si"><div class="arch"><img src="img/erd-hoodie.jpg" alt=""></div><h3>Бесплатный разбор</h3><p>Потенциал канала и 3 совета</p><b class="si-price">0 ₽</b></article>
     </div>
+    <ul class="svc-specs" aria-hidden="true"><li>Стратегия</li><li>Контент</li><li>Продвижение</li><li>Запуски</li></ul>
     <div class="svc-bar">
-      <button class="play" id="playVideo"><i>▶</i>Смотреть видео</button>
+      <button class="play" id="playVideo"><i>▶</i>Смотреть видео <small>01:03</small></button>
       <div class="svc-nav">
         <span class="cnt"><b id="svcN">01</b> / 04</span>
         <a href="#formats" class="pill ghost">Подробнее</a>
@@ -124,9 +171,9 @@
     </div>
   </section>
 
-  <!-- КОМАНДА КАНАЛА: было → стало -->
+  <!-- КОМАНДА КАНАЛА -->
   <section class="sec crew" id="crew">
-    <div class="sec-head"><span class="cap">02 | Внутри</span><h2 class="h2">1 человек → 6 ролей</h2></div>
+    <div class="sec-head"><span class="cap">04 | Внутри</span><h2 class="h2">1 человек → 6 ролей</h2></div>
     <div class="crew-top">
       <div class="seg" role="tablist"><button class="on" data-m="0">Было</button><button data-m="1">Стало</button></div>
       <dl class="crew-stats">
@@ -138,76 +185,107 @@
     <canvas class="crew-canvas" aria-label="Схема: кто делает работу в канале"></canvas>
   </section>
 
-  <!-- ПРОЦЕСС: колонки -->
+  <!-- ПРОЦЕСС: чек -->
   <section class="sec proc" id="process">
-    <div class="sec-head"><span class="cap">03 | Процесс</span><h2 class="h2">5 шагов</h2></div>
-    <ol class="cols">
-      <li><span>01</span><h3>Разбор</h3><p>3 конкретных шага</p></li>
-      <li><span>02</span><h3>Стратегия</h3><p>Тема и контент-план</p></li>
-      <li><span>03</span><h3>Выпуск</h3><p>Посты по графику</p></li>
-      <li><span>04</span><h3>Продвижение</h3><p>Новые читатели</p></li>
-      <li><span>05</span><h3>Запуск</h3><p>Продажи</p></li>
-    </ol>
+    <div class="proc-l">
+      <span class="cap">05 | Процесс</span>
+      <h2 class="h2">5 шагов.<br>Чек прилагаем</h2>
+      <svg class="mark spin proc-ast"><use href="#ast"/></svg>
+    </div>
+    <div class="receipt" id="receipt">
+      <div class="rc-in">
+        <b class="rc-logo">нас#лия</b>
+        <span class="rc-c">продакшн telegram-каналов</span>
+        <span class="rc-c">чек № 0001 · <i id="rcDate"></i></span>
+        <hr>
+        <ol>
+          <li><span>01 Разбор</span><i></i><b>3 шага</b></li>
+          <li><span>02 Стратегия</span><i></i><b>план</b></li>
+          <li><span>03 Выпуск</span><i></i><b>посты</b></li>
+          <li><span>04 Продвижение</span><i></i><b>читатели</b></li>
+          <li><span>05 Запуск</span><i></i><b>продажи</b></li>
+        </ol>
+        <hr>
+        <div class="rc-total"><span>Итого</span><b>канал, который продаёт</b></div>
+        <span class="rc-c">операционка автора: 0 ч</span>
+        <svg class="barcode" id="bc2" aria-hidden="true"></svg>
+        <span class="rc-c">спасибо ✱ приходите ещё</span>
+      </div>
+    </div>
   </section>
 
-  <!-- КЕЙСЫ: строки + картинка за курсором -->
+  <!-- КЕЙСЫ: папки и окно -->
   <section class="sec cases" id="cases">
-    <div class="sec-head"><span class="cap">04 | Кейсы</span><h2 class="h2">Работы</h2></div>
-    <div class="rows">
-      <a class="row" data-img="img/station.jpg"><span class="r-n">01</span><h3>Wake Up</h3><span class="r-m">7 дней · чек ~4 000 ₽</span><b>180+</b></a>
-      <a class="row" data-img="img/cliff-sun.jpg"><span class="r-n">02</span><h3>Wake Up Empire</h3><span class="r-m">5 дней · платные подписчики</span><b>80+</b></a>
-      <a class="row" data-img="img/erd-hoodie.jpg"><span class="r-n">03</span><h3>С нуля</h3><span class="r-m">3 дня · 150+ участников</span><b>100K ₽</b></a>
+    <div class="sec-head"><span class="cap">06 | Кейсы</span><h2 class="h2">Папка «Работы»</h2></div>
+    <div class="desk">
+      <div class="folders">
+        <button class="folder on" data-c="0"><img src="img/obj-folder.png" alt="" draggable="false"><span>WAKE_UP</span></button>
+        <button class="folder" data-c="1"><img src="img/obj-folder.png" alt="" draggable="false"><span>EMPIRE</span></button>
+        <button class="folder" data-c="2"><img src="img/obj-folder.png" alt="" draggable="false"><span>С_НУЛЯ</span></button>
+        <p class="desk-hint">↖ откройте папку</p>
+      </div>
+      <div class="win">
+        <div class="win-bar"><i></i><i></i><i></i><span id="winTitle">WAKE_UP — 7 дней</span></div>
+        <div class="win-body">
+          <article class="case on"><div class="case-img" style="background-image:url(img/station.jpg)"></div><div class="case-txt"><small>кейс 01 · 7 дней</small><h3>Wake Up</h3><b>180+</b><ul><li>несколько воронок</li><li>частичная автоматизация</li><li>чек ~4 000 ₽</li></ul></div></article>
+          <article class="case"><div class="case-img" style="background-image:url(img/cliff-sun.jpg)"></div><div class="case-txt"><small>кейс 02 · 5 дней</small><h3>Wake Up Empire</h3><b>80+</b><ul><li>платные подписчики</li><li>сильный прогрев</li><li>чек от 4 990 ₽</li></ul></div></article>
+          <article class="case"><div class="case-img" style="background-image:url(img/erd-hoodie.jpg)"></div><div class="case-txt"><small>кейс 03 · 3 дня</small><h3>С нуля</h3><b>100K ₽</b><ul><li>150+ участников</li><li>чек 1 750 ₽</li><li>шаг к группе за 60 000+ ₽</li></ul></div></article>
+        </div>
+      </div>
     </div>
-    <div class="cur-img" aria-hidden="true"></div>
   </section>
 
   <!-- ХАОС → СИСТЕМА -->
   <section class="chaos" id="chaos">
     <div class="chaos-pin">
       <canvas class="chaos-canvas" aria-hidden="true"></canvas>
-      <div class="chaos-text"><span class="cap">05 | План</span><h2 class="h2">Хаос → система</h2></div>
+      <div class="chaos-text"><span class="cap">07 | План</span><h2 class="h2">Хаос → система</h2><p class="chaos-leg"><i class="l1"></i>пост <i class="l2"></i>прогрев <i class="l3"></i>запуск</p></div>
       <b class="chaos-pct" id="chaosPct">0%</b>
     </div>
   </section>
 
   <!-- КОМАНДА -->
   <section class="sec team" id="team">
-    <div class="sec-head"><span class="cap">06 | Команда</span><h2 class="h2">Люди</h2></div>
+    <div class="sec-head"><span class="cap">08 | Команда</span><h2 class="h2">Люди</h2></div>
     <div class="people">
-      <article class="person"><div class="arch"><img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy"></div><small>Продукт и продюсирование</small><h3>Артём Бутов</h3><a href="https://t.me/lfbutov" target="_blank" rel="noopener">@lfbutov ↗</a></article>
+      <article class="person"><div class="photo"><span class="tape"></span><img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy"></div><small>Продукт и продюсирование</small><h3>Артём Бутов</h3><a href="https://t.me/lfbutov" target="_blank" rel="noopener">@lfbutov ↗</a></article>
       <div class="stats">
         <div><b>15 000+</b><span>аудитория команды</span></div>
         <div><b>$50 000+</b><span>прибыль запусков</span></div>
         <div><b>500K ₽+</b><span>планка запуска</span></div>
+        <svg class="mark spin stats-ast"><use href="#ast"/></svg>
       </div>
-      <article class="person"><div class="arch"><img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy"></div><small>Клиенты и команда</small><h3>Артём Федонко</h3><a href="https://t.me/+soEcPH8C9oRlNTZi" target="_blank" rel="noopener">Telegram-канал ↗</a></article>
+      <article class="person"><div class="photo"><span class="tape"></span><img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy"></div><small>Клиенты и команда</small><h3>Артём Федонко</h3><a href="https://t.me/+soEcPH8C9oRlNTZi" target="_blank" rel="noopener">Telegram-канал ↗</a></article>
     </div>
   </section>
 
-  <!-- ФОРМАТЫ -->
+  <!-- ФОРМАТЫ: листы на зажимах -->
   <section class="sec fmt" id="formats">
-    <div class="sec-head"><span class="cap">07 | Форматы</span><h2 class="h2">С чего начать</h2></div>
+    <div class="sec-head"><span class="cap">09 | Форматы</span><h2 class="h2">С чего начать</h2></div>
     <div class="cards">
-      <article><small>ежемесячно</small><h3>Продюсирование</h3><ul><li>Контент по системе</li><li>Широкая аудитория</li><li>Запуск от 500 000 ₽</li></ul><b class="price">от 120 000 ₽</b><a href="#brief" class="pill ghost" data-pick="Передать канал под ключ">Обсудить</a></article>
-      <article class="hl"><small>чаще всего</small><h3>Запуск продукта</h3><ul><li>Прогрев и посты</li><li>Операционка на нас</li><li>Канал живёт и после</li></ul><b class="price">после диагностики</b><a href="#brief" class="pill inv" data-pick="Запустить продукт в Telegram">Обсудить</a></article>
-      <article><small>бесплатно</small><h3>Консультация</h3><ul><li>Потенциал канала</li><li>3 идеи монетизации</li><li>Понятные условия</li></ul><b class="price">0 ₽</b><a href="#brief" class="pill ghost" data-pick="Начать с бесплатной консультации">Записаться</a></article>
+      <article class="paper" style="--tilt:-1.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>ежемесячно · ф-01</small><h3>Продюсирование</h3><ul><li>Контент по системе</li><li>Широкая аудитория</li><li>Запуск от 500 000 ₽</li></ul><b class="price">от 120 000 ₽</b><a href="#brief" class="pill ghost" data-pick="Передать канал под ключ">Обсудить</a><svg class="barcode" aria-hidden="true"></svg></article>
+      <article class="paper hl" style="--tilt:1deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>чаще всего · ф-02</small><h3>Запуск продукта</h3><ul><li>Прогрев и посты</li><li>Операционка на нас</li><li>Канал живёт и после</li></ul><b class="price">после диагностики</b><a href="#brief" class="pill inv" data-pick="Запустить продукт в Telegram">Обсудить</a><svg class="barcode" aria-hidden="true"></svg><span class="stamp">хит</span></article>
+      <article class="paper" style="--tilt:-.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>бесплатно · ф-03</small><h3>Консультация</h3><ul><li>Потенциал канала</li><li>3 идеи монетизации</li><li>Понятные условия</li></ul><b class="price">0 ₽</b><a href="#brief" class="pill ghost" data-pick="Начать с бесплатной консультации">Записаться</a><svg class="barcode" aria-hidden="true"></svg></article>
     </div>
   </section>
 
   <!-- ВОПРОСЫ -->
   <section class="sec faq" id="faq">
-    <div class="sec-head"><span class="cap">08 | Вопросы</span></div>
+    <div class="sec-head"><span class="cap">10 | Вопросы</span></div>
     <div class="qa">
-      <details><summary><span>Что можно передать вам?</span><b class="plus"></b></summary><p>Контент, сайт и запуск продукта — целиком или по отдельности.</p></details>
-      <details><summary><span>Что нужно от меня?</span><b class="plus"></b></summary><p>Экспертиза и обратная связь. Голос остаётся вашим.</p></details>
-      <details><summary><span>Сколько стоит?</span><b class="plus"></b></summary><p>Продюсирование — от 120 000 ₽/мес. Запуск оценим после знакомства.</p></details>
-      <details><summary><span>С чего начнём?</span><b class="plus"></b></summary><p>С бесплатного разбора и трёх следующих шагов.</p></details>
+      <details><summary><svg class="mark"><use href="#ast"/></svg><span>Что можно передать вам?</span><b class="plus"></b></summary><p>Контент, сайт и запуск продукта — целиком или по отдельности.</p></details>
+      <details><summary><svg class="mark"><use href="#ast"/></svg><span>Что нужно от меня?</span><b class="plus"></b></summary><p>Экспертиза и обратная связь. Голос остаётся вашим.</p></details>
+      <details><summary><svg class="mark"><use href="#ast"/></svg><span>Сколько стоит?</span><b class="plus"></b></summary><p>Продюсирование — от 120 000 ₽/мес. Запуск оценим после знакомства.</p></details>
+      <details><summary><svg class="mark"><use href="#ast"/></svg><span>С чего начнём?</span><b class="plus"></b></summary><p>С бесплатного разбора и трёх следующих шагов.</p></details>
     </div>
   </section>
 
   <!-- КОНТАКТ -->
   <section class="sec ct" id="brief">
-    <h2 class="ct-title" id="ctTitle">Напишите<br>нам</h2>
+    <div class="ct-l">
+      <h2 class="ct-title" id="ctTitle">Напишите<br>нам</h2>
+      <svg class="ct-hash spin-slow" aria-hidden="true"><use href="#hash"/></svg>
+    </div>
     <form class="cform" id="cform">
       <div class="chips" role="group" aria-label="Задача">
         <button type="button" class="chip" aria-pressed="false">Запустить продукт в Telegram</button>
@@ -224,7 +302,7 @@
 </main>
 
 <footer class="ft">
-  <p class="ft-word"><span class="fb">Н</span>ас#ли<span class="fb">я</span></p>
+  <p class="ft-word"><span class="fb">Н</span>ас<svg class="ft-hash"><use href="#hash"/></svg>ли<span class="fb">я</span></p>
   <div class="ft-row">
     <span>© 2026 Агентство Нас#лия</span>
     <span>Артём Бутов × Артём Федонко</span>
@@ -238,6 +316,6 @@
   <video playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" controls aria-label="Знакомство с агентством"></video>
 </div>
 
-<script src="app.js?v=1793400100"></script>
+<script src="app.js?v=1793500200"></script>
 </body>
 </html>

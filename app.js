@@ -150,7 +150,7 @@ document.querySelectorAll(".h2").forEach(h => {
   let k = 0;
   h.innerHTML = h.innerHTML.split("<br>").map(line => line.trim().split(/\s+/).map(w => `<span class="wd"><i style="--d:${(k++ * .07).toFixed(2)}s">${w}</i></span>`).join(" ")).join("<br>");
 });
-const stag = [".about-grid li", ".gloss > div", ".proc-steps li", ".ba-foot > div", ".stats > div", ".qa details", ".si-col", ".chips .chip"];
+const stag = [".about-grid li", ".gloss > div", ".proc-steps li", ".ba-foot > div", ".stats > div", ".qa details", ".chips .chip"];
 stag.forEach(sel => document.querySelectorAll(sel).forEach((el, i) => { el.classList.add("st"); el.style.setProperty("--i", i % 8); }));
 document.querySelectorAll(".lead, .test-lead, .svc-lead, .person-p").forEach(el => el.classList.add("st"));
 
@@ -199,23 +199,24 @@ if (fine && !calm) document.querySelectorAll(".pill").forEach(b => {
   })();
 })();
 
-// ---------- услуги: кадры плёнки + шкала ----------
-(function film() {
+// ---------- услуги: лестница ----------
+(function stairs() {
   const sec = document.getElementById("services");
   if (!sec) return;
-  const row = sec.querySelector(".film-row"), frs = [...sec.querySelectorAll(".fr")], items = [...sec.querySelectorAll(".si")];
-  const ticks = [...sec.querySelectorAll(".spec-ticks button")], num = document.getElementById("svcN");
+  const wrap = sec.querySelector(".stairs-wrap"), steps = [...sec.querySelectorAll(".step")], items = [...sec.querySelectorAll(".si")];
   let cur = 0, touched = false;
   const go = i => {
     cur = (i + items.length) % items.length;
-    [frs, items, ticks].forEach(list => list.forEach((el, j) => el.classList.toggle("on", j === cur)));
+    [steps, items].forEach(list => list.forEach((el, j) => el.classList.toggle("on", j === cur)));
     sec.style.setProperty("--k", cur);
-    num.textContent = String(cur + 1).padStart(2, "0");
-    if (row.scrollWidth > row.clientWidth) row.scrollTo({ left: frs[cur].offsetLeft - row.offsetLeft - 20, behavior: "smooth" });
+    sec.style.setProperty("--hk", steps[cur].offsetHeight + "px");
   };
-  [frs, ticks].forEach(list => list.forEach((b, i) => b.addEventListener("click", () => { touched = true; go(i); })));
+  steps.forEach((b, i) => { b.addEventListener("click", () => { touched = true; go(i); }); b.addEventListener("pointerenter", () => { if (fine) { touched = true; go(i); } }); });
+  addEventListener("resize", () => go(cur));
   go(0);
-  setInterval(() => { const r = sec.getBoundingClientRect(); if (!touched && !calm && r.top < innerHeight * .5 && r.bottom > innerHeight * .5) go(cur + 1); }, 5000);
+  if (calm || shot) wrap.classList.add("in");
+  else new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { wrap.classList.add("in"); io.disconnect(); } }, { threshold: .3 }).observe(wrap);
+  setInterval(() => { const r = sec.getBoundingClientRect(); if (!touched && !calm && r.top < innerHeight * .5 && r.bottom > innerHeight * .5) go(cur + 1); }, 4000);
 })();
 
 // ---------- видео ----------

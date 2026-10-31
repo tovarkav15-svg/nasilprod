@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793500900">
+<link rel="stylesheet" href="style.css?v=1793501900">
 </head>
 <body>
 
@@ -25,7 +25,7 @@
 <div class="cursor" aria-hidden="true"></div>
 
 <header class="nav">
-  <div class="logo-wrap"><a href="#top" class="logo">нас#лия</a><span class="logo-meta">Telegram-продакшн<br>вып. 2026 · арт. НАС-001</span></div>
+  <div class="logo-wrap"><a href="#top" class="logo">нас#лия</a></div>
   <nav class="nav-list">
     <a href="#about">Что делаем</a>
     <a href="#services">Услуги</a>
@@ -55,11 +55,9 @@
   <section class="hero" id="hero">
     <canvas class="wings" aria-hidden="true"></canvas>
     <div class="hud" aria-hidden="true">
-      <span class="tag"><em>+</em>Посты <u>по графику</u></span>
-      <span class="tag"><em>+</em>Прогрев <u>online</u></span>
     </div>
     <div class="stage">
-      <figure class="angel"><img src="img/angel-girl.jpg" alt="Ангел"><figcaption>илл. 01 — ангел-хранитель канала</figcaption></figure>
+      <figure class="angel"><img src="img/angel-girl.jpg" alt="Ангел"></figure>
       <span class="lb lb-l"><svg class="mark spin"><use href="#ast"/></svg>Мы —</span>
       <span class="lb lb-r">Нас#лия</span>
       <span class="lb lb-rr">и мы</span>
@@ -69,12 +67,12 @@
         <span class="sub">экспертов в Telegram</span>
       </h1>
     </div>
-    <div class="obj obj-cup" data-drag style="--rot:-14deg"><img src="img/obj-cup.png" alt="Стакан кофе" draggable="false"><span class="hint">тащи ↗</span></div>
-    <div class="hero-cta"><p class="hero-lead">Ведём Telegram-каналы экспертов под ключ: пишем посты вашим голосом, приводим читателей и продаём ваши курсы и консультации. От вас — только экспертиза.</p><a href="#brief" class="pill">Разобрать канал бесплатно ↗</a><span class="cta-note">созвон · 3 конкретных совета · 0 ₽</span></div>
+    <div class="obj obj-cup" data-drag style="--rot:-14deg"><img src="img/obj-cup.png" alt="Стакан кофе" draggable="false"></div>
+    <div class="hero-cta"><p class="hero-lead">Ведём Telegram-каналы экспертов под ключ: пишем посты вашим голосом, приводим читателей и продаём ваши курсы и консультации. От вас — только экспертиза.</p><a href="#brief" class="pill">Разобрать канал бесплатно ↗</a></div>
     <div class="hero-bar">
-      <span>Скролл ↓</span>
+      <span></span>
       <span class="hb-mid">Продюсирование — от 120 000 ₽ / мес</span>
-      <span>Следующий пост · <b id="nextPost">00:00:00</b></span>
+      <span></span>
     </div>
   </section>
 
@@ -151,7 +149,7 @@
     </div>
     <form class="sheet" id="sheet" onsubmit="return false">
       <img src="img/obj-clip.png" alt="" class="sheet-clip">
-      <div class="sheet-head"><b>Тестовый лист канала</b><span>форма НАС-02 · <i id="sheetDate"></i></span></div>
+      <div class="sheet-head"><b>Тестовый лист канала</b></div>
       <div class="roast"><span>Уровень прожарки</span>
         <label><input type="radio" name="roast" value="0">Light</label>
         <label><input type="radio" name="roast" value="1" checked>Medium</label>
@@ -183,10 +181,10 @@
       <div class="stairs-wrap">
         <span class="halo-pick" aria-hidden="true"><i></i><b>вы здесь</b></span>
         <div class="stairs">
-          <button class="step on" data-i="0" style="--h:34%;--c:#e9e9ec;--i:0"><span class="step-top"><span class="step-n">01</span><span class="step-lvl">●○○○</span></span><span class="step-name">Разбор</span><span class="step-p">0 ₽</span></button>
-          <button class="step" data-i="1" style="--h:55%;--c:#cfcfd3;--i:1"><span class="step-top"><span class="step-n">02</span><span class="step-lvl">●●○○</span></span><span class="step-name">Сайт</span><span class="step-p">в запуске</span></button>
-          <button class="step dark" data-i="2" style="--h:77%;--c:#6b6b70;--i:2"><span class="step-top"><span class="step-n">03</span><span class="step-lvl">●●●○</span></span><span class="step-name">Запуск</span><span class="step-p">после диагностики</span></button>
-          <button class="step dark" data-i="3" style="--h:100%;--c:#0b0b0c;--i:3"><span class="step-top"><span class="step-n">04</span><span class="step-lvl">●●●●</span></span><span class="step-name">Продюси&shy;рование</span><span class="step-p">от 120 000 ₽/мес</span></button>
+          <button class="step on" data-i="0" style="--h:34%;--c:#e9e9ec;--i:0"><span class="step-top"><span class="step-n">01</span></span><span class="step-name">Разбор</span><span class="step-p">0 ₽</span></button>
+          <button class="step" data-i="1" style="--h:55%;--c:#cfcfd3;--i:1"><span class="step-top"><span class="step-n">02</span></span><span class="step-name">Сайт</span><span class="step-p">в запуске</span></button>
+          <button class="step dark" data-i="2" style="--h:77%;--c:#6b6b70;--i:2"><span class="step-top"><span class="step-n">03</span></span><span class="step-name">Запуск</span><span class="step-p">после диагностики</span></button>
+          <button class="step dark" data-i="3" style="--h:100%;--c:#0b0b0c;--i:3"><span class="step-top"><span class="step-n">04</span></span><span class="step-name">Продюси&shy;рование</span><span class="step-p">от 120 000 ₽/мес</span></button>
         </div>
         <div class="stairs-axis"><span>меньше нашего участия</span><span>делаем всё мы →</span></div>
       </div>
@@ -194,7 +192,6 @@
         <img src="img/obj-clip.png" alt="" class="sheet-clip">
         <div class="svc-items">
           <article class="si on">
-            <small class="si-k">услуга 01 из 04 · участие ●○○○</small>
             <h3>Бесплатный разбор</h3>
             <p>Созваниваемся, смотрим ваш канал или идею и продукт. Говорим, сколько канал может зарабатывать и что мешает.</p>
             <div class="si-cols">
@@ -204,7 +201,6 @@
             <div class="si-foot"><span><small>Стоимость</small><b class="si-price">0 ₽</b></span></div>
           </article>
           <article class="si">
-            <small class="si-k">услуга 02 из 04 · участие ●●○○</small>
             <h3>Сайт и упаковка</h3>
             <p>Делаем страницу продукта и оплату, чтобы читатель из канала мог купить в пару кликов, без переписки в личке.</p>
             <div class="si-cols">
@@ -214,7 +210,6 @@
             <div class="si-foot"><span><small>Стоимость</small><b class="si-price">в рамках запуска</b></span></div>
           </article>
           <article class="si">
-            <small class="si-k">услуга 03 из 04 · участие ●●●○</small>
             <h3>Запуск продукта</h3>
             <p>Продаём ваш продукт через канал: готовим прогрев, пишем посты, ведём продажи. Вся операционка — на нас.</p>
             <div class="si-cols">
@@ -224,7 +219,6 @@
             <div class="si-foot"><span><small>Стоимость</small><b class="si-price">после диагностики</b></span></div>
           </article>
           <article class="si">
-            <small class="si-k">услуга 04 из 04 · участие ●●●●</small>
             <h3>Полное продюсирование</h3>
             <p>Ведём канал целиком каждый месяц: посты по системе, рост аудитории и регулярные запуски ваших продуктов.</p>
             <div class="si-cols">
@@ -270,8 +264,8 @@
     <div class="receipt" id="receipt">
       <div class="rc-in">
         <b class="rc-logo">нас#лия</b>
-        <span class="rc-c">продакшн telegram-каналов</span>
-        <span class="rc-c">чек № 0001 · <i id="rcDate"></i></span>
+        
+        
         <hr>
         <ol>
           <li><span>01 Разбор</span><i></i><b>3 шага</b></li>
@@ -284,7 +278,7 @@
         <div class="rc-total"><span>Итого</span><b>канал, который продаёт</b></div>
         <span class="rc-c">операционка автора: 0 ч</span>
         <svg class="barcode" id="bc2" aria-hidden="true"></svg>
-        <span class="rc-c">спасибо ✱ приходите ещё</span>
+        
       </div>
     </div>
   </section>
@@ -329,9 +323,9 @@
         <div class="badge" role="button" tabindex="0" aria-label="Перевернуть бейдж: Артём Бутов">
           <div class="badge-in">
             <div class="badge-f">
-              <span class="badge-top"><b>STAFF</b><span>нас#лия · 2026</span></span>
+              <span class="badge-top"><b>STAFF</b></span>
               <img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy">
-              <span class="badge-no">№ 001</span>
+              
               <span class="badge-name">Артём Бутов</span>
               <span class="badge-role">Продукт и продюсирование</span>
               <span class="badge-desc">Делает сайты и контент для Telegram. Выстраивает путь от интереса к посту до покупки.</span>
@@ -339,7 +333,7 @@
               <span class="badge-flip">нажмите — перевернётся ↻</span>
             </div>
             <div class="badge-b">
-              <span class="badge-top"><b>Чем занимается</b><span>№ 001</span></span>
+              <span class="badge-top"><b>Чем занимается</b></span>
               <ul class="badge-facts"><li><b>Сайты</b><span>страницы продуктов и оплата</span></li><li><b>Контент</b><span>посты и прогревы для Telegram</span></li><li><b>Воронки</b><span>путь от поста до покупки</span></li></ul>
               <a href="https://t.me/lfbutov" target="_blank" rel="noopener" class="badge-link">Telegram-блог @lfbutov ↗</a>
               <span class="badge-flip">↻ обратно</span>
@@ -353,9 +347,9 @@
         <div class="badge" role="button" tabindex="0" aria-label="Перевернуть бейдж: Артём Федонко">
           <div class="badge-in">
             <div class="badge-f">
-              <span class="badge-top"><b>STAFF</b><span>нас#лия · 2026</span></span>
+              <span class="badge-top"><b>STAFF</b></span>
               <img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy">
-              <span class="badge-no">№ 002</span>
+              
               <span class="badge-name">Артём Федонко</span>
               <span class="badge-role">Клиенты и команда</span>
               <span class="badge-desc">Находит клиентов, ведёт переговоры, собирает команду и координирует продажников.</span>
@@ -363,7 +357,7 @@
               <span class="badge-flip">нажмите — перевернётся ↻</span>
             </div>
             <div class="badge-b">
-              <span class="badge-top"><b>В цифрах</b><span>№ 002</span></span>
+              <span class="badge-top"><b>В цифрах</b></span>
               <ul class="badge-facts"><li><b>15 000+</b><span>человек — его аудитория</span></li><li><b>$50 000+</b><span>общая прибыль запусков с его участием</span></li><li><b>4 тыс.</b><span>подписчиков в его Telegram-канале</span></li></ul>
               <a href="https://t.me/+soEcPH8C9oRlNTZi" target="_blank" rel="noopener" class="badge-link">Telegram-канал ↗</a>
               <span class="badge-flip">↻ обратно</span>
@@ -378,9 +372,9 @@
   <section class="sec fmt" id="formats">
     <div class="sec-head"><div><span class="cap">10 | Форматы</span><h2 class="h2">С чего начать</h2></div><p class="lead">Три способа начать работу. У каждого написано, кому он подходит. Не знаете, что выбрать, — запишитесь на бесплатную консультацию, там и решим.</p></div>
     <div class="cards"><span class="twine" aria-hidden="true"></span>
-      <article class="paper" style="--tilt:-1.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>ежемесячно · ф-01</small><h3>Продюсирование</h3><p class="p-desc">Ведём канал целиком и продюсируем запуски.</p><p class="p-who"><small>Кому подходит</small>Есть канал и продукт, хотите отдать нам всю работу.</p><ul><li>Посты выходят по системе</li><li>Растёт аудитория</li><li>Запуски от 500 000 ₽</li></ul><b class="price">от 120 000 ₽</b><a href="#brief" class="pill ghost" data-pick="Передать канал под ключ">Обсудить</a><svg class="barcode" aria-hidden="true"></svg></article>
-      <article class="paper hl" style="--tilt:1deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>чаще всего · ф-02</small><h3>Запуск продукта</h3><p class="p-desc">Разовый проект: продаём ваш продукт через канал.</p><p class="p-who"><small>Кому подходит</small>Есть продукт, нужно продать его через Telegram.</p><ul><li>Прогрев и посты</li><li>Вся операционка на нас</li><li>Канал работает и после</li></ul><b class="price">после диагностики</b><a href="#brief" class="pill inv" data-pick="Запустить продукт в Telegram">Обсудить</a><svg class="barcode" aria-hidden="true"></svg><span class="stamp">хит</span></article>
-      <article class="paper" style="--tilt:-.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>бесплатно · ф-03</small><h3>Консультация</h3><p class="p-desc">Созвон, на котором разбираем ваш канал.</p><p class="p-who"><small>Кому подходит</small>Пока не понятно, с чего начать и сколько это стоит.</p><ul><li>Потенциал канала</li><li>3 идеи, как зарабатывать</li><li>Условия работы с нами</li></ul><b class="price">0 ₽</b><a href="#brief" class="pill ghost" data-pick="Начать с бесплатной консультации">Записаться</a><svg class="barcode" aria-hidden="true"></svg></article>
+      <article class="paper" style="--tilt:-1.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>ежемесячно</small><h3>Продюсирование</h3><p class="p-desc">Ведём канал целиком и продюсируем запуски.</p><p class="p-who"><small>Кому подходит</small>Есть канал и продукт, хотите отдать нам всю работу.</p><ul><li>Посты выходят по системе</li><li>Растёт аудитория</li><li>Запуски от 500 000 ₽</li></ul><b class="price">от 120 000 ₽</b><a href="#brief" class="pill ghost" data-pick="Передать канал под ключ">Обсудить</a><svg class="barcode" aria-hidden="true"></svg></article>
+      <article class="paper hl" style="--tilt:1deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>чаще всего</small><h3>Запуск продукта</h3><p class="p-desc">Разовый проект: продаём ваш продукт через канал.</p><p class="p-who"><small>Кому подходит</small>Есть продукт, нужно продать его через Telegram.</p><ul><li>Прогрев и посты</li><li>Вся операционка на нас</li><li>Канал работает и после</li></ul><b class="price">после диагностики</b><a href="#brief" class="pill inv" data-pick="Запустить продукт в Telegram">Обсудить</a><svg class="barcode" aria-hidden="true"></svg><span class="stamp">хит</span></article>
+      <article class="paper" style="--tilt:-.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>бесплатно</small><h3>Консультация</h3><p class="p-desc">Созвон, на котором разбираем ваш канал.</p><p class="p-who"><small>Кому подходит</small>Пока не понятно, с чего начать и сколько это стоит.</p><ul><li>Потенциал канала</li><li>3 идеи, как зарабатывать</li><li>Условия работы с нами</li></ul><b class="price">0 ₽</b><a href="#brief" class="pill ghost" data-pick="Начать с бесплатной консультации">Записаться</a><svg class="barcode" aria-hidden="true"></svg></article>
     </div>
     <div class="fmt-foot"><span>Сомневаетесь?</span><a href="#test">Пройдите тест канала за 30 секунд ↑</a><a href="#brief">или сразу напишите нам ↓</a></div>
   </section>
@@ -437,6 +431,6 @@
   <video playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" controls aria-label="Знакомство с агентством"></video>
 </div>
 
-<script src="app.js?v=1793500900"></script>
+<script src="app.js?v=1793501900"></script>
 </body>
 </html>

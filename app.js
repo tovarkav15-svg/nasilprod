@@ -145,23 +145,20 @@ function onScroll() {
 }
 addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll); addEventListener("load", onScroll); onScroll();
 
-// ---------- услуги: слайдер ----------
-(function slider() {
+// ---------- услуги: кадры плёнки ----------
+(function film() {
   const sec = document.getElementById("services");
   if (!sec) return;
-  const tabs = [...sec.querySelectorAll(".svc-tabs button")], items = [...sec.querySelectorAll(".si")], words = [...sec.querySelectorAll(".svc-word span")];
+  const row = sec.querySelector(".film-row"), frs = [...sec.querySelectorAll(".fr")], items = [...sec.querySelectorAll(".si")];
   const num = document.getElementById("svcN");
   let cur = 0, touched = false;
   const go = i => {
-    i = (i + items.length) % items.length;
-    if (i === cur) return;
-    words[cur].classList.add("out"); const prev = words[cur]; setTimeout(() => prev.classList.remove("out"), 1100);
-    cur = i;
-    [tabs, items, words].forEach(list => list.forEach((el, j) => el.classList.toggle("on", j === i)));
-    num.textContent = String(i + 1).padStart(2, "0");
+    cur = (i + items.length) % items.length;
+    [frs, items].forEach(list => list.forEach((el, j) => el.classList.toggle("on", j === cur)));
+    num.textContent = String(cur + 1).padStart(2, "0");
+    if (row.scrollWidth > row.clientWidth) row.scrollTo({ left: frs[cur].offsetLeft - row.offsetLeft - 20, behavior: "smooth" });
   };
-  tabs.forEach((b, i) => b.addEventListener("click", () => { touched = true; go(i); }));
-  sec.querySelectorAll(".arr").forEach(b => b.addEventListener("click", () => { touched = true; go(cur + +b.dataset.d); }));
+  frs.forEach((b, i) => b.addEventListener("click", () => { touched = true; go(i); }));
   setInterval(() => { const r = sec.getBoundingClientRect(); if (!touched && !calm && r.top < innerHeight * .5 && r.bottom > innerHeight * .5) go(cur + 1); }, 5000);
 })();
 

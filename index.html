@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793500800">
+<link rel="stylesheet" href="style.css?v=1793500900">
 </head>
 <body>
 
@@ -250,6 +250,7 @@
         <div><dt>Остаётся вам</dt><dd id="cs3">всё</dd></div>
       </dl>
     </div>
+    <div class="obj obj-cap" data-drag style="--rot:-9deg"><img src="img/obj-cap.png" alt="Кепка с надписью «Весь день занят, а денег мало»" draggable="false"><span class="obj-note">весь день занят,<br>а денег мало — знакомо?</span></div>
     <canvas class="crew-canvas" aria-label="Схема: кто делает работу в канале"></canvas>
   </section>
 
@@ -318,34 +319,75 @@
     </div>
   </section>
 
-  <!-- КОМАНДА -->
+  <!-- КОМАНДА: бейджи на ланъярдах -->
   <section class="sec team" id="team">
-    <div class="sec-head"><div><span class="cap">09 | Команда</span><h2 class="h2">Люди</h2></div><p class="lead">Агентство основали два Артёма. Один отвечает за продукт и продажи через канал, второй — за клиентов и команду.</p></div>
-    <div class="people">
-      <article class="person"><div class="photo"><span class="tape"></span><img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy"></div><small>Продукт и продюсирование</small><h3>Артём Бутов</h3><p class="person-p">Делает сайты и контент для Telegram. Выстраивает путь от интереса к посту до покупки продукта.</p><a href="https://t.me/lfbutov" target="_blank" rel="noopener">@lfbutov ↗</a></article>
-      <div class="stats">
-        <div><b>15 000+</b><span>человек — аудитория Артёма Федонко</span></div>
-        <div><b>$50 000+</b><span>общая прибыль запусков с его участием</span></div>
-        <div><b>500K ₽+</b><span>выручка запуска, на которую мы целимся</span></div>
-        <svg class="mark spin stats-ast"><use href="#ast"/></svg>
+    <div class="sec-head"><div><span class="cap">09 | Команда</span><h2 class="h2">Кто за этим<br>стоит</h2></div><p class="lead">Агентство основали два Артёма. Один отвечает за продукт и продажи через канал, второй — за клиентов и команду. Нажмите на бейдж, чтобы перевернуть его.</p></div>
+    <div class="lanyards">
+      <div class="lanyard" style="--l:-2.5deg">
+        <span class="strap" aria-hidden="true"><i>нас#лия · нас#лия · нас#лия · нас#лия · нас#лия · нас#лия</i></span>
+        <span class="hook" aria-hidden="true"></span>
+        <div class="badge" role="button" tabindex="0" aria-label="Перевернуть бейдж: Артём Бутов">
+          <div class="badge-in">
+            <div class="badge-f">
+              <span class="badge-top"><b>STAFF</b><span>нас#лия · 2026</span></span>
+              <img src="img/creator-artem-butov-v2.jpg" alt="Артём Бутов" loading="lazy">
+              <span class="badge-no">№ 001</span>
+              <span class="badge-name">Артём Бутов</span>
+              <span class="badge-role">Продукт и продюсирование</span>
+              <span class="badge-desc">Делает сайты и контент для Telegram. Выстраивает путь от интереса к посту до покупки.</span>
+              <svg class="barcode" aria-hidden="true"></svg>
+              <span class="badge-flip">нажмите — перевернётся ↻</span>
+            </div>
+            <div class="badge-b">
+              <span class="badge-top"><b>Чем занимается</b><span>№ 001</span></span>
+              <ul class="badge-facts"><li><b>Сайты</b><span>страницы продуктов и оплата</span></li><li><b>Контент</b><span>посты и прогревы для Telegram</span></li><li><b>Воронки</b><span>путь от поста до покупки</span></li></ul>
+              <a href="https://t.me/lfbutov" target="_blank" rel="noopener" class="badge-link">Telegram-блог @lfbutov ↗</a>
+              <span class="badge-flip">↻ обратно</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <article class="person"><div class="photo"><span class="tape"></span><img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy"></div><small>Клиенты и команда</small><h3>Артём Федонко</h3><p class="person-p">Находит клиентов, ведёт переговоры, собирает команду и координирует продажников.</p><a href="https://t.me/+soEcPH8C9oRlNTZi" target="_blank" rel="noopener">Telegram-канал ↗</a></article>
+      <div class="lanyard" style="--l:2deg">
+        <span class="strap" aria-hidden="true"><i>нас#лия · нас#лия · нас#лия · нас#лия · нас#лия · нас#лия</i></span>
+        <span class="hook" aria-hidden="true"></span>
+        <div class="badge" role="button" tabindex="0" aria-label="Перевернуть бейдж: Артём Федонко">
+          <div class="badge-in">
+            <div class="badge-f">
+              <span class="badge-top"><b>STAFF</b><span>нас#лия · 2026</span></span>
+              <img src="img/creator-artem-fedonko-v2.jpg" alt="Артём Федонко" loading="lazy">
+              <span class="badge-no">№ 002</span>
+              <span class="badge-name">Артём Федонко</span>
+              <span class="badge-role">Клиенты и команда</span>
+              <span class="badge-desc">Находит клиентов, ведёт переговоры, собирает команду и координирует продажников.</span>
+              <svg class="barcode" aria-hidden="true"></svg>
+              <span class="badge-flip">нажмите — перевернётся ↻</span>
+            </div>
+            <div class="badge-b">
+              <span class="badge-top"><b>В цифрах</b><span>№ 002</span></span>
+              <ul class="badge-facts"><li><b>15 000+</b><span>человек — его аудитория</span></li><li><b>$50 000+</b><span>общая прибыль запусков с его участием</span></li><li><b>4 тыс.</b><span>подписчиков в его Telegram-канале</span></li></ul>
+              <a href="https://t.me/+soEcPH8C9oRlNTZi" target="_blank" rel="noopener" class="badge-link">Telegram-канал ↗</a>
+              <span class="badge-flip">↻ обратно</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ФОРМАТЫ: листы на зажимах -->
   <section class="sec fmt" id="formats">
-    <div class="sec-head"><div><span class="cap">10 | Форматы</span><h2 class="h2">С чего начать</h2></div><p class="lead">Три способа начать работу. Не знаете, что выбрать, — запишитесь на бесплатную консультацию, там и решим.</p></div>
-    <div class="cards">
-      <article class="paper" style="--tilt:-1.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>ежемесячно · ф-01</small><h3>Продюсирование</h3><p class="p-desc">Ведём канал целиком и продюсируем запуски.</p><ul><li>Посты выходят по системе</li><li>Растёт аудитория</li><li>Запуски от 500 000 ₽</li></ul><b class="price">от 120 000 ₽</b><a href="#brief" class="pill ghost" data-pick="Передать канал под ключ">Обсудить</a><svg class="barcode" aria-hidden="true"></svg></article>
-      <article class="paper hl" style="--tilt:1deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>чаще всего · ф-02</small><h3>Запуск продукта</h3><p class="p-desc">Разовый проект: продаём ваш продукт через канал.</p><ul><li>Прогрев и посты</li><li>Вся операционка на нас</li><li>Канал работает и после</li></ul><b class="price">после диагностики</b><a href="#brief" class="pill inv" data-pick="Запустить продукт в Telegram">Обсудить</a><svg class="barcode" aria-hidden="true"></svg><span class="stamp">хит</span></article>
-      <article class="paper" style="--tilt:-.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>бесплатно · ф-03</small><h3>Консультация</h3><p class="p-desc">Созвон, на котором разбираем ваш канал.</p><ul><li>Потенциал канала</li><li>3 идеи, как зарабатывать</li><li>Условия работы с нами</li></ul><b class="price">0 ₽</b><a href="#brief" class="pill ghost" data-pick="Начать с бесплатной консультации">Записаться</a><svg class="barcode" aria-hidden="true"></svg></article>
+    <div class="sec-head"><div><span class="cap">10 | Форматы</span><h2 class="h2">С чего начать</h2></div><p class="lead">Три способа начать работу. У каждого написано, кому он подходит. Не знаете, что выбрать, — запишитесь на бесплатную консультацию, там и решим.</p></div>
+    <div class="cards"><span class="twine" aria-hidden="true"></span>
+      <article class="paper" style="--tilt:-1.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>ежемесячно · ф-01</small><h3>Продюсирование</h3><p class="p-desc">Ведём канал целиком и продюсируем запуски.</p><p class="p-who"><small>Кому подходит</small>Есть канал и продукт, хотите отдать нам всю работу.</p><ul><li>Посты выходят по системе</li><li>Растёт аудитория</li><li>Запуски от 500 000 ₽</li></ul><b class="price">от 120 000 ₽</b><a href="#brief" class="pill ghost" data-pick="Передать канал под ключ">Обсудить</a><svg class="barcode" aria-hidden="true"></svg></article>
+      <article class="paper hl" style="--tilt:1deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>чаще всего · ф-02</small><h3>Запуск продукта</h3><p class="p-desc">Разовый проект: продаём ваш продукт через канал.</p><p class="p-who"><small>Кому подходит</small>Есть продукт, нужно продать его через Telegram.</p><ul><li>Прогрев и посты</li><li>Вся операционка на нас</li><li>Канал работает и после</li></ul><b class="price">после диагностики</b><a href="#brief" class="pill inv" data-pick="Запустить продукт в Telegram">Обсудить</a><svg class="barcode" aria-hidden="true"></svg><span class="stamp">хит</span></article>
+      <article class="paper" style="--tilt:-.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>бесплатно · ф-03</small><h3>Консультация</h3><p class="p-desc">Созвон, на котором разбираем ваш канал.</p><p class="p-who"><small>Кому подходит</small>Пока не понятно, с чего начать и сколько это стоит.</p><ul><li>Потенциал канала</li><li>3 идеи, как зарабатывать</li><li>Условия работы с нами</li></ul><b class="price">0 ₽</b><a href="#brief" class="pill ghost" data-pick="Начать с бесплатной консультации">Записаться</a><svg class="barcode" aria-hidden="true"></svg></article>
     </div>
+    <div class="fmt-foot"><span>Сомневаетесь?</span><a href="#test">Пройдите тест канала за 30 секунд ↑</a><a href="#brief">или сразу напишите нам ↓</a></div>
   </section>
 
   <!-- ВОПРОСЫ -->
   <section class="sec faq" id="faq">
-    <div class="sec-head"><span class="cap">11 | Вопросы</span></div>
+    <div class="sec-head"><span class="cap">11 | Вопросы</span><div class="peek"><img src="img/obj-beanie.png" alt="" draggable="false"><span class="bubble">Ничего не понятно?<br>Спросите — объясним</span></div></div>
     <div class="qa">
       <details><summary><svg class="mark"><use href="#ast"/></svg><span>Чем вы отличаетесь от SMM-щика или копирайтера?</span><b class="plus"></b></summary><p>Копирайтер пишет посты, SMM-щик ведёт соцсети. Мы отвечаем за результат целиком: стратегия, тексты, продвижение и продажи вашего продукта — одной командой.</p></details>
       <details><summary><svg class="mark"><use href="#ast"/></svg><span>Что можно передать вам?</span><b class="plus"></b></summary><p>Контент, сайт и запуск продукта в Telegram. Берём канал целиком или подключаемся к отдельному запуску.</p></details>
@@ -362,6 +404,7 @@
     <div class="ct-l">
       <h2 class="ct-title" id="ctTitle">Напишите<br>нам</h2>
       <svg class="ct-hash spin-slow" aria-hidden="true"><use href="#hash"/></svg>
+      <div class="obj obj-case" data-drag style="--rot:7deg"><img src="img/obj-case.png" alt="" draggable="false"></div>
       <p class="lead ct-lead">Выберите задачу и оставьте Telegram. Начнём с бесплатного разбора: созвон, на котором скажем, что можно улучшить в вашем канале.</p>
     </div>
     <form class="cform" id="cform">
@@ -394,6 +437,6 @@
   <video playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" controls aria-label="Знакомство с агентством"></video>
 </div>
 
-<script src="app.js?v=1793500800"></script>
+<script src="app.js?v=1793500900"></script>
 </body>
 </html>

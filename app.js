@@ -137,7 +137,7 @@ if (ctTitle) {
   ctTitle.innerHTML = lines.map(l => `<span class="ln">${[...l].map(ch => `<i>${ch}</i>`).join("")}</span>`).join("");
   [...ctTitle.querySelectorAll("i")].forEach((s, i) => { s.style.transitionDelay = `${i * .05}s`; });
 }
-const pending = new Set(document.querySelectorAll(".ba, .sheet, .crew-top, .receipt, .desk, .people, .cards, .qa, .cform, .ct-title"));
+const pending = new Set(document.querySelectorAll(".ba, .sheet, .crew-top, .receipt, .desk, .lanyards, .cards, .qa, .cform, .ct-title"));
 pending.forEach(el => { if (!el.matches(".ba, .ct-title, .receipt")) el.classList.add("rv"); });
 function onScroll() {
   const H = innerHeight;
@@ -150,9 +150,9 @@ document.querySelectorAll(".h2").forEach(h => {
   let k = 0;
   h.innerHTML = h.innerHTML.split("<br>").map(line => line.trim().split(/\s+/).map(w => `<span class="wd"><i style="--d:${(k++ * .07).toFixed(2)}s">${w}</i></span>`).join(" ")).join("<br>");
 });
-const stag = [".about-grid li", ".gloss > div", ".proc-steps li", ".ba-foot > div", ".stats > div", ".qa details", ".chips .chip"];
+const stag = [".about-grid li", ".gloss > div", ".proc-steps li", ".ba-foot > div", ".fmt-foot > *", ".qa details", ".chips .chip"];
 stag.forEach(sel => document.querySelectorAll(sel).forEach((el, i) => { el.classList.add("st"); el.style.setProperty("--i", i % 8); }));
-document.querySelectorAll(".lead, .test-lead, .svc-lead, .person-p").forEach(el => el.classList.add("st"));
+document.querySelectorAll(".lead, .test-lead, .svc-lead").forEach(el => el.classList.add("st"));
 
 function countUp(el) {
   if (calm || shot) return;
@@ -168,7 +168,7 @@ function countUp(el) {
     if (k < 1) requestAnimationFrame(step);
   })(t0);
 }
-const counters = new Set(document.querySelectorAll(".ba-foot b, .stats b, .case.on .case-txt b"));
+const counters = new Set(document.querySelectorAll(".ba-foot b, .case.on .case-txt b"));
 const anim = [...document.querySelectorAll(".h2, .st, .cap, .cards")];
 if (calm || shot) anim.forEach(el => el.classList.add("in"));
 else {
@@ -255,6 +255,32 @@ if (fine && !calm) document.querySelectorAll(".pill").forEach(b => {
     };
     requestAnimationFrame(tick);
   }, { threshold: .5 }).observe(box);
+})();
+
+// ---------- команда: бейджи качаются и переворачиваются ----------
+(function lanyards() {
+  const ls = [...document.querySelectorAll(".lanyard")];
+  if (!ls.length) return;
+  ls.forEach(l => {
+    const b = l.querySelector(".badge");
+    b.addEventListener("click", e => { if (!e.target.closest("a")) l.classList.toggle("flip"); });
+    b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); l.classList.toggle("flip"); } });
+  });
+  if (calm || shot) return;
+  const st = ls.map(() => ({ a: 0, v: 0 }));
+  let lastX = px, lastY = scrollY;
+  (function loop() {
+    const dx = px - lastX, dy = scrollY - lastY; lastX = px; lastY = scrollY;
+    ls.forEach((l, i) => {
+      const r = l.getBoundingClientRect(), s = st[i];
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      if (Math.abs(px - (r.left + r.width / 2)) < r.width * .7 && py > r.top && py < r.bottom) s.v += dx * .012;
+      s.v += dy * .002 * (i % 2 ? -1 : 1);
+      s.v += -s.a * .02; s.v *= .96; s.a = clamp(s.a + s.v, -25, 25);
+      l.style.setProperty("--sw", s.a.toFixed(2) + "deg");
+    });
+    requestAnimationFrame(loop);
+  })();
 })();
 
 // ---------- кейсы: папки открывают окно ----------

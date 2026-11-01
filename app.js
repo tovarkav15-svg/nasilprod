@@ -137,7 +137,7 @@ if (ctTitle) {
   ctTitle.innerHTML = lines.map(l => `<span class="ln">${[...l].map(ch => `<i>${ch}</i>`).join("")}</span>`).join("");
   [...ctTitle.querySelectorAll("i")].forEach((s, i) => { s.style.transitionDelay = `${i * .05}s`; });
 }
-const pending = new Set(document.querySelectorAll(".ba, .sheet, .crew-top, .receipt, .desk, .lanyards, .cards, .qa, .cform, .ct-title"));
+const pending = new Set(document.querySelectorAll(".ba, .sheet, .svc-list, .crew-top, .receipt, .desk, .lanyards, .cards, .qa, .cform, .ct-title"));
 pending.forEach(el => { if (!el.matches(".ba, .ct-title, .receipt")) el.classList.add("rv"); });
 function onScroll() {
   const H = innerHeight;
@@ -150,7 +150,7 @@ document.querySelectorAll(".h2").forEach(h => {
   let k = 0;
   h.innerHTML = h.innerHTML.split("<br>").map(line => line.trim().split(/\s+/).map(w => `<span class="wd"><i style="--d:${(k++ * .07).toFixed(2)}s">${w}</i></span>`).join(" ")).join("<br>");
 });
-const stag = [".about-grid li", ".gloss > div", ".proc-steps li", ".ba-foot > div", ".fmt-foot > *", ".qa details", ".chips .chip"];
+const stag = [".gloss > div", ".proc-steps li", ".ba-foot > div", ".fmt-foot > *", ".qa details", ".chips .chip"];
 stag.forEach(sel => document.querySelectorAll(sel).forEach((el, i) => { el.classList.add("st"); el.style.setProperty("--i", i % 8); }));
 document.querySelectorAll(".lead, .test-lead, .svc-lead").forEach(el => el.classList.add("st"));
 
@@ -199,24 +199,31 @@ if (fine && !calm) document.querySelectorAll(".pill").forEach(b => {
   })();
 })();
 
-// ---------- услуги: лестница ----------
-(function stairs() {
-  const sec = document.getElementById("services");
-  if (!sec) return;
-  const wrap = sec.querySelector(".stairs-wrap"), steps = [...sec.querySelectorAll(".step")], items = [...sec.querySelectorAll(".si")];
-  let cur = 0, touched = false;
-  const go = i => {
-    cur = (i + items.length) % items.length;
-    [steps, items].forEach(list => list.forEach((el, j) => el.classList.toggle("on", j === cur)));
-    sec.style.setProperty("--k", cur);
-    sec.style.setProperty("--hk", steps[cur].offsetHeight + "px");
+// ---------- услуги: прайс-лист ----------
+(function svcRows() {
+  const rows = [...document.querySelectorAll("#services .row")];
+  rows.forEach(r => r.querySelector(".row-head").addEventListener("click", () => {
+    const open = !r.classList.contains("open");
+    rows.forEach(o => { o.classList.toggle("open", o === r && open); o.querySelector(".row-head").setAttribute("aria-expanded", o === r && open); });
+  }));
+})();
+
+// ---------- что делаем: переписка ----------
+(function chat() {
+  const box = document.getElementById("chat");
+  if (!box || calm || shot) return;
+  const body = box.querySelector(".chat-body"), msgs = [...box.querySelectorAll(".msg")];
+  body.style.minHeight = body.offsetHeight + "px";
+  box.classList.add("js");
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const run = async () => {
+    for (const m of msgs) {
+      if (m.classList.contains("us")) { box.classList.add("typing"); await wait(900 + Math.min(900, m.textContent.length * 6)); box.classList.remove("typing"); }
+      else await wait(450);
+      m.classList.add("show");
+    }
   };
-  steps.forEach((b, i) => { b.addEventListener("click", () => { touched = true; go(i); }); b.addEventListener("pointerenter", () => { if (fine) { touched = true; go(i); } }); });
-  addEventListener("resize", () => go(cur));
-  go(0);
-  if (calm || shot) wrap.classList.add("in");
-  else new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { wrap.classList.add("in"); io.disconnect(); } }, { threshold: .3 }).observe(wrap);
-  setInterval(() => { const r = sec.getBoundingClientRect(); if (!touched && !calm && r.top < innerHeight * .5 && r.bottom > innerHeight * .5) go(cur + 1); }, 4000);
+  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); run(); } }, { threshold: .35 }).observe(box);
 })();
 
 // ---------- видео ----------

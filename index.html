@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793501900">
+<link rel="stylesheet" href="style.css?v=1793502900">
 </head>
 <body>
 
@@ -81,23 +81,35 @@
     <span>Посты</span><svg class="mark"><use href="#ast"/></svg><span>Прогревы</span><svg class="mark"><use href="#hash"/></svg><span>Запуски</span><svg class="mark"><use href="#ast"/></svg><span>Воронки</span><svg class="mark"><use href="#hash"/></svg><span>Сайты</span><svg class="mark"><use href="#ast"/></svg><span>Кружки</span><svg class="mark"><use href="#hash"/></svg>
   </div></div>
 
-  <!-- ЧТО МЫ ДЕЛАЕМ -->
+  <!-- ЧТО МЫ ДЕЛАЕМ: переписка -->
   <section class="sec about" id="about">
-    <div class="about-top">
-      <div><span class="cap">01 | Что мы делаем</span><h2 class="h2">Берём ваш канал<br>на себя</h2></div>
-      <p class="lead">Нас#лия — продюсерское агентство. Мы делаем так, чтобы Telegram-канал эксперта рос и приносил деньги, а сам эксперт не тратил на него вечера. Стратегия, тексты, продвижение и продажи — одной командой.</p>
+    <div class="about-wrap">
+      <div class="about-side">
+        <span class="cap">01 | Что мы делаем</span>
+        <h2 class="h2">Берём ваш канал<br>на себя</h2>
+        <p class="lead">Нас#лия — продюсерское агентство. Мы делаем так, чтобы Telegram-канал эксперта рос и приносил деньги, а сам эксперт не тратил на него вечера. В переписке — ответы на вопросы, которые нам задают чаще всего.</p>
+        <dl class="gloss">
+          <div><dt>Прогрев</dt><dd>серия постов, которая объясняет читателю, зачем ему ваш продукт</dd></div>
+          <div><dt>Запуск</dt><dd>период, когда продукт продаётся через канал</dd></div>
+          <div><dt>Воронка</dt><dd>путь человека от подписки до оплаты</dd></div>
+        </dl>
+      </div>
+      <div class="chat" id="chat">
+        <div class="chat-head"><span class="chat-ava">н#</span><span><b>Нас#лия</b><small>на связи</small></span><svg class="mark spin"><use href="#ast"/></svg></div>
+        <div class="chat-body">
+          <p class="msg me">Привет! Для кого вы работаете?</p>
+          <p class="msg us"><b>Для экспертов.</b> Психологи, коучи, нутрициологи, тренеры, консультанты — все, у кого есть знания и продукт, но нет времени вести канал.</p>
+          <p class="msg me">А что конкретно делаете?</p>
+          <p class="msg us"><b>Ведём весь канал.</b> Решаем, о чём писать, пишем и выпускаем посты, находим новых читателей и проводим продажи вашего продукта.</p>
+          <p class="msg me">Зачем мне это?</p>
+          <p class="msg us"><b>Чтобы канал продавал.</b> Он перестаёт быть дневником и приносит деньги: курсы, консультации, клубы, наставничество.</p>
+          <p class="msg me">А что нужно от меня?</p>
+          <p class="msg us"><b>Только ваш голос.</b> Экспертиза и обратная связь: созвоны, голосовые, правки. Всё остальное делаем мы.</p>
+          <span class="typing" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+        <a href="#brief" class="chat-input">Задать свой вопрос<span>↗</span></a>
+      </div>
     </div>
-    <ol class="about-grid">
-      <li><svg class="mark"><use href="#ast"/></svg><small>Для кого</small><h3>Эксперты</h3><p>Психологи, коучи, нутрициологи, тренеры, консультанты — все, у кого есть знания и продукт, но нет времени вести канал.</p></li>
-      <li><svg class="mark"><use href="#hash"/></svg><small>Что делаем</small><h3>Весь канал</h3><p>Решаем, о чём писать, пишем и выпускаем посты, находим новых читателей и проводим продажи вашего продукта.</p></li>
-      <li><svg class="mark"><use href="#ast"/></svg><small>Зачем</small><h3>Продажи</h3><p>Канал перестаёт быть дневником и начинает продавать: курсы, консультации, клубы, наставничество.</p></li>
-      <li><svg class="mark"><use href="#hash"/></svg><small>Что от вас</small><h3>Голос</h3><p>Ваша экспертиза и обратная связь: созвоны, голосовые, правки. Всё остальное делаем мы.</p></li>
-    </ol>
-    <dl class="gloss">
-      <div><dt>Прогрев</dt><dd>серия постов, которая объясняет читателю, зачем ему ваш продукт</dd></div>
-      <div><dt>Запуск</dt><dd>период, когда продукт продаётся через канал</dd></div>
-      <div><dt>Воронка</dt><dd>путь человека от подписки до оплаты</dd></div>
-    </dl>
   </section>
 
   <!-- ДО / ПОСЛЕ -->
@@ -171,66 +183,48 @@
     </form>
   </section>
 
-  <!-- УСЛУГИ: лестница -->
-  <section class="sec svc" id="services" style="--k:0">
+  <!-- УСЛУГИ: прайс-лист -->
+  <section class="sec svc" id="services">
     <div class="sec-head">
       <div><span class="cap">04 | Услуги</span><h2 class="h2">От совета<br>до канала под ключ</h2></div>
-      <p class="svc-lead">Четыре услуги — как ступени. Чем выше ступень, тем больше работы мы забираем у вас. Можно взять любую отдельно. Нажмите на ступень, чтобы посмотреть, что входит.</p>
+      <p class="svc-lead">Четыре услуги — от бесплатного разбора до полного ведения канала. Можно взять любую отдельно. Серая заливка строки показывает, какую часть работы мы забираем у вас. Нажмите на строку, чтобы увидеть, что входит.</p>
     </div>
-    <div class="svc-grid">
-      <div class="stairs-wrap">
-        <span class="halo-pick" aria-hidden="true"><i></i><b>вы здесь</b></span>
-        <div class="stairs">
-          <button class="step on" data-i="0" style="--h:34%;--c:#e9e9ec;--i:0"><span class="step-top"><span class="step-n">01</span></span><span class="step-name">Разбор</span><span class="step-p">0 ₽</span></button>
-          <button class="step" data-i="1" style="--h:55%;--c:#cfcfd3;--i:1"><span class="step-top"><span class="step-n">02</span></span><span class="step-name">Сайт</span><span class="step-p">в запуске</span></button>
-          <button class="step dark" data-i="2" style="--h:77%;--c:#6b6b70;--i:2"><span class="step-top"><span class="step-n">03</span></span><span class="step-name">Запуск</span><span class="step-p">после диагностики</span></button>
-          <button class="step dark" data-i="3" style="--h:100%;--c:#0b0b0c;--i:3"><span class="step-top"><span class="step-n">04</span></span><span class="step-name">Продюси&shy;рование</span><span class="step-p">от 120 000 ₽/мес</span></button>
-        </div>
-        <div class="stairs-axis"><span>меньше нашего участия</span><span>делаем всё мы →</span></div>
-      </div>
-      <div class="svc-card">
-        <img src="img/obj-clip.png" alt="" class="sheet-clip">
-        <div class="svc-items">
-          <article class="si on">
-            <h3>Бесплатный разбор</h3>
+    <div class="svc-list">
+      <div class="svc-scale" aria-hidden="true"><span>вы делаете сами</span><span>мы делаем всё</span></div>
+        <article class="row open" style="--p:25%;--i:0">
+          <button class="row-head" aria-expanded="true"><span class="row-fill" aria-hidden="true"></span><span class="row-n">01</span><span class="row-name">Бесплатный разбор</span><span class="row-price">0 ₽</span><span class="row-x" aria-hidden="true"></span></button>
+          <div class="row-body"><div class="row-in">
             <p>Созваниваемся, смотрим ваш канал или идею и продукт. Говорим, сколько канал может зарабатывать и что мешает.</p>
-            <div class="si-cols">
-              <div><small>Что делаем</small><ul><li>Разбор канала и аудитории</li><li>1 созвон</li><li>3 идеи монетизации</li></ul></div>
-              <div><small>Что получаете</small><ul><li>Оценку потенциала</li><li>Понятный план</li><li>Условия работы</li></ul></div>
-            </div>
-            <div class="si-foot"><span><small>Стоимость</small><b class="si-price">0 ₽</b></span></div>
-          </article>
-          <article class="si">
-            <h3>Сайт и упаковка</h3>
+            <div class="row-col"><small>Что делаем</small><ul><li>Разбор канала и аудитории</li><li>1 созвон</li><li>3 идеи монетизации</li></ul></div>
+            <div class="row-col"><small>Что получаете</small><ul><li>Оценку потенциала</li><li>Понятный план</li><li>Условия работы</li></ul></div>
+          </div></div>
+        </article>
+        <article class="row" style="--p:50%;--i:1">
+          <button class="row-head" aria-expanded="false"><span class="row-fill" aria-hidden="true"></span><span class="row-n">02</span><span class="row-name">Сайт и упаковка</span><span class="row-price">в рамках запуска</span><span class="row-x" aria-hidden="true"></span></button>
+          <div class="row-body"><div class="row-in">
             <p>Делаем страницу продукта и оплату, чтобы читатель из канала мог купить в пару кликов, без переписки в личке.</p>
-            <div class="si-cols">
-              <div><small>Что делаем</small><ul><li>Лендинг продукта</li><li>Приём оплаты</li><li>Связка канал → сайт</li></ul></div>
-              <div><small>Что получаете</small><ul><li>Воронку без дыр</li><li>Оплату в пару кликов</li></ul></div>
-            </div>
-            <div class="si-foot"><span><small>Стоимость</small><b class="si-price">в рамках запуска</b></span></div>
-          </article>
-          <article class="si">
-            <h3>Запуск продукта</h3>
+            <div class="row-col"><small>Что делаем</small><ul><li>Лендинг продукта</li><li>Приём оплаты</li><li>Связка канал → сайт</li></ul></div>
+            <div class="row-col"><small>Что получаете</small><ul><li>Воронку без дыр</li><li>Оплату в пару кликов</li></ul></div>
+          </div></div>
+        </article>
+        <article class="row" style="--p:75%;--i:2">
+          <button class="row-head" aria-expanded="false"><span class="row-fill" aria-hidden="true"></span><span class="row-n">03</span><span class="row-name">Запуск продукта</span><span class="row-price">после диагностики</span><span class="row-x" aria-hidden="true"></span></button>
+          <div class="row-body"><div class="row-in">
             <p>Продаём ваш продукт через канал: готовим прогрев, пишем посты, ведём продажи. Вся операционка — на нас.</p>
-            <div class="si-cols">
-              <div><small>Что делаем</small><ul><li>Аудит продукта</li><li>Прогрев и посты</li><li>Операционка запуска</li></ul></div>
-              <div><small>Что получаете</small><ul><li>Продажи</li><li>Канал, который живёт и после</li></ul></div>
-            </div>
-            <div class="si-foot"><span><small>Стоимость</small><b class="si-price">после диагностики</b></span></div>
-          </article>
-          <article class="si">
-            <h3>Полное продюсирование</h3>
+            <div class="row-col"><small>Что делаем</small><ul><li>Аудит продукта</li><li>Прогрев и посты</li><li>Операционка запуска</li></ul></div>
+            <div class="row-col"><small>Что получаете</small><ul><li>Продажи</li><li>Канал, который живёт и после</li></ul></div>
+          </div></div>
+        </article>
+        <article class="row" style="--p:100%;--i:3">
+          <button class="row-head" aria-expanded="false"><span class="row-fill" aria-hidden="true"></span><span class="row-n">04</span><span class="row-name">Полное продюсирование</span><span class="row-price">от 120 000 ₽/мес</span><span class="row-x" aria-hidden="true"></span></button>
+          <div class="row-body"><div class="row-in">
             <p>Ведём канал целиком каждый месяц: посты по системе, рост аудитории и регулярные запуски ваших продуктов.</p>
-            <div class="si-cols">
-              <div><small>Что делаем</small><ul><li>Стратегия</li><li>Контент по системе</li><li>Продвижение</li><li>Запуски</li></ul></div>
-              <div><small>Что получаете</small><ul><li>Широкую аудиторию</li><li>Регулярные продажи</li><li>0 ч операционки</li></ul></div>
-            </div>
-            <div class="si-foot"><span><small>Стоимость</small><b class="si-price">от 120 000 ₽/мес</b></span></div>
-          </article>
-        </div>
-        <div class="svc-actions"><a href="#brief" class="pill">Обсудить</a><button class="play" id="playVideo"><i>▶</i>Видео о нас <small>01:03</small></button></div>
-      </div>
+            <div class="row-col"><small>Что делаем</small><ul><li>Стратегия</li><li>Контент по системе</li><li>Продвижение</li><li>Запуски</li></ul></div>
+            <div class="row-col"><small>Что получаете</small><ul><li>Широкую аудиторию</li><li>Регулярные продажи</li><li>0 ч операционки</li></ul></div>
+          </div></div>
+        </article>
     </div>
+    <div class="svc-actions"><a href="#brief" class="pill">Обсудить</a><button class="play" id="playVideo"><i>▶</i>Видео о нас <small>01:03</small></button></div>
   </section>
 
   <!-- КОМАНДА КАНАЛА -->
@@ -431,6 +425,6 @@
   <video playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" controls aria-label="Знакомство с агентством"></video>
 </div>
 
-<script src="app.js?v=1793501900"></script>
+<script src="app.js?v=1793502900"></script>
 </body>
 </html>

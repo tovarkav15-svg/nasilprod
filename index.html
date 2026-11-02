@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793502900">
+<link rel="stylesheet" href="style.css?v=1793503900">
 </head>
 <body>
 
@@ -81,34 +81,20 @@
     <span>Посты</span><svg class="mark"><use href="#ast"/></svg><span>Прогревы</span><svg class="mark"><use href="#hash"/></svg><span>Запуски</span><svg class="mark"><use href="#ast"/></svg><span>Воронки</span><svg class="mark"><use href="#hash"/></svg><span>Сайты</span><svg class="mark"><use href="#ast"/></svg><span>Кружки</span><svg class="mark"><use href="#hash"/></svg>
   </div></div>
 
-  <!-- ЧТО МЫ ДЕЛАЕМ: переписка -->
+  <!-- ЧТО МЫ ДЕЛАЕМ -->
   <section class="sec about" id="about">
     <div class="about-wrap">
       <div class="about-side">
         <span class="cap">01 | Что мы делаем</span>
         <h2 class="h2">Берём ваш канал<br>на себя</h2>
-        <p class="lead">Нас#лия — продюсерское агентство. Мы делаем так, чтобы Telegram-канал эксперта рос и приносил деньги, а сам эксперт не тратил на него вечера. В переписке — ответы на вопросы, которые нам задают чаще всего.</p>
-        <dl class="gloss">
-          <div><dt>Прогрев</dt><dd>серия постов, которая объясняет читателю, зачем ему ваш продукт</dd></div>
-          <div><dt>Запуск</dt><dd>период, когда продукт продаётся через канал</dd></div>
-          <div><dt>Воронка</dt><dd>путь человека от подписки до оплаты</dd></div>
-        </dl>
+        <p class="lead">От вас — только экспертиза. Остальное делаем мы.</p>
+        <img src="img/emo-mic.png" alt="" class="emo emo-mic" aria-hidden="true">
       </div>
-      <div class="chat" id="chat">
-        <div class="chat-head"><span class="chat-ava">н#</span><span><b>Нас#лия</b><small>на связи</small></span><svg class="mark spin"><use href="#ast"/></svg></div>
-        <div class="chat-body">
-          <p class="msg me">Привет! Для кого вы работаете?</p>
-          <p class="msg us"><b>Для экспертов.</b> Психологи, коучи, нутрициологи, тренеры, консультанты — все, у кого есть знания и продукт, но нет времени вести канал.</p>
-          <p class="msg me">А что конкретно делаете?</p>
-          <p class="msg us"><b>Ведём весь канал.</b> Решаем, о чём писать, пишем и выпускаем посты, находим новых читателей и проводим продажи вашего продукта.</p>
-          <p class="msg me">Зачем мне это?</p>
-          <p class="msg us"><b>Чтобы канал продавал.</b> Он перестаёт быть дневником и приносит деньги: курсы, консультации, клубы, наставничество.</p>
-          <p class="msg me">А что нужно от меня?</p>
-          <p class="msg us"><b>Только ваш голос.</b> Экспертиза и обратная связь: созвоны, голосовые, правки. Всё остальное делаем мы.</p>
-          <span class="typing" aria-hidden="true"><i></i><i></i><i></i></span>
-        </div>
-        <a href="#brief" class="chat-input">Задать свой вопрос<span>↗</span></a>
-      </div>
+      <ol class="does">
+        <li><span>01</span>Пишем посты вашим голосом</li>
+        <li><span>02</span>Приводим читателей</li>
+        <li><span>03</span>Продаём ваши продукты</li>
+      </ol>
     </div>
   </section>
 
@@ -179,52 +165,22 @@
         <div class="comment-box"><b class="face" id="face">× ×<br>ᵕ</b><p id="verdict">Канал пока живёт на силе воли. Начнём с разбора.</p></div>
       </div>
       <a href="#brief" class="pill" id="sheetBtn" data-pick="Начать с бесплатной консультации">Отправить лист на разбор ↗</a>
-      <svg class="barcode" id="bc1" aria-hidden="true"></svg>
     </form>
   </section>
 
-  <!-- УСЛУГИ: прайс-лист -->
+  <!-- УСЛУГИ -->
   <section class="sec svc" id="services">
     <div class="sec-head">
       <div><span class="cap">04 | Услуги</span><h2 class="h2">От совета<br>до канала под ключ</h2></div>
-      <p class="svc-lead">Четыре услуги — от бесплатного разбора до полного ведения канала. Можно взять любую отдельно. Серая заливка строки показывает, какую часть работы мы забираем у вас. Нажмите на строку, чтобы увидеть, что входит.</p>
+      <img src="img/emo-horn.png" alt="" class="emo emo-horn" aria-hidden="true">
     </div>
-    <div class="svc-list">
-      <div class="svc-scale" aria-hidden="true"><span>вы делаете сами</span><span>мы делаем всё</span></div>
-        <article class="row open" style="--p:25%;--i:0">
-          <button class="row-head" aria-expanded="true"><span class="row-fill" aria-hidden="true"></span><span class="row-n">01</span><span class="row-name">Бесплатный разбор</span><span class="row-price">0 ₽</span><span class="row-x" aria-hidden="true"></span></button>
-          <div class="row-body"><div class="row-in">
-            <p>Созваниваемся, смотрим ваш канал или идею и продукт. Говорим, сколько канал может зарабатывать и что мешает.</p>
-            <div class="row-col"><small>Что делаем</small><ul><li>Разбор канала и аудитории</li><li>1 созвон</li><li>3 идеи монетизации</li></ul></div>
-            <div class="row-col"><small>Что получаете</small><ul><li>Оценку потенциала</li><li>Понятный план</li><li>Условия работы</li></ul></div>
-          </div></div>
-        </article>
-        <article class="row" style="--p:50%;--i:1">
-          <button class="row-head" aria-expanded="false"><span class="row-fill" aria-hidden="true"></span><span class="row-n">02</span><span class="row-name">Сайт и упаковка</span><span class="row-price">в рамках запуска</span><span class="row-x" aria-hidden="true"></span></button>
-          <div class="row-body"><div class="row-in">
-            <p>Делаем страницу продукта и оплату, чтобы читатель из канала мог купить в пару кликов, без переписки в личке.</p>
-            <div class="row-col"><small>Что делаем</small><ul><li>Лендинг продукта</li><li>Приём оплаты</li><li>Связка канал → сайт</li></ul></div>
-            <div class="row-col"><small>Что получаете</small><ul><li>Воронку без дыр</li><li>Оплату в пару кликов</li></ul></div>
-          </div></div>
-        </article>
-        <article class="row" style="--p:75%;--i:2">
-          <button class="row-head" aria-expanded="false"><span class="row-fill" aria-hidden="true"></span><span class="row-n">03</span><span class="row-name">Запуск продукта</span><span class="row-price">после диагностики</span><span class="row-x" aria-hidden="true"></span></button>
-          <div class="row-body"><div class="row-in">
-            <p>Продаём ваш продукт через канал: готовим прогрев, пишем посты, ведём продажи. Вся операционка — на нас.</p>
-            <div class="row-col"><small>Что делаем</small><ul><li>Аудит продукта</li><li>Прогрев и посты</li><li>Операционка запуска</li></ul></div>
-            <div class="row-col"><small>Что получаете</small><ul><li>Продажи</li><li>Канал, который живёт и после</li></ul></div>
-          </div></div>
-        </article>
-        <article class="row" style="--p:100%;--i:3">
-          <button class="row-head" aria-expanded="false"><span class="row-fill" aria-hidden="true"></span><span class="row-n">04</span><span class="row-name">Полное продюсирование</span><span class="row-price">от 120 000 ₽/мес</span><span class="row-x" aria-hidden="true"></span></button>
-          <div class="row-body"><div class="row-in">
-            <p>Ведём канал целиком каждый месяц: посты по системе, рост аудитории и регулярные запуски ваших продуктов.</p>
-            <div class="row-col"><small>Что делаем</small><ul><li>Стратегия</li><li>Контент по системе</li><li>Продвижение</li><li>Запуски</li></ul></div>
-            <div class="row-col"><small>Что получаете</small><ul><li>Широкую аудиторию</li><li>Регулярные продажи</li><li>0 ч операционки</li></ul></div>
-          </div></div>
-        </article>
-    </div>
-    <div class="svc-actions"><a href="#brief" class="pill">Обсудить</a><button class="play" id="playVideo"><i>▶</i>Видео о нас <small>01:03</small></button></div>
+    <ol class="tiers">
+        <li class="tier" style="--i:0"><span class="tier-n">01</span><h3>Разбор</h3><p>Созвон и план роста канала</p><b>0 ₽</b></li>
+        <li class="tier" style="--i:1"><span class="tier-n">02</span><h3>Сайт</h3><p>Страница продукта и оплата</p><b>в рамках запуска</b></li>
+        <li class="tier" style="--i:2"><span class="tier-n">03</span><h3>Запуск</h3><p>Прогрев и продажи продукта</p><b>после диагностики</b></li>
+        <li class="tier dark" style="--i:3"><span class="tier-n">04</span><h3>Продюси&shy;рование</h3><p>Ведём канал целиком</p><b>от 120 000 ₽/мес</b></li>
+    </ol>
+    <div class="svc-actions"><a href="#brief" class="pill">Обсудить</a><button class="play" id="playVideo"><img src="img/emo-play.png" alt="" class="emo emo-play">Видео о нас</button></div>
   </section>
 
   <!-- КОМАНДА КАНАЛА -->
@@ -238,7 +194,7 @@
         <div><dt>Остаётся вам</dt><dd id="cs3">всё</dd></div>
       </dl>
     </div>
-    <div class="obj obj-cap" data-drag style="--rot:-9deg"><img src="img/obj-cap.png" alt="Кепка с надписью «Весь день занят, а денег мало»" draggable="false"><span class="obj-note">весь день занят,<br>а денег мало — знакомо?</span></div>
+    <div class="obj obj-cap" data-drag style="--rot:-9deg"><img src="img/obj-cap.png" alt="Кепка с надписью «Весь день занят, а денег мало»" draggable="false"></div>
     <canvas class="crew-canvas" aria-label="Схема: кто делает работу в канале"></canvas>
   </section>
 
@@ -271,7 +227,6 @@
         <hr>
         <div class="rc-total"><span>Итого</span><b>канал, который продаёт</b></div>
         <span class="rc-c">операционка автора: 0 ч</span>
-        <svg class="barcode" id="bc2" aria-hidden="true"></svg>
         
       </div>
     </div>
@@ -323,7 +278,6 @@
               <span class="badge-name">Артём Бутов</span>
               <span class="badge-role">Продукт и продюсирование</span>
               <span class="badge-desc">Делает сайты и контент для Telegram. Выстраивает путь от интереса к посту до покупки.</span>
-              <svg class="barcode" aria-hidden="true"></svg>
               <span class="badge-flip">нажмите — перевернётся ↻</span>
             </div>
             <div class="badge-b">
@@ -347,7 +301,6 @@
               <span class="badge-name">Артём Федонко</span>
               <span class="badge-role">Клиенты и команда</span>
               <span class="badge-desc">Находит клиентов, ведёт переговоры, собирает команду и координирует продажников.</span>
-              <svg class="barcode" aria-hidden="true"></svg>
               <span class="badge-flip">нажмите — перевернётся ↻</span>
             </div>
             <div class="badge-b">
@@ -364,11 +317,11 @@
 
   <!-- ФОРМАТЫ: листы на зажимах -->
   <section class="sec fmt" id="formats">
-    <div class="sec-head"><div><span class="cap">10 | Форматы</span><h2 class="h2">С чего начать</h2></div><p class="lead">Три способа начать работу. У каждого написано, кому он подходит. Не знаете, что выбрать, — запишитесь на бесплатную консультацию, там и решим.</p></div>
+    <div class="sec-head"><div><span class="cap">10 | Форматы</span><h2 class="h2">С чего начать</h2></div><img src="img/emo-papers.png" alt="" class="emo emo-papers" aria-hidden="true"><p class="lead">Три способа начать работу. У каждого написано, кому он подходит. Не знаете, что выбрать, — запишитесь на бесплатную консультацию, там и решим.</p></div>
     <div class="cards"><span class="twine" aria-hidden="true"></span>
-      <article class="paper" style="--tilt:-1.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>ежемесячно</small><h3>Продюсирование</h3><p class="p-desc">Ведём канал целиком и продюсируем запуски.</p><p class="p-who"><small>Кому подходит</small>Есть канал и продукт, хотите отдать нам всю работу.</p><ul><li>Посты выходят по системе</li><li>Растёт аудитория</li><li>Запуски от 500 000 ₽</li></ul><b class="price">от 120 000 ₽</b><a href="#brief" class="pill ghost" data-pick="Передать канал под ключ">Обсудить</a><svg class="barcode" aria-hidden="true"></svg></article>
-      <article class="paper hl" style="--tilt:1deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>чаще всего</small><h3>Запуск продукта</h3><p class="p-desc">Разовый проект: продаём ваш продукт через канал.</p><p class="p-who"><small>Кому подходит</small>Есть продукт, нужно продать его через Telegram.</p><ul><li>Прогрев и посты</li><li>Вся операционка на нас</li><li>Канал работает и после</li></ul><b class="price">после диагностики</b><a href="#brief" class="pill inv" data-pick="Запустить продукт в Telegram">Обсудить</a><svg class="barcode" aria-hidden="true"></svg><span class="stamp">хит</span></article>
-      <article class="paper" style="--tilt:-.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>бесплатно</small><h3>Консультация</h3><p class="p-desc">Созвон, на котором разбираем ваш канал.</p><p class="p-who"><small>Кому подходит</small>Пока не понятно, с чего начать и сколько это стоит.</p><ul><li>Потенциал канала</li><li>3 идеи, как зарабатывать</li><li>Условия работы с нами</li></ul><b class="price">0 ₽</b><a href="#brief" class="pill ghost" data-pick="Начать с бесплатной консультации">Записаться</a><svg class="barcode" aria-hidden="true"></svg></article>
+      <article class="paper" style="--tilt:-1.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>ежемесячно</small><h3>Продюсирование</h3><p class="p-desc">Ведём канал целиком и продюсируем запуски.</p><p class="p-who"><small>Кому подходит</small>Есть канал и продукт, хотите отдать нам всю работу.</p><ul><li>Посты выходят по системе</li><li>Растёт аудитория</li><li>Запуски от 500 000 ₽</li></ul><b class="price">от 120 000 ₽</b><a href="#brief" class="pill ghost" data-pick="Передать канал под ключ">Обсудить</a></article>
+      <article class="paper hl" style="--tilt:1deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>чаще всего</small><h3>Запуск продукта</h3><p class="p-desc">Разовый проект: продаём ваш продукт через канал.</p><p class="p-who"><small>Кому подходит</small>Есть продукт, нужно продать его через Telegram.</p><ul><li>Прогрев и посты</li><li>Вся операционка на нас</li><li>Канал работает и после</li></ul><b class="price">после диагностики</b><a href="#brief" class="pill inv" data-pick="Запустить продукт в Telegram">Обсудить</a><span class="stamp">хит</span></article>
+      <article class="paper" style="--tilt:-.6deg"><img src="img/obj-clip.png" alt="" class="p-clip"><small>бесплатно</small><h3>Консультация</h3><p class="p-desc">Созвон, на котором разбираем ваш канал.</p><p class="p-who"><small>Кому подходит</small>Пока не понятно, с чего начать и сколько это стоит.</p><ul><li>Потенциал канала</li><li>3 идеи, как зарабатывать</li><li>Условия работы с нами</li></ul><b class="price">0 ₽</b><a href="#brief" class="pill ghost" data-pick="Начать с бесплатной консультации">Записаться</a></article>
     </div>
     <div class="fmt-foot"><span>Сомневаетесь?</span><a href="#test">Пройдите тест канала за 30 секунд ↑</a><a href="#brief">или сразу напишите нам ↓</a></div>
   </section>
@@ -425,6 +378,6 @@
   <video playsinline preload="none" poster="img/agency-intro-poster.jpg" src="img/agency-intro.mp4" controls aria-label="Знакомство с агентством"></video>
 </div>
 
-<script src="app.js?v=1793502900"></script>
+<script src="app.js?v=1793503900"></script>
 </body>
 </html>

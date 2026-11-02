@@ -137,8 +137,8 @@ if (ctTitle) {
   ctTitle.innerHTML = lines.map(l => `<span class="ln">${[...l].map(ch => `<i>${ch}</i>`).join("")}</span>`).join("");
   [...ctTitle.querySelectorAll("i")].forEach((s, i) => { s.style.transitionDelay = `${i * .05}s`; });
 }
-const pending = new Set(document.querySelectorAll(".ba, .sheet, .svc-list, .crew-top, .receipt, .desk, .lanyards, .cards, .qa, .cform, .ct-title"));
-pending.forEach(el => { if (!el.matches(".ba, .ct-title, .receipt")) el.classList.add("rv"); });
+const pending = new Set(document.querySelectorAll(".ba, .sheet, .emo, .tiers, .crew-top, .receipt, .desk, .lanyards, .cards, .qa, .cform, .ct-title"));
+pending.forEach(el => { if (!el.matches(".ba, .ct-title, .receipt, .emo")) el.classList.add("rv"); });
 function onScroll() {
   const H = innerHeight;
   for (const el of pending) { const r = el.getBoundingClientRect(); if (r.top < H * .85 && r.bottom > 0) { el.classList.add("in"); pending.delete(el); } }
@@ -197,33 +197,6 @@ if (fine && !calm) document.querySelectorAll(".pill").forEach(b => {
     if (marq && !calm) { const target = d === 0 ? Math.sign(speed) || 1 : Math.sign(d) * (1 + Math.min(6, Math.abs(d) / 6)); speed += (target - speed) * .08; marq.playbackRate = speed; }
     requestAnimationFrame(loop);
   })();
-})();
-
-// ---------- услуги: прайс-лист ----------
-(function svcRows() {
-  const rows = [...document.querySelectorAll("#services .row")];
-  rows.forEach(r => r.querySelector(".row-head").addEventListener("click", () => {
-    const open = !r.classList.contains("open");
-    rows.forEach(o => { o.classList.toggle("open", o === r && open); o.querySelector(".row-head").setAttribute("aria-expanded", o === r && open); });
-  }));
-})();
-
-// ---------- что делаем: переписка ----------
-(function chat() {
-  const box = document.getElementById("chat");
-  if (!box || calm || shot) return;
-  const body = box.querySelector(".chat-body"), msgs = [...box.querySelectorAll(".msg")];
-  body.style.minHeight = body.offsetHeight + "px";
-  box.classList.add("js");
-  const wait = ms => new Promise(r => setTimeout(r, ms));
-  const run = async () => {
-    for (const m of msgs) {
-      if (m.classList.contains("us")) { box.classList.add("typing"); await wait(900 + Math.min(900, m.textContent.length * 6)); box.classList.remove("typing"); }
-      else await wait(450);
-      m.classList.add("show");
-    }
-  };
-  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); run(); } }, { threshold: .35 }).observe(box);
 })();
 
 // ---------- видео ----------

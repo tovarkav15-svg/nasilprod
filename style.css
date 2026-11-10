@@ -561,3 +561,20 @@ details[open] .plus::after{transform:rotate(0)}
   .mate-row b{font-size:18px}
   .mate-role{font-size:12px}
 }
+/* как работаем и кейсы: просто */
+.how{background:var(--fg);color:#fff}
+.how-steps{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,2vw,28px)}
+.how-steps li{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1.5px solid #fff}
+.how-steps span{font-size:13px;font-weight:700;color:#8a8a90}
+.how-steps h3{font-size:clamp(18px,1.7vw,26px);font-weight:800;text-transform:uppercase;letter-spacing:-.045em;line-height:1}
+.how-steps p{font-size:14px;color:#a9a9ae}
+.case-list{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,28px)}
+.case-list li{display:flex;flex-direction:column;gap:6px;padding:24px;border-radius:10px;background:#fff;box-shadow:0 0 0 1px rgba(11,11,12,.08)}
+.case-list b{font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.06em;line-height:.9}
+.case-list span{font-size:15px;color:var(--mut)}
+.case-list h3{margin-top:26px;padding-top:12px;border-top:1px solid rgba(11,11,12,.15);font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:-.02em}
+.case-list p{font-size:14px;color:var(--mut)}
+@media (max-width:900px){
+  .how-steps{grid-template-columns:1fr 1fr}
+  .case-list{grid-template-columns:1fr}
+}

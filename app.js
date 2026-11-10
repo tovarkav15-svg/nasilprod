@@ -199,6 +199,18 @@ if (fine && !calm) document.querySelectorAll(".pill").forEach(b => {
   })();
 })();
 
+// ---------- эмодзи чуть отстают от прокрутки ----------
+(function emoParallax() {
+  const els = [...document.querySelectorAll(".emo:not(.emo-play)")];
+  if (!els.length || calm || shot) return;
+  const loop = () => {
+    const H = innerHeight;
+    els.forEach(el => { const r = el.getBoundingClientRect(); if (r.bottom > -200 && r.top < H + 200) el.style.setProperty("--py", ((r.top + r.height / 2 - H / 2) * -.12).toFixed(1) + "px"); });
+    requestAnimationFrame(loop);
+  };
+  loop();
+})();
+
 // ---------- видео ----------
 (function video() {
   const m = document.getElementById("vmodal"), v = m?.querySelector("video");

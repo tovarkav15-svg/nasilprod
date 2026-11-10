@@ -537,27 +537,58 @@ details[open] .plus::after{transform:rotate(0)}
   .emo-papers{display:none}
 }
 /* 09: команда */
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,64px);max-width:900px;margin-left:auto}
-.duo .mate:nth-child(2){margin-top:clamp(40px,7vw,110px)}
-.mate{display:flex;flex-direction:column;gap:10px}
-.mate-ph{display:block;overflow:hidden;border-radius:6px;aspect-ratio:1;background:var(--soft)}
+/* 09: команда — строки с текстом */
+.duo{display:grid;gap:0;max-width:1040px;margin-left:auto}
+.mate{display:grid;grid-template-columns:clamp(130px,15vw,210px) 1fr;gap:clamp(18px,3vw,44px);align-items:start;padding:clamp(22px,2.6vw,36px) 0;border-top:1.5px solid var(--fg)}
+.mate:last-child{border-bottom:1.5px solid var(--fg)}
+.mate-ph{display:block;overflow:hidden;border-radius:6px;aspect-ratio:4/5;background:var(--soft)}
 .mate-ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:transform 1.2s var(--ease),filter .6s}
-.mate:hover .mate-ph img{transform:scale(1.05);filter:grayscale(1) contrast(1.2)}
-.mate-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:6px;border-top:1.5px solid var(--fg)}
-.mate-row b{font-size:clamp(22px,2.4vw,36px);font-weight:800;text-transform:uppercase;letter-spacing:-.05em;line-height:1}
-.mate-row i{font-style:normal;font-size:20px;transition:transform .4s var(--ease)}
-.mate:hover .mate-row i{transform:translate(4px,-4px)}
-.mate-role{font-size:14px;color:var(--mut)}
+.mate:hover .mate-ph img{filter:grayscale(1) contrast(1.2)}
+.mate-txt{display:flex;flex-direction:column;gap:10px}
+.mate-txt h3{font-size:clamp(24px,2.6vw,40px);font-weight:800;text-transform:uppercase;letter-spacing:-.05em;line-height:.95}
+.mate-role{font-size:14px;font-weight:600;color:var(--mut)}
+.mate-txt p{max-width:600px;font-size:15px;line-height:1.5;color:#3a3a3e}
+.mate-facts{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+.mate-facts li{display:flex;flex-direction:column;gap:2px;padding-top:8px;border-top:1px dashed rgba(11,11,12,.3);font-size:12px;color:var(--mut)}
+.mate-facts b{font-size:clamp(18px,1.7vw,26px);font-weight:800;letter-spacing:-.04em;color:var(--fg)}
+.mate-link{align-self:flex-start;margin-top:4px;font-size:14px;font-weight:600;border-bottom:1.5px solid currentColor;transition:opacity .3s}
+.mate-link:hover{opacity:.55}
 .duo.rv{opacity:1;transform:none}
-.duo.rv .mate-ph{clip-path:inset(100% 0 0 0);transition:clip-path 1.2s var(--ease)}
+.duo.rv .mate-ph{clip-path:inset(100% 0 0 0);transition:clip-path 1.1s var(--ease)}
 .duo.rv .mate-ph img{transform:scale(1.25)}
-.duo.rv .mate:nth-child(2) .mate-ph{transition-delay:.15s}
+.duo.rv .mate-txt>*{opacity:0;translate:0 16px;transition:opacity .7s ease,translate .9s var(--ease)}
+.duo.rv .mate-txt>:nth-child(2){transition-delay:.08s}.duo.rv .mate-txt>:nth-child(3){transition-delay:.16s}.duo.rv .mate-txt>:nth-child(4){transition-delay:.24s}.duo.rv .mate-txt>:nth-child(5){transition-delay:.32s}
+.duo.rv .mate:nth-child(2) .mate-ph{transition-delay:.25s}
 .duo.in .mate-ph{clip-path:inset(0 0 0 0)}
 .duo.in .mate-ph img{transform:none}
+.duo.in .mate-txt>*{opacity:1;translate:0 0}
 .duo.in .mate:hover .mate-ph img{transform:scale(1.05)}
 @media (max-width:700px){
-  .duo{gap:14px}
-  .duo .mate:nth-child(2){margin-top:40px}
-  .mate-row b{font-size:18px}
-  .mate-role{font-size:12px}
+  .mate{grid-template-columns:96px 1fr;gap:14px}
+  .mate-facts{grid-template-columns:1fr;gap:8px}
+  .mate-txt p{font-size:14px}
 }
+
+/* 10: форматы — живее, от руки */
+.paper{margin-top:var(--y,0)}
+.paper::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:10px;background:inherit;clip-path:polygon(0 0,100% 0,100% 6px,95.4% 3px,90.9% 9px,86.3% 2px,81.8% 7px,77.2% 4px,72.7% 9px,68.1% 3px,63.6% 6px,59% 2px,54.5% 8px,50% 4px,45.4% 9px,40.9% 3px,36.3% 7px,31.8% 2px,27.2% 8px,22.7% 5px,18.1% 9px,13.6% 3px,9% 7px,4.5% 2px,0 8px)}
+.p-who{background:none!important;padding:2px 0 2px 12px;border-left:2px solid currentColor;border-radius:0;font-family:"Caveat",cursive;font-size:21px;line-height:1.05}
+.p-who small{font-family:var(--mono)}
+.scrawl{position:absolute;z-index:3;font-family:"Caveat",cursive;font-size:24px;font-weight:700;line-height:1;white-space:nowrap;color:var(--fg);pointer-events:none}
+.scrawl.s1{left:-14px;top:-44px;rotate:-7deg}
+.scrawl.s3{right:-34px;top:-34px;rotate:7deg}
+.scrawl svg{position:absolute;left:30%;top:22px;width:46px;height:34px;transform:scaleX(-1)}
+.scrawl path,.ring path{fill:none;stroke:var(--fg);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420}
+.ring{position:relative;align-self:flex-start}
+.ring svg{position:absolute;left:-18px;top:-12px;width:calc(100% + 40px);height:calc(100% + 24px);overflow:visible}
+.cards.in .ring path,.cards.in .scrawl path{animation:draw 1.1s var(--ease) 1.5s forwards}
+.cards .scrawl{opacity:0;transition:opacity .6s ease 1.3s}
+.cards.in .scrawl{opacity:1}
+@keyframes draw{to{stroke-dashoffset:0}}
+.stamp{rotate:-6deg}
+@media (max-width:1000px){
+  .paper{margin-top:0}
+  .scrawl.s1{top:-40px;left:auto;right:10px}
+}
+/* эмодзи: лёгкий параллакс */
+.emo{translate:0 var(--py,0px)}

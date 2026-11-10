@@ -150,7 +150,7 @@ document.querySelectorAll(".h2").forEach(h => {
   let k = 0;
   h.innerHTML = h.innerHTML.split("<br>").map(line => line.trim().split(/\s+/).map(w => `<span class="wd"><i style="--d:${(k++ * .07).toFixed(2)}s">${w}</i></span>`).join(" ")).join("<br>");
 });
-const stag = [".how-steps li", ".case-list li", ".gloss > div", ".ba-foot > div", ".fmt-foot > *", ".qa details", ".chips .chip"];
+const stag = [".gloss > div", ".proc-steps li", ".ba-foot > div", ".fmt-foot > *", ".qa details", ".chips .chip"];
 stag.forEach(sel => document.querySelectorAll(sel).forEach((el, i) => { el.classList.add("st"); el.style.setProperty("--i", i % 8); }));
 document.querySelectorAll(".lead, .test-lead, .svc-lead").forEach(el => el.classList.add("st"));
 
@@ -168,7 +168,7 @@ function countUp(el) {
     if (k < 1) requestAnimationFrame(step);
   })(t0);
 }
-const counters = new Set(document.querySelectorAll(".case-list b"));
+const counters = new Set(document.querySelectorAll(".ba-foot b, .case.on .case-txt b"));
 const anim = [...document.querySelectorAll(".h2, .st, .cap, .cards")];
 if (calm || shot) anim.forEach(el => el.classList.add("in"));
 else {
